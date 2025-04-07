@@ -1,0 +1,226 @@
+/* Logo Styling */
+.logo{
+    padding: 5px 0 0 10px;
+    width: 200px;
+    height: 200px;
+}
+
+/* Authentication Control */
+.auth-required-content {
+    display: none; /* Hide all content by default */
+}
+
+body.authenticated .auth-required-content {
+    display: block; /* Show content when authenticated */
+}
+
+body.authenticated .auth-forms {
+    display: none; /* Hide login forms when authenticated */
+}
+
+.auth-forms {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f5f5f5;
+}
+
+.auth-box {
+    background: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    width: 90%;
+    max-width: 400px;
+}
+
+.auth-box h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #3d3d3d;
+}
+
+.auth-box input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.auth-box button {
+    width: 100%;
+    padding: 12px;
+    background-color: #3d3d3d;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.auth-box button:hover {
+    background-color: #a52a2a;
+}
+
+.auth-toggle {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.auth-toggle a {
+    color: #a52a2a;
+    text-decoration: none;
+}
+
+/* Main Section Layout */
+.section{
+    width: 100%;
+    min-height: 100vh;
+    background-color: #dddddd00;
+}
+
+.container{
+    width: 80%;
+    display: block;
+    margin: auto;
+    padding-top: 100px;
+}
+
+/* Content and Image Sections */
+.content-section{
+    float: left;
+    width: 55%;
+}
+
+.image-section{
+    float: right;
+    width: 40%;
+}
+
+.image-section img{
+    width: 100%;
+    height: auto;
+}
+
+/* Typography Styling */
+.content-section .title{
+    text-transform: uppercase;
+    font-size: 28px;
+}
+
+.content-section .content h3{
+    margin-top: 20px;
+    color: #5d5d5d;
+    font-size: 21px;
+}
+
+.content-section .content p{
+    margin-top: 10px;
+    font-family: sans-serif;
+    font-size: 18px;
+    line-height: 1.5;
+}
+
+/* Button Styling */
+.content-section .content .button{
+    margin-top: 30px;
+}
+
+.content-section .content .button a{
+    background-color: #3d3d3d;
+    padding: 12px 40px;
+    text-decoration: none;
+    color: #fff;
+    font-size: 25px;
+    letter-spacing: 1.5px;
+}
+
+.content-section .content .button a:hover{
+    background-color: #a52a2a;
+    color: #ffffff00;
+}
+
+/* Social Media Icons */
+.content-section .social{
+    margin: 40px 40px;
+}
+
+.content-section .social i{
+    color: #a52a2a;
+    font-size: 30px;
+    padding: 0px 10px;
+}
+
+.content-section .social i:hover{
+    color: #3d3d3d;
+}
+
+/* Banner Styling */
+.banner{
+    min-height: 100vh;
+    width: 100%;
+    background-image: url("");
+    background-size: cover;
+    background-attachment: relative;
+    position: relative;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px){
+    .container{
+        width: 80%;
+        display: block;
+        margin: auto;
+        padding-top: 50px;
+    }
+    
+    .content-section{
+        float: none;
+        width: 100%;
+        display: block;
+        margin: auto;
+    }
+    
+    .image-section{
+        float: none;
+        width: 100%;
+    }
+    
+    .image-section img{
+        width: 100%;
+        height: auto;
+        display: block;
+        margin: auto;
+    }
+    
+    .content-section .title{
+        text-align: center;
+        font-size: 19px;
+    }
+    
+    .content-section .content .button{
+        text-align: center;
+    }
+    
+    .content-section .content .button a{
+        padding: 9px 30px;
+    }
+    
+    .content-section .social{
+        text-align: center;
+    }
+}
+
+/* Commented out Navigation Overrides 
+ul.navbar-nav.mb-2.mb-lg-0 {
+  gap: 1rem;
+  font-size: 20px;
+  margin-right: 10px;
+}
+
+body{
+  overflow-x: hidden;
+} */

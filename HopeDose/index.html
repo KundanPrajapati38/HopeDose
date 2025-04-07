@@ -1,0 +1,1127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HopeDose</title>
+  <!-- Authentication Check Script -->
+  <script>
+    // Authentication check - redirect to login if not authenticated
+    (function() {
+      const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+      // Check if current page is login or signup page
+      const currentPage = window.location.pathname.split('/').pop();
+      const authPages = ['login.html', 'signup.html'];
+      
+      // Always redirect to login page if not logged in
+      if (!isLoggedIn && currentPage !== 'login.html') {
+        // User is not logged in and not on login page, redirect to login
+        window.location.href = "login.html";
+      } else if (isLoggedIn && authPages.includes(currentPage)) {
+        // User is logged in but on an auth page, redirect to home
+        window.location.href = "index.html";
+      }
+    })();
+  </script>
+  <!-- Bootstrap & FontAwesome -->
+  <!-- ... rest of the file remains unchanged ... -->
+  <!-- Bootstrap & FontAwesome -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+  <!-- Add AOS library for scroll animations -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      overflow-x: hidden;
+    }
+
+    /* Enhanced Navbar Styles */
+    .navbar {
+      background: linear-gradient(90deg, #007bff, #00c6ff);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      padding: 12px 0;
+      transition: all 0.3s ease;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    .navbar {
+      background: linear-gradient(90deg, #007bff, #00c6ff);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      padding: 12px 0;
+    }
+
+    /* Enhanced dropdown styles with dark background */
+    .dropdown-menu {
+      background: #2a2a2a;
+      border: none;
+      border-radius: 10px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+      padding: 10px;
+      margin-top: 10px;
+      animation: fadeIn 0.3s ease;
+    }
+    
+    .dropdown-item {
+      color: #e0e0e0 !important;
+      font-weight: 500;
+      padding: 10px 15px;
+      border-radius: 6px;
+      margin-bottom: 5px;
+      transition: all 0.3s ease;
+    }
+    
+    .dropdown-item:hover {
+      background: linear-gradient(90deg, rgba(0, 123, 255, 0.3), rgba(0, 198, 255, 0.3));
+      color: #ffffff !important;
+      transform: translateX(5px);
+    }
+    
+    .dropdown-menu::before {
+      content: '';
+      position: absolute;
+      top: -8px;
+      left: 20px;
+      width: 16px;
+      height: 16px;
+      background: #2a2a2a;
+      transform: rotate(45deg);
+      border-radius: 2px;
+      z-index: -1;
+    }
+    
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .navbar a {
+      color: white !important;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+    .navbar.scrolled {
+      padding: 8px 0;
+      background: linear-gradient(90deg, #0056b3, #007bff);
+    }
+
+    .navbar a {
+      color: rgb(255, 255, 255) !important;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .navbar a:hover {
+      color: #ffd700 !important;
+      transform: translateY(-2px);
+    }
+    
+    .navbar .nav-link.active::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background-color: #2200ff;
+      border-radius: 2px;
+    }
+    
+    .brand-text {
+      font-weight: 700;
+      letter-spacing: 1px;
+      font-size: 1.4rem;
+      text-transform: uppercase;
+      background: linear-gradient(90deg, #ffffff, #ffd700);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+   
+  /* Enhanced Donation Button in Navbar */
+  .donate-btn {
+    background: linear-gradient(90deg, #ff5e62, #ff9966);
+    border-radius: 50px;
+    padding: 8px 20px !important;
+    margin-left: 10px;
+    box-shadow: 0 4px 15px rgba(255, 94, 98, 0.3);
+    transition: all 0.3s ease !important;
+    position: relative;
+    overflow: hidden;
+    color: white !important;
+    font-weight: 600 !important;
+    display: flex;
+    align-items: center;
+  }
+  
+  .donate-btn:hover {
+    transform: translateY(-3px) !important;
+    box-shadow: 0 8px 20px rgba(255, 94, 98, 0.4);
+    color: white !important;
+  }
+  
+  .donate-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: all 0.6s ease;
+  }
+  
+  .donate-btn:hover::before {
+    left: 100%;
+  }
+  
+  .donate-btn i {
+    font-size: 16px;
+    margin-right: 5px;
+    animation: pulse 2s infinite;
+  }
+  
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.1);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
+    .logo {
+      width: 60px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      transition: all 0.3s ease;
+    }
+    
+    .navbar-brand:hover .logo {
+      transform: rotate(5deg) scale(1.05);
+    }
+    
+    /* Enhanced Banner Styles */
+    .banner {
+      background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1509099836639-18ba1795216d') no-repeat center center;
+      background-size: cover;
+      height: 600px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      color: rgb(255, 255, 255);
+      text-shadow: 2px 2px 10px rgba(0,0,0,0.6);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .banner::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 123, 255, 0.2);
+      z-index: 0;
+    }
+    
+    .banner::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 100px;
+      background: linear-gradient(to top, rgba(245, 247, 250, 1), transparent);
+      z-index: 1;
+    }
+    
+    .banner-content {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 0 20px;
+      max-width: 1000px;
+    }
+    
+    .banner-title {
+      font-size: 4.5rem;
+      font-weight: bold;
+      margin-bottom: 1.5rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      animation: fadeInDown 1.5s;
+    }
+    
+    .banner-subtitle {
+      font-size: 1.6rem;
+      max-width: 800px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.6;
+      animation: fadeInUp 1.5s;
+    }
+    
+    .banner-btn {
+      padding: 15px 40px;
+      font-size: 1.2rem;
+      font-weight: 600;
+      border-radius: 50px;
+      background: linear-gradient(90deg, #007bff, #00c6ff);
+      border: none;
+      box-shadow: 0 4px 15px rgba(0, 123, 255, 0.4);
+      transition: all 0.3s ease;
+      color: white !important;
+      animation: pulse 2s infinite;
+    }
+    
+    .banner-btn:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0, 123, 255, 0.6);
+    }
+    
+    .banner-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: all 0.6s ease;
+    }
+    
+    .banner-btn:hover::before {
+      left: 100%;
+    }
+    
+    /* Enhanced Section Title Styles */
+    .section-title {
+      position: relative;
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #0a4d68;
+      margin-bottom: 2.5rem;
+      padding-bottom: 1.5rem;
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+    
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background: linear-gradient(90deg, #007bff, #00c6ff);
+      border-radius: 2px;
+    }
+    
+    .section-title::before {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 40px;
+      height: 4px;
+      background: linear-gradient(90deg, #00c6ff, #007bff);
+      border-radius: 2px;
+    }
+    
+    /* Enhanced Card Styles */
+    .custom-card {
+      border: none;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+      background: white;
+      position: relative;
+      z-index: 1;
+    }
+
+    .custom-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(0, 123, 255, 0.1) 0%, rgba(0, 198, 255, 0.1) 100%);
+      opacity: 0;
+      transition: all 0.3s ease;
+      z-index: -1;
+    }
+
+    .custom-card:hover {
+      transform: translateY(-15px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+    }
+    
+    .custom-card:hover::before {
+      opacity: 1;
+    }
+
+    .overflow-hidden {
+      overflow: hidden;
+      border-top-left-radius: 15px;
+      border-top-right-radius: 15px;
+    }
+
+    .card-img-top {
+      height: 200px;
+      object-fit: cover;
+      transition: all 0.5s ease;
+    }
+    
+    .custom-card:hover .card-img-top {
+      transform: scale(1.1);
+    }
+
+    .card-body {
+      padding: 1.5rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .card-title {
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: #0a4d68;
+      margin-bottom: 0.8rem;
+      transition: all 0.3s ease;
+    }
+    
+    .custom-card:hover .card-title {
+      color: #007bff;
+    }
+
+    .card-text {
+      color: #6c757d;
+      margin-bottom: 1.2rem;
+      transition: all 0.3s ease;
+    }
+
+    .btn-primary {
+      background: linear-gradient(90deg, #007bff, #00c6ff);
+      border: none;
+      border-radius: 50px;
+      padding: 8px 20px;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-primary:hover {
+      background: linear-gradient(90deg, #0056b3, #0099cc);
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(0, 123, 255, 0.4);
+    }
+    
+    .btn-primary::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: all 0.6s ease;
+    }
+    
+    .btn-primary:hover::before {
+      left: 100%;
+    }
+    
+    /* Testimonials Section Styles */
+    .py-5.bg-light {
+      background: linear-gradient(135deg, rgba(245, 247, 250, 0.8) 0%, rgba(195, 207, 226, 0.8) 100%) !important;
+      border-radius: 20px;
+      margin: 3rem 1rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .py-5.bg-light::before {
+      content: '';
+      position: absolute;
+      top: -50px;
+      left: -50px;
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: rgba(0, 123, 255, 0.1);
+      z-index: 0;
+    }
+    
+    .py-5.bg-light::after {
+      content: '';
+      position: absolute;
+      bottom: -50px;
+      right: -50px;
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: rgba(0, 198, 255, 0.1);
+      z-index: 0;
+    }
+    
+    .rounded-circle.overflow-hidden {
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      border: 3px solid white;
+      transition: all 0.3s ease;
+    }
+    
+    .custom-card:hover .rounded-circle.overflow-hidden {
+      transform: scale(1.1);
+      box-shadow: 0 8px 20px rgba(0, 123, 255, 0.2);
+    }
+    
+    .text-warning {
+      color: #ffc107 !important;
+    }
+    
+    /* Text Scanner Section Styles */
+    .py-5.bg-white {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(240, 240, 240, 0.9) 100%) !important;
+      border-radius: 20px;
+      margin: 3rem 1rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    }
+    
+    .scanner-container {
+      background: rgba(245, 247, 250, 0.5);
+      border-radius: 15px;
+      padding: 20px;
+      box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05);
+    }
+    
+    #scannerFeed, #scannerCanvas {
+      border: 2px solid rgba(0, 123, 255, 0.2);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+    
+    .alert {
+      border-radius: 10px;
+      border: none;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+    }
+    
+    /* Animation Keyframes */
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.05);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+    
+    /* Responsive Styles */
+    @media (max-width: 992px) {
+      .banner-title {
+        font-size: 3.5rem;
+      }
+      
+      .banner-subtitle {
+        font-size: 1.4rem;
+      }
+      
+      .section-title {
+        font-size: 2.2rem;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .banner-title {
+        font-size: 2.8rem;
+      }
+      
+      .banner-subtitle {
+        font-size: 1.2rem;
+      }
+      
+      .section-title {
+        font-size: 2rem;
+      }
+      
+      .banner {
+        height: 500px;
+      }
+      
+      .banner-btn {
+        padding: 12px 30px;
+        font-size: 1.1rem;
+      }
+    }
+    
+    @media (max-width: 576px) {
+      .banner-title {
+        font-size: 2.2rem;
+      }
+      
+      .banner-subtitle {
+        font-size: 1rem;
+      }
+      
+      .section-title {
+        font-size: 1.8rem;
+      }
+      
+      .banner {
+        height: 450px;
+      }
+      
+      .banner-btn {
+        padding: 10px 25px;
+        font-size: 1rem;
+      }
+    }
+</style>
+</head>
+
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center" href="#">
+      <img src="images/donation.jpg" alt="logo" class="logo me-2">
+      <span class="brand-text">HopeDose</span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarContent">
+      <ul class="navbar-nav ms-auto align-items-center">
+        <li class="nav-item mx-1"><a class="nav-link active" href="index.html"><i class="fas fa-home me-1"></i> Home</a></li>
+       
+     
+        
+        <li class="nav-item mx-1"><a class="nav-link" href="./Donate.html"><i class="fas fa-hand-holding-heart me-1"></i> Donate</a></li>
+        <!-- New Product Management Button -->
+        <li class="nav-item mx-1"><a class="nav-link" href="./product-management.html"><i class="fas fa-barcode me-1"></i> Product </a></li>
+        <li class="nav-item mx-1"><a class="nav-link" href="./inventory.html"><i class="fas fa-boxes me-1"></i> Inventory</a></li>
+        <li class="nav-item mx-1"><a class="nav-link" href="./submit.html"><i class="fas fa-paper-plane me-1"></i> Request</a></li>
+        <li class="nav-item dropdown mx-1">
+          <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown"><i class="fas fa-info-circle me-1"></i> About Us</a>
+          <ul class="dropdown-menu dropdown-menu-animated">
+            <li><a class="dropdown-item" href="./about.html">Overview</a></li>
+            <li><a class="dropdown-item" href="./vm.html">Vision & Mission</a></li>
+          </ul>
+        </li>
+        <!-- Dashboard link (only visible when logged in) -->
+        <li class="nav-item dashboard-link mx-1" style="display: none;"><a class="nav-link" href="./dashboard.html"><i class="fas fa-user-circle me-1"></i> My Dashboard</a></li>
+        <li class="nav-item auth-link mx-1"><a class="nav-link" href="./login.html"><i class="fas fa-sign-in-alt me-1"></i> Login</a></li>
+        <li class="nav-item auth-link mx-1"><a class="nav-link" href="./signup.html"><i class="fas fa-user-plus me-1"></i> Sign Up</a></li>
+        <!-- Logout Button -->
+        <li class="nav-item mx-1"><button id="logoutBtn" class="btn btn-outline-light btn-sm ms-2 logout-btn" style="display: none;"><i class="fas fa-sign-out-alt me-1"></i> Logout</button></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Banner -->
+<div class="banner">
+  <div class="banner-content">
+    <h1 class="banner-title" data-aos="fade-up">Welcome to HopeDose </h1>
+    <p class="banner-subtitle" data-aos="fade-up" data-aos-delay="200">Empowering communities through generosity and support. Together we can make a difference.</p>
+    <a href="./Donate.html" class="btn btn-light banner-btn" data-aos="fade-up" data-aos-delay="400">Donate Now</a>
+  </div>
+</div>
+
+<!-- Features -->
+<h1 class="section-title" id="Features" data-aos="fade-up">Our Features</h1>
+<div class="container">
+  <div class="row g-4">
+    <!-- Submit Request -->
+    <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="100">
+      <div class="custom-card h-100">
+        <div class="overflow-hidden">
+          <img src="https://st3.depositphotos.com/24261740/35326/i/450/depositphotos_353269088-stock-photo-bearded-adult-man-praying-god.jpg" class="card-img-top" alt="Submit Request">
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Submit Request</h5>
+          <p class="card-text">Need help? Submit your request and we'll do our best to assist you.</p>
+          <a href="./submit.html" class="btn btn-primary">Get Started</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Requests Queue -->
+    <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="200">
+      <div class="custom-card h-100">
+        <div class="overflow-hidden">
+          <img src="https://img.freepik.com/premium-photo/group-happy-young-people-standing-line_252847-5942.jpg?w=996" class="card-img-top" alt="Requests Queue">
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Requests Queue</h5>
+          <p class="card-text">View current requests and see how you can help others in need.</p>
+          <a href="./submit.html" class="btn btn-primary">View Requests</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Inventory -->
+    <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="300">
+      <div class="custom-card h-100">
+        <div class="overflow-hidden">
+          <img src="https://media.sortly.com/wp-content/uploads/2020/02/12130157/Retail-Inventory.jpg" class="card-img-top" alt="Inventory">
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Inventory</h5>
+          <p class="card-text">Check our current inventory to see what items are available.</p>
+          <a href="./inventory.html" class="btn btn-primary">Browse Items</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Donate Here -->
+    <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="400">
+      <div class="custom-card h-100">
+        <div class="overflow-hidden">
+          <img src="https://www.safesmartliving.com/wp-content/uploads/hands-holding-donation-sign-jpg.jpg.webp" class="card-img-top" alt="Donate Here">
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Donate Here</h5>
+          <p class="card-text">Your generosity can change lives. Donate today and make a difference.</p>
+          <a href="./Donate.html" class="btn btn-primary">Donate Now</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Items -->
+<h1 class="section-title" id="items" data-aos="fade-up">Our Items</h1>
+<div class="container">
+  <div class="row g-4">
+    <!-- Toys -->
+    <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="100">
+      <div class="custom-card h-100">
+        <div class="overflow-hidden">
+          <img src="https://img.freepik.com/premium-photo/many-colorful-toys-collection-wooden-desk_488220-17409.jpg?w=2000" class="card-img-top" alt="Toys">
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Toys</h5>
+          <p class="card-text">Donate toys to bring joy and happiness to children in need.</p>
+          <a href="./toys.html" class="btn btn-primary">Donate Toys</a>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Books -->
+    <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="200">
+      <div class="custom-card h-100">
+        <div class="overflow-hidden">
+          <img src="https://media.istockphoto.com/id/1335708681/photo/stacks-of-books-for-teaching-knowledge-college-library-green-background.jpg?b=1&s=170667a&w=0&k=20&c=_-kpFpVyUWgiCafriJgZ6Wr_kLQ2kt19SSCZvlWK63Y=" class="card-img-top" alt="Books">
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Books</h5>
+          <p class="card-text">Share knowledge and inspire learning through book donations.</p>
+          <a href="./Books.html" class="btn btn-primary">Donate Books</a>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Cash -->
+    <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="300">
+      <div class="custom-card h-100">
+        <div class="overflow-hidden">
+          <img src="https://media.istockphoto.com/id/955864548/photo/businessman-giving-money-in-the-form-of-indian-rupees-for-services-rendered.jpg?s=612x612&w=0&k=20&c=HAs9z7fTUh2WoD9XqbAFqdFr56SQtYhxscmD6YC_VZ8=" class="card-img-top" alt="Cash">
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Cash</h5>
+          <p class="card-text">Financial contributions help us support more people in need.</p>
+          <a href="./payment.html" class="btn btn-primary">Donate Cash</a>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Clothes -->
+    <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="400">
+      <div class="custom-card h-100">
+        <div class="overflow-hidden">
+          <img src="https://thumbs.dreamstime.com/b/clothes-shop-9280981.jpg" class="card-img-top" alt="Clothes">
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Clothes</h5>
+          <p class="card-text">Donate clothes to help those in need stay warm and dignified.</p>
+          <a href="./Clothes.html" class="btn btn-primary">Donate Clothes</a>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Food -->
+    <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="100">
+      <div class="custom-card h-100">
+        <div class="overflow-hidden">
+          <img src="https://thumbs.dreamstime.com/b/assorted-indian-recipes-food-various-spices-rice-wooden-table-92742528.jpg" class="card-img-top" alt="Food">
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Food</h5>
+          <p class="card-text">Help fight hunger by donating food to those who need it most.</p>
+          <a href="./Food.html" class="btn btn-primary">Donate Food</a>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Games Kit -->
+    <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="200">
+      <div class="custom-card h-100">
+        <div class="overflow-hidden">
+          <img src="https://media.istockphoto.com/id/497203317/photo/the-tools-for-a-batsman.jpg?b=1&s=170667a&w=0&k=20&c=Xr5tRw7jXw-aGq9-BicshRYoN9Z2unI1bXTUwc0TmKo=" class="card-img-top" alt="Games Kit">
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Games Kit</h5>
+          <p class="card-text">Sports equipment donations help promote healthy activities.</p>
+          <a href="./Gameskit.html" class="btn btn-primary">Donate Kits</a>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Medicines -->
+    <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="300">
+      <div class="custom-card h-100">
+        <div class="overflow-hidden">
+          <img src="https://t4.ftcdn.net/jpg/02/81/42/77/360_F_281427785_gfahY8bX4VYCGo6jlfO8St38wS9cJQop.jpg" class="card-img-top" alt="Medicines">
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Medicines</h5>
+          <p class="card-text">Donate medicines to help those who cannot afford healthcare.</p>
+          <a href="./Medicines.html" class="btn btn-primary">Donate Medicines</a>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Others -->
+    <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="400">
+      <div class="custom-card h-100">
+        <div class="overflow-hidden">
+          <img src="https://hr.mcmaster.ca/app/uploads/2019/12/brainstorm-1400x600-720x405.png" class="card-img-top" alt="Others">
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Others</h5>
+          <p class="card-text">Have something else to donate? We welcome all kinds of help.</p>
+          <a href="./Others.html" class="btn btn-primary">Donate Items</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Testimonials Section -->
+<section class="py-5 bg-light mt-5">
+  <div class="container">
+    <h2 class="section-title" data-aos="fade-up">What People Say</h2>
+    <div class="row">
+      <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="100">
+        <div class="custom-card h-100 p-4">
+          <div class="d-flex align-items-center mb-3">
+            <div class="rounded-circle overflow-hidden me-3" style="width: 60px; height: 60px;">
+              <img src="components/assets/images/harsh.jpg" alt="Testimonial" class="img-fluid">
+            </div>
+            <div>
+              <h5 class="mb-0">Harsh</h5>
+              <small class="text-muted">Donor</small>
+            </div>
+          </div>
+          <p class="card-text">"Donating through HopeDose has been an incredible experience. I know my contributions are making a real difference in people's lives."</p>
+          <div class="text-warning">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="200">
+        <div class="custom-card h-100 p-4">
+          <div class="d-flex align-items-center mb-3">
+            <div class="rounded-circle overflow-hidden me-3" style="width: 60px; height: 60px;">
+              <!-- Changed the image path to match your project structure -->
+              <img src="components/assets/images/kundan.jpg" alt="Testimonial" class="img-fluid">
+            </div>
+            <div>
+              <h5 class="mb-0">Kundan kumar</h5>
+              <small class="text-muted">Volunteer</small>
+            </div>
+          </div>
+          <p class="card-text">"Working with HopeDose has shown me how a small act of kindness can transform someone's life. The platform makes helping others so easy."</p>
+          <div class="text-warning">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star-half-alt"></i>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="300">
+        <div class="custom-card h-100 p-4">
+          <div class="d-flex align-items-center mb-3">
+            <div class="rounded-circle overflow-hidden me-3" style="width: 60px; height: 60px;">
+              <img src="components/assets/images/muskan.jpg" alt="Testimonial" class="img-fluid">
+            </div>
+            <div>
+              <h5 class="mb-0">Muskan </h5>
+              <small class="text-muted">Beneficiary</small>
+            </div>
+          </div>
+          <p class="card-text">"The support I received from HopeDose during a difficult time was life-changing. I'm forever grateful for the generosity of donors."</p>
+          <div class="text-warning">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Text Scanner Section - Add before the footer placeholder -->
+<section class="py-5 bg-white">
+  <div class="container">
+    <h2 class="section-title" data-aos="fade-up">Text Scanner</h2>
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="custom-card p-4">
+          <div class="text-center mb-3">
+            <button id="startScannerCamera" class="btn btn-primary me-2"><i class="fas fa-camera me-1"></i> Start Camera</button>
+            <button id="captureText" class="btn btn-success me-2" disabled><i class="fas fa-file-alt me-1"></i> Scan Text</button>
+            <button id="stopScannerCamera" class="btn btn-danger" disabled><i class="fas fa-stop-circle me-1"></i> Stop Camera</button>
+          </div>
+          <div class="scanner-container text-center">
+            <video id="scannerFeed" style="max-width: 100%; border-radius: 10px; display: none;" autoplay></video>
+            <canvas id="scannerCanvas" style="max-width: 100%; border-radius: 10px; display: none;"></canvas>
+            <div id="scannerStatus" class="alert alert-info mt-3">Scanner is not active. Click "Start Camera" to begin.</div>
+            <div id="recognizedText" class="mt-3 p-3 bg-light rounded" style="display: none; text-align: left; max-height: 200px; overflow-y: auto;">
+              <h5><i class="fas fa-file-alt me-2"></i>Recognized Text:</h5>
+              <div id="textContent" class="mt-2"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Include Footer -->
+<div id="footer-placeholder"></div>
+
+<!-- Text Scanner JS -->
+<script src="js/text-scanner.js"></script>
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- AOS Animation Library -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<!-- Custom JS -->
+<script src="js/main.js"></script>
+<!-- Component Loader -->
+<script>
+  // Load header and footer components
+  fetch('components/header.html')
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById('header-placeholder').innerHTML = data;
+    });
+  
+  fetch('components/footer.html')
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById('footer-placeholder').innerHTML = data;
+    });
+    
+  // Authentication state management
+  document.addEventListener('DOMContentLoaded', function() {
+    const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+    const authLinks = document.querySelectorAll('.auth-link');
+    const dashboardLink = document.querySelector('.dashboard-link');
+    const logoutBtn = document.getElementById('logoutBtn');
+    
+    // Navbar scroll effect
+    window.addEventListener('scroll', function() {
+      const navbar = document.querySelector('.navbar');
+      if (window.scrollY > 50) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+    });
+    
+    // Add active class to current nav item
+    const currentLocation = location.href;
+    const navItems = document.querySelectorAll('.navbar .nav-link');
+    navItems.forEach(item => {
+      if (item.href === currentLocation) {
+        item.classList.add('active');
+      } else {
+        item.classList.remove('active');
+      }
+    });
+    
+    if (isLoggedIn) {
+      // Hide login/signup links when logged in
+      authLinks.forEach(link => link.style.display = 'none');
+      // Show dashboard link
+      dashboardLink.style.display = 'block';
+      // Show logout button
+      logoutBtn.style.display = 'block';
+      
+      // Display user name if available
+      const user = JSON.parse(localStorage.getItem("user") || "{}");
+      // if (user.name) {
+      //   const userNameElement = document.createElement('li');
+      //   userNameElement.className = 'nav-item';
+      //   userNameElement.innerHTML = `<span class="nav-link"><i class="fas fa-user me-1"></i> Welcome, ${user.name}</span>`;
+      //   logoutBtn.parentNode.before(userNameElement);
+      // }
+    } else {
+      // Show login/signup links when logged out
+      authLinks.forEach(link => link.style.display = 'block');
+      // Hide dashboard link
+      dashboardLink.style.display = 'none';
+      // Hide logout button
+      logoutBtn.style.display = 'none';
+    }
+    
+    // Logout functionality
+    logoutBtn.addEventListener('click', function() {
+      localStorage.removeItem("isLoggedIn");
+      alert("You have been logged out successfully!");
+      window.location.href = "login.html";
+    });
+    
+    // Camera functionality
+    const startCameraBtn = document.getElementById('startCamera');
+    const takePhotoBtn = document.getElementById('takePhoto');
+    const stopCameraBtn = document.getElementById('stopCamera');
+    const cameraFeed = document.getElementById('cameraFeed');
+    const photoCanvas = document.getElementById('photoCanvas');
+    const cameraStatus = document.getElementById('cameraStatus');
+    
+    let stream = null;
+    
+    // Start camera
+    startCameraBtn.addEventListener('click', async function() {
+      try {
+        cameraStatus.className = 'alert alert-info mt-3';
+        cameraStatus.textContent = 'Requesting camera access...';
+        
+        stream = await navigator.mediaDevices.getUserMedia({ 
+          video: true, 
+          audio: false 
+        });
+        
+        cameraFeed.srcObject = stream;
+        cameraFeed.style.display = 'block';
+        photoCanvas.style.display = 'none';
+        
+        startCameraBtn.disabled = true;
+        takePhotoBtn.disabled = false;
+        stopCameraBtn.disabled = false;
+        
+        cameraStatus.className = 'alert alert-success mt-3';
+        cameraStatus.textContent = 'Camera is active and working!';
+      } catch (err) {
+        console.error('Error accessing camera:', err);
+        cameraStatus.className = 'alert alert-danger mt-3';
+        cameraStatus.textContent = 'Error accessing camera: ' + err.message;
+      }
+    });
+    
+    // Take photo
+    takePhotoBtn.addEventListener('click', function() {
+      if (!stream) return;
+      
+      const context = photoCanvas.getContext('2d');
+      photoCanvas.width = cameraFeed.videoWidth;
+      photoCanvas.height = cameraFeed.videoHeight;
+      
+      context.drawImage(cameraFeed, 0, 0, photoCanvas.width, photoCanvas.height);
+      
+      cameraFeed.style.display = 'none';
+      photoCanvas.style.display = 'block';
+      
+      cameraStatus.className = 'alert alert-success mt-3';
+      cameraStatus.textContent = 'Photo captured! You can take another or stop the camera.';
+    });
+    
+    // Stop camera
+    stopCameraBtn.addEventListener('click', function() {
+      if (stream) {
+        stream.getTracks().forEach(track => track.stop());
+        stream = null;
+        
+        cameraFeed.srcObject = null;
+        cameraFeed.style.display = 'none';
+        photoCanvas.style.display = 'none';
+        
+        startCameraBtn.disabled = false;
+        takePhotoBtn.disabled = true;
+        stopCameraBtn.disabled = true;
+        
+        cameraStatus.className = 'alert alert-info mt-3';
+        cameraStatus.textContent = 'Camera has been stopped. Click "Start Camera" to begin again.';
+      }
+    });
+    
+    // Initialize AOS animation library
+    AOS.init({
+      duration: 800,
+      easing: 'ease-in-out'
+    });
+  });
+</script>
+</body>
+</html>

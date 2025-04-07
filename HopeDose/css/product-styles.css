@@ -1,0 +1,363 @@
+/* Product Management Styles */
+.entry-options {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.entry-option {
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  padding: 25px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  border-bottom: 4px solid transparent;
+  overflow: hidden;
+  position: relative;
+}
+
+.entry-option:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 30px rgba(0, 123, 255, 0.2);
+  border-bottom: 4px solid #007bff;
+}
+
+.entry-option::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 0;
+  background: linear-gradient(to bottom, rgba(0, 123, 255, 0.05), transparent);
+  transition: height 0.3s ease;
+  z-index: 0;
+}
+
+.entry-option:hover::before {
+  height: 100%;
+}
+
+.option-icon {
+  font-size: 2.5rem;
+  color: #007bff;
+  margin-bottom: 15px;
+  width: 70px;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 123, 255, 0.1);
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 1;
+}
+
+.entry-option:hover .option-icon {
+  background: rgba(0, 123, 255, 0.2);
+  transform: scale(1.1);
+}
+
+.option-content {
+  position: relative;
+  z-index: 1;
+}
+
+.option-content h3 {
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+  color: #333;
+  transition: color 0.3s ease;
+}
+
+.entry-option:hover .option-content h3 {
+  color: #007bff;
+}
+
+.option-content p {
+  color: #6c757d;
+  margin-bottom: 0;
+}
+
+.entry-form {
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  margin-bottom: 30px;
+  transition: all 0.3s ease;
+  border-left: 5px solid #007bff;
+}
+
+.entry-form:hover {
+  box-shadow: 0 8px 25px rgba(0, 123, 255, 0.15);
+}
+
+.drag-drop-container {
+  border: 2px dashed #007bff;
+  border-radius: 10px;
+  padding: 40px 20px;
+  text-align: center;
+  background: rgba(0, 123, 255, 0.05);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.drag-drop-container:hover {
+  background: rgba(0, 123, 255, 0.1);
+}
+
+.drag-drop-container.active {
+  background: rgba(0, 123, 255, 0.15);
+  border-color: #0056b3;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(0, 123, 255, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(0, 123, 255, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(0, 123, 255, 0);
+  }
+}
+
+.scanner-container {
+  background: #f8f9fa;
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  border: 1px solid #dee2e6;
+  transition: all 0.3s ease;
+}
+
+.scanner-container:hover {
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+#scanner-video {
+  border-radius: 10px;
+  max-height: 300px;
+  margin: 0 auto;
+  display: block;
+  border: 1px solid #dee2e6;
+}
+
+/* Product table styles */
+.product-table {
+  border-collapse: separate;
+  border-spacing: 0;
+  width: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.product-table thead th {
+  background-color: #007bff;
+  color: white;
+  padding: 15px;
+  font-weight: 500;
+}
+
+.product-table tbody tr {
+  transition: all 0.3s ease;
+}
+
+.product-table tbody tr:nth-child(even) {
+  background-color: rgba(0, 123, 255, 0.05);
+}
+
+.product-table tbody tr:hover {
+  background-color: rgba(0, 123, 255, 0.1);
+}
+
+.product-table td {
+  padding: 12px 15px;
+  vertical-align: middle;
+  border-top: 1px solid #dee2e6;
+}
+
+.product-action-btn {
+  padding: 5px 10px;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+  margin-right: 5px;
+}
+
+.product-action-btn:hover {
+  transform: translateY(-2px);
+}
+
+/* Form control enhancements */
+.form-control:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 0 0.25rem rgba(0, 123, 255, 0.25);
+}
+
+.btn-product {
+  padding: 10px 20px;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.btn-product:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 123, 255, 0.2);
+}
+
+/* Dashboard Styles */
+.stats-card {
+  border-radius: 15px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  height: 100%;
+  transition: all 0.3s ease;
+  border-bottom: 3px solid transparent;
+}
+
+.stats-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+.stats-card.primary {
+  background: linear-gradient(135deg, #007bff, #0056b3);
+  color: white;
+  border-bottom-color: #003d80;
+}
+
+.stats-card.success {
+  background: linear-gradient(135deg, #28a745, #1e7e34);
+  color: white;
+  border-bottom-color: #145523;
+}
+
+.stats-card.warning {
+  background: linear-gradient(135deg, #ffc107, #d39e00);
+  color: white;
+  border-bottom-color: #a07800;
+}
+
+.stats-card.danger {
+  background: linear-gradient(135deg, #dc3545, #bd2130);
+  color: white;
+  border-bottom-color: #921925;
+}
+
+.stats-icon {
+  font-size: 2rem;
+  margin-right: 15px;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.stats-card:hover .stats-icon {
+  transform: scale(1.1);
+}
+
+.stats-info h3 {
+  font-size: 1.8rem;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.stats-info p {
+  margin-bottom: 0;
+  font-size: 0.9rem;
+  opacity: 0.9;
+}
+
+/* Status badges */
+.status-badge {
+  padding: 5px 10px;
+  border-radius: 50px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.status-badge:hover {
+  transform: translateY(-2px);
+}
+
+.status-active {
+  background-color: rgba(25, 135, 84, 0.1);
+  color: #198754;
+  border: 1px solid rgba(25, 135, 84, 0.2);
+}
+
+.status-expiring {
+  background-color: rgba(255, 193, 7, 0.1);
+  color: #ffc107;
+  border: 1px solid rgba(255, 193, 7, 0.2);
+}
+
+.status-expired {
+  background-color: rgba(220, 53, 69, 0.1);
+  color: #dc3545;
+  border: 1px solid rgba(220, 53, 69, 0.2);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .entry-options {
+    grid-template-columns: 1fr;
+  }
+  
+  .stats-card {
+    margin-bottom: 15px;
+  }
+  
+  .entry-form {
+    padding: 20px;
+  }
+  
+  .product-table {
+    display: block;
+    overflow-x: auto;
+  }
+}
+
+@media (max-width: 576px) {
+  .option-icon {
+    width: 60px;
+    height: 60px;
+    font-size: 2rem;
+  }
+  
+  .entry-option {
+    padding: 20px 15px;
+  }
+  
+  .stats-icon {
+    width: 50px;
+    height: 50px;
+    font-size: 1.5rem;
+  }
+  
+  .stats-info h3 {
+    font-size: 1.5rem;
+  }
+}

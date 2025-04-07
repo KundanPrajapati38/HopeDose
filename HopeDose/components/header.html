@@ -1,0 +1,213 @@
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center" href="index.html">
+      <img src="images/donation.jpg" alt="HopeDose Logo" class="logo me-2">
+      <span class="brand-text">HopeDose</span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto align-items-center">
+        <li class="nav-item mx-1">
+          <a class="nav-link" href="index.html"><i class="fas fa-home me-1"></i> Home</a>
+        </li>
+        <li class="nav-item mx-1">
+          <a class="nav-link" href="Donate.html"><i class="fas fa-hand-holding-heart me-1"></i> Donate</a>
+        </li>
+       
+      
+        <li class="nav-item mx-1">
+          <a class="nav-link" href="about.html"><i class="fas fa-info-circle me-1"></i> About Us</a>
+        </li>
+        <li class="nav-item mx-1">
+          <a class="nav-link" href="contact.html"><i class="fas fa-envelope me-1"></i> Contact</a>
+        </li>
+        <li class="nav-item dropdown mx-1">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fas fa-user-circle"></i> Account
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="profile.html"><i class="fas fa-user me-2"></i>Profile</a></li>
+            <li><a class="dropdown-item" href="settings.html"><i class="fas fa-cog me-2"></i>Settings</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#" id="logoutBtn"><i class="fas fa-sign-out-alt me-2"></i>Logout</a></li>
+          </ul>
+        </li>
+        <li class="mb-2"><a href="     volunteer.html" class="text-white text-decoration-none">Volunteer</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<style>
+  .navbar {
+    background: linear-gradient(90deg, #007bff, #00c6ff);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    padding: 12px 0;
+    transition: all 0.3s ease;
+  }
+  
+  .navbar.scrolled {
+    padding: 8px 0;
+    background: linear-gradient(90deg, #0056b3, #007bff);
+  }
+  
+  .navbar .nav-link {
+    color: white !important;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    position: relative;
+    padding: 8px 15px;
+  }
+  
+  .navbar .nav-link:hover {
+    color: #000000 !important;
+    transform: translateY(-2px);
+  }
+  
+  .navbar .nav-link.active {
+    color: #000000 !important;
+  }
+  
+  .navbar .nav-link.active::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: #000000;
+    border-radius: 2px;
+  }
+  
+  .logo {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+  }
+  
+  .navbar-brand:hover .logo {
+    transform: rotate(5deg);
+  }
+  
+  .brand-text {
+    font-weight: 700;
+    letter-spacing: 1px;
+    font-size: 1.4rem;
+    text-transform: uppercase;
+  }
+  
+  .dropdown-menu {
+    background: #ffffff;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    overflow: hidden;
+    padding: 12px;
+    animation: dropdownFade 0.3s ease;
+  }
+  
+  @keyframes dropdownFade {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .dropdown-item {
+    padding: 12px 18px;
+    transition: all 0.3s ease;
+    color: #222222 !important;
+    font-weight: 600;
+    border-radius: 10px;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .dropdown-item i {
+    color: #000000;
+    margin-right: 12px;
+    font-size: 18px;
+    transition: all 0.3s ease;
+    width: 20px;
+    text-align: center;
+  }
+  
+  .dropdown-item:hover {
+    background: linear-gradient(to right, #f0f8ff, #e6f2ff);
+    transform: translateX(5px);
+    color: #000000 !important;
+    box-shadow: 0 2px 8px rgba(0,123,255,0.1);
+  }
+  
+  .dropdown-item:hover i {
+    color: #000000;
+    transform: scale(1.2);
+  }
+  
+  .dropdown-divider {
+    border-color: #e0e0e0;
+    margin: 10px 0;
+    opacity: 0.7;
+  }
+  
+  #logoutBtn {
+    color: #000000 !important;
+    font-weight: 600;
+  }
+  
+  #logoutBtn i {
+    color: #000000;
+  }
+  
+  #logoutBtn:hover {
+    background: linear-gradient(to right, #fff5f5, #ffe0e0);
+    color: #000000 !important;
+    box-shadow: 0 2px 8px rgba(220,53,69,0.1);
+  }
+  
+  #logoutBtn:hover i {
+    transform: translateX(-3px) scale(1.2);
+  }
+</style>
+
+<script>
+  // Logout functionality
+  document.getElementById('logoutBtn').addEventListener('click', function(e) {
+    e.preventDefault();
+    if (confirm('Are you sure you want to logout?')) {
+      localStorage.removeItem('isLoggedIn');
+      localStorage.removeItem('userData');
+      window.location.href = 'login.html';
+    }
+  });
+  
+  // Add active class to current nav item
+  document.addEventListener('DOMContentLoaded', function() {
+    const currentLocation = location.href;
+    const navItems = document.querySelectorAll('.navbar .nav-link');
+    navItems.forEach(item => {
+      if (item.href === currentLocation) {
+        item.classList.add('active');
+      }
+    });
+    
+    // Navbar scroll effect
+    window.addEventListener('scroll', function() {
+      const navbar = document.querySelector('.navbar');
+      if (window.scrollY > 50) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+    });
+  });
+</script>

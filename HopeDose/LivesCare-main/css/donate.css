@@ -1,0 +1,447 @@
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.page-header {
+  background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+              url('https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center;
+  background-size: cover;
+  color: white;
+  padding: 80px 0;
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.page-title {
+  font-size: 3rem;
+  font-weight: bold;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+  margin-bottom: 1rem;
+}
+
+.page-subtitle {
+  font-size: 1.2rem;
+  max-width: 700px;
+  margin: 0 auto;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+}
+
+.breadcrumb {
+  background: transparent;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.breadcrumb-item a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.breadcrumb-item.active {
+  color: #ffd700;
+}
+
+.section-title {
+  text-align: center;
+  margin-bottom: 2.5rem;
+  font-size: 2.2rem;
+  color: #002f61;
+  font-weight: bold;
+  position: relative;
+  padding-bottom: 15px;
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(90deg, #007bff, #00c6ff);
+  border-radius: 2px;
+}
+
+.donation-options {
+  margin-bottom: 50px;
+}
+
+.donation-card {
+  background-color: #fff;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  padding: 30px;
+  height: 100%;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.donation-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+}
+
+.donation-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 8px;
+  background: linear-gradient(90deg, #007bff, #00c6ff);
+}
+
+.donation-icon {
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(90deg, #007bff, #00c6ff);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+  color: white;
+  font-size: 2rem;
+  box-shadow: 0 10px 20px rgba(0, 123, 255, 0.3);
+}
+
+.donation-title {
+  text-align: center;
+  color: #002f61;
+  font-weight: 600;
+  margin-bottom: 15px;
+  font-size: 1.5rem;
+}
+
+.donation-text {
+  text-align: center;
+  color: #6c757d;
+  line-height: 1.7;
+  margin-bottom: 25px;
+}
+
+.donation-btn {
+  display: block;
+  width: 100%;
+  background: linear-gradient(90deg, #007bff, #00c6ff);
+  color: white;
+  border: none;
+  padding: 12px 0;
+  border-radius: 50px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  text-align: center;
+  text-decoration: none;
+}
+
+.donation-btn:hover {
+  background: linear-gradient(90deg, #0056b3, #0099cc);
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 123, 255, 0.4);
+  color: white;
+}
+
+.donation-form-section {
+  background-color: #fff;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  padding: 40px;
+  margin-bottom: 50px;
+}
+
+.form-title {
+  color: #002f61;
+  font-weight: 600;
+  margin-bottom: 30px;
+  position: relative;
+  padding-bottom: 15px;
+}
+
+.form-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 50px;
+  height: 3px;
+  background: linear-gradient(90deg, #007bff, #00c6ff);
+}
+
+.form-label {
+  color: #002f61;
+  font-weight: 500;
+}
+
+.form-control {
+  border-radius: 10px;
+  padding: 12px 15px;
+  border: 1px solid #ced4da;
+  transition: all 0.3s ease;
+}
+
+.form-control:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 0 0.25rem rgba(0, 123, 255, 0.25);
+}
+
+.amount-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.amount-option {
+  flex: 1;
+  min-width: 80px;
+}
+
+.amount-option input[type="radio"] {
+  display: none;
+}
+
+.amount-option label {
+  display: block;
+  background-color: #f8f9fa;
+  border: 2px solid #e9ecef;
+  border-radius: 10px;
+  padding: 10px 15px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 600;
+  color: #495057;
+}
+
+.amount-option input[type="radio"]:checked + label {
+  background-color: #007bff;
+  border-color: #007bff;
+  color: white;
+}
+
+.custom-amount {
+  margin-top: 15px;
+}
+
+.payment-methods {
+  margin-top: 30px;
+}
+
+.payment-method {
+  margin-bottom: 15px;
+}
+
+.payment-method input[type="radio"] {
+  margin-right: 10px;
+}
+
+.payment-icon {
+  width: 40px;
+  height: 25px;
+  display: inline-block;
+  margin-left: 10px;
+  vertical-align: middle;
+}
+
+.submit-btn {
+  background: linear-gradient(90deg, #007bff, #00c6ff);
+  color: white;
+  border: none;
+  padding: 12px 30px;
+  border-radius: 50px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  margin-top: 20px;
+}
+
+.submit-btn:hover {
+  background: linear-gradient(90deg, #0056b3, #0099cc);
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 123, 255, 0.4);
+}
+
+.impact-section {
+  margin-bottom: 50px;
+}
+
+.impact-card {
+  background-color: #fff;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  overflow: hidden;
+  transition: all 0.3s ease;
+  height: 100%;
+}
+
+.impact-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+}
+
+.impact-img-container {
+  height: 200px;
+  overflow: hidden;
+}
+
+.impact-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.impact-card:hover .impact-img {
+  transform: scale(1.1);
+}
+
+.impact-content {
+  padding: 20px;
+}
+
+.impact-title {
+  color: #002f61;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+.impact-text {
+  color: #6c757d;
+  line-height: 1.7;
+}
+
+.testimonial-section {
+  background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), 
+              url('https://images.unsplash.com/photo-1559027615-cd4628902d4a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center;
+  background-size: cover;
+  color: white;
+  padding: 60px 0;
+  margin-bottom: 50px;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.testimonial-card {
+  text-align: center;
+  padding: 30px;
+}
+
+.testimonial-quote {
+  font-size: 1.5rem;
+  font-style: italic;
+  margin-bottom: 20px;
+  position: relative;
+  padding: 0 30px;
+}
+
+.testimonial-quote::before,
+.testimonial-quote::after {
+  content: '"';
+  font-size: 3rem;
+  position: absolute;
+  color: #007bff;
+  opacity: 0.5;
+}
+
+.testimonial-quote::before {
+  top: -20px;
+  left: 0;
+}
+
+.testimonial-quote::after {
+  bottom: -40px;
+  right: 0;
+}
+
+.testimonial-author {
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.testimonial-role {
+  opacity: 0.8;
+  font-size: 0.9rem;
+}
+
+.faq-section {
+  margin-bottom: 50px;
+}
+
+.faq-card {
+  background-color: #fff;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  padding: 30px;
+  margin-bottom: 30px;
+}
+
+.accordion-item {
+  border-bottom: 1px solid #e9ecef;
+  padding: 15px 0;
+}
+
+.accordion-item:last-child {
+  border-bottom: none;
+}
+
+.accordion-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  color: #002f61;
+  font-weight: 600;
+  padding: 10px 0;
+}
+
+.accordion-icon {
+  transition: transform 0.3s ease;
+}
+
+.accordion-item.active .accordion-icon {
+  transform: rotate(180deg);
+}
+
+.accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+  color: #6c757d;
+  line-height: 1.7;
+  padding-right: 20px;
+}
+
+.accordion-item.active .accordion-content {
+  max-height: 1000px;
+}
+
+@media (max-width: 768px) {
+  .page-title {
+    font-size: 2.2rem;
+  }
+  
+  .page-subtitle {
+    font-size: 1rem;
+  }
+  
+  .section-title {
+    font-size: 1.8rem;
+  }
+  
+  .donation-form-section {
+    padding: 20px;
+  }
+  
+  .amount-options {
+    flex-direction: column;
+  }
+  
+  .amount-option {
+    width: 100%;
+  }
+}

@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>User Dashboard - HopeDose</title>
+  <!-- Authentication Check Script -->
+  <script>
+    // Authentication check - redirect to login if not authenticated
+    (function() {
+      const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+      if (!isLoggedIn) {
+        // User is not logged in, redirect to login page
+        window.location.href = "login.html";
+      }
+    })();
+  </script>
+  <!-- Bootstrap & FontAwesome -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+  <!-- Add AOS library for scroll animations -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    }
+
+    /* Existing navbar styles */
+    .navbar {
+      background: linear-gradient(90deg, #007bff, #00c6ff);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      padding: 12px 0;
+    }
+
+    /* Enhanced dropdown styles with dark background */
+    .dropdown-menu {
+      background: #2a2a2a;
+      border: none;
+      border-radius: 10px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+      padding: 10px;
+      margin-top: 10px;
+      animation: fadeIn 0.3s ease;
+    }
+    
+    .dropdown-item {
+      color: #e0e0e0 !important;
+      font-weight: 500;
+      padding: 10px 15px;
+      border-radius: 6px;
+      margin-bottom: 5px;
+      transition: all 0.3s ease;
+    }
+    
+    .dropdown-item:hover {
+      background: linear-gradient(90deg, rgba(0, 123, 255, 0.3), rgba(0, 198, 255, 0.3));
+      color: #ffffff !important;
+      transform: translateX(5px);
+    }
+    
+    .dropdown-menu::before {
+      content: '';
+      position: absolute;
+      top: -8px;
+      left: 20px;
+      width: 16px;
+      height: 16px;
+      background: #2a2a2a;
+      transform: rotate(45deg);
+      border-radius: 2px;
+      z-index: -1;
+    }
+    
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .navbar a {
+      color: white !important;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+
+    /* Rest of your existing styles */
+    .navbar a:hover {
+      color: #ffd700 !important;
+      transform: translateY(-2px);
+    }
+
+    .logo {
+      width: 60px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+
+    .dashboard-container {
+      padding: 40px 0;
+    }
+
+    .dashboard-header {
+      background: linear-gradient(90deg, #007bff, #00c6ff);
+      color: white;
+      padding: 30px;
+      border-radius: 15px;
+      margin-bottom: 30px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    .dashboard-header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+
+    .dashboard-card {
+      background: white;
+      border-radius: 15px;
+      padding: 25px;
+      margin-bottom: 25px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      transition: all 0.3s ease;
+    }
+
+    .dashboard-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    }
+
+    .dashboard-card h3 {
+      color: #007bff;
+      margin-bottom: 20px;
+      font-weight: 600;
+      border-bottom: 2px solid #f0f0f0;
+      padding-bottom: 10px;
+    }
+
+    .dashboard-card .icon {
+      font-size: 2.5rem;
+      color: #007bff;
+      margin-bottom: 15px;
+    }
+
+    .profile-image {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 5px solid white;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    .stat-card {
+      background: white;
+      border-radius: 15px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      transition: all 0.3s ease;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    }
+
+    .stat-card .number {
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: #007bff;
+      margin: 10px 0;
+    }
+
+    .stat-card .label {
+      color: #6c757d;
+      font-size: 1rem;
+    }
+
+    .activity-item {
+      padding: 15px 0;
+      border-bottom: 1px solid #f0f0f0;
+    }
+
+    .activity-item:last-child {
+      border-bottom: none;
+    }
+
+    .activity-item .date {
+      color: #6c757d;
+      font-size: 0.9rem;
+    }
+
+    .btn-primary {
+      background: linear-gradient(90deg, #007bff, #00c6ff);
+      border: none;
+      border-radius: 50px;
+      padding: 8px 20px;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+
+    .btn-primary:hover {
+      background: linear-gradient(90deg, #0056b3, #0099cc);
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(0, 123, 255, 0.4);
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center" href="index.html">
+      <img src="images/donation.jpg" alt="logo" class="logo me-2">
+      <span>HopeDose</span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarContent">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="index.html"><i class="fas fa-home me-1"></i> Home</a></li>
+        <li class="nav-item dropdown">
+          
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="./about.html">Overview</a></li>
+            <li><a class="dropdown-item" href="./vm.html">Vision & Mission</a></li>
+          </ul> <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown"><i class="fas fa-info-circle me-1"></i> About Us</a>
+          <li class="nav-item"><a class="nav-link" href="./Donate.html"><i class="fas fa-hand-holding-heart me-1"></i> Donate</a></li>
+
+        </li><li class="nav-item"><a class="nav-link" href="./inventory.html"><i class="fas fa-boxes me-1"></i> Inventory</a></li>
+        <li class="nav-item"><a class="nav-link" href="./submit.html"><i class="fas fa-paper-plane me-1"></i> Submit Request</a></li>
+       
+        
+        <li class="nav-item"><a class="nav-link active" href="./dashboard.html"><i class="fas fa-user-circle me-1"></i> My Dashboard</a></li>
+        <!-- Logout Button -->
+        <li class="nav-item"><button id="logoutBtn" class="btn btn-outline-light btn-sm ms-2"><i class="fas fa-sign-out-alt me-1"></i> Logout</button></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Dashboard Content -->
+<div class="container dashboard-container">
+  <!-- Dashboard Header -->
+  <div class="dashboard-header" data-aos="fade-up">
+    <div class="row align-items-center">
+      <div class="col-md-2 text-center">
+        <img src="components/assets/images/dashboard.jpg" alt="Profile" class="profile-image" id="profile-image">
+      </div>
+      <div class="col-md-10">
+        <h1>Welcome, <span id="user-name">User</span>!</h1>
+        <p>Manage your account, track your donations, and view your impact.</p>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Dashboard Stats -->
+  <div class="row g-4 mb-4">
+    <div class="col-md-3" data-aos="fade-up" data-aos-delay="100">
+      <div class="stat-card">
+        <i class="fas fa-hand-holding-heart icon"></i>
+        <div class="number" id="donations-count">0</div>
+        <div class="label">Total Donations</div>
+      </div>
+    </div>
+    <div class="col-md-3" data-aos="fade-up" data-aos-delay="200">
+      <div class="stat-card">
+        <i class="fas fa-rupee-sign icon"></i>
+        <div class="number" id="amount-donated">₹0</div>
+        <div class="label">Amount Donated</div>
+      </div>
+    </div>
+    <div class="col-md-3" data-aos="fade-up" data-aos-delay="300">
+      <div class="stat-card">
+        <i class="fas fa-box-open icon"></i>
+        <div class="number" id="items-donated">0</div>
+        <div class="label">Items Donated</div>
+      </div>
+    </div>
+    <div class="col-md-3" data-aos="fade-up" data-aos-delay="400">
+      <div class="stat-card">
+        <i class="fas fa-heart icon"></i>
+        <div class="number" id="lives-impacted">0</div>
+        <div class="label">Lives Impacted</div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Dashboard Main Content -->
+  <div class="row">
+    <!-- Profile Information -->
+    <div class="col-lg-4" data-aos="fade-up">
+      <div class="dashboard-card">
+        <h3><i class="fas fa-user me-2"></i>Profile Information</h3>
+        <div class="mb-3">
+          <label class="form-label">Full Name</label>
+          <input type="text" class="form-control" id="profile-name" placeholder="Your Name">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Email Address</label>
+          <input type="email" class="form-control" id="profile-email" placeholder="your.email@example.com" readonly>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Phone Number</label>
+          <input type="tel" class="form-control" id="profile-phone" placeholder="Your Phone Number">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Address</label>
+          <textarea class="form-control" id="profile-address" rows="3" placeholder="Your Address"></textarea>
+        </div>
+        <button class="btn btn-primary" id="save-profile"><i class="fas fa-save me-2"></i>Save Changes</button>
+      </div>
+    </div>
+    
+    <!-- Recent Activity -->
+    <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
+      <div class="dashboard-card">
+        <h3><i class="fas fa-history me-2"></i>Recent Activity</h3>
+        <div id="activity-list">
+          <!-- Activity items will be added dynamically -->
+          <div class="activity-item">
+            <p class="mb-1"><strong>Account Created</strong></p>
+            <p class="mb-0">Welcome to HopeDose! Your journey of giving starts here.</p>
+            <small class="date" id="signup-date">Date</small>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Upcoming Events -->
+      <div class="dashboard-card" data-aos="fade-up" data-aos-delay="150">
+        <h3><i class="fas fa-calendar-alt me-2"></i>Upcoming Events</h3>
+        <div class="activity-item">
+          <p class="mb-1"><strong>Food Distribution Drive</strong></p>
+          <p class="mb-0">Join us in distributing food to those in need.</p>
+          <small class="date">June 15, 2023</small>
+        </div>
+        <div class="activity-item">
+          <p class="mb-1"><strong>Book Donation Camp</strong></p>
+          <p class="mb-0">Help spread knowledge by donating books.</p>
+          <small class="date">July 5, 2023</small>
+        </div>
+        <a href="#" class="btn btn-primary mt-3"><i class="fas fa-plus me-2"></i>View All Events</a>
+      </div>
+    </div>
+    
+    <!-- Donation History -->
+    <div class="col-lg-4" data-aos="fade-up" data-aos-delay="200">
+      <div class="dashboard-card">
+        <h3><i class="fas fa-donate me-2"></i>Donation History</h3>
+        <div id="donation-history">
+          <!-- Donation history will be added dynamically -->
+          <p class="text-center text-muted">No donations yet. Start making a difference today!</p>
+        </div>
+        <a href="./Donate.html" class="btn btn-primary mt-3"><i class="fas fa-hand-holding-heart me-2"></i>Make a Donation</a>
+      </div>
+      
+      <!-- Certificates & Rewards -->
+      <div class="dashboard-card" data-aos="fade-up" data-aos-delay="250">
+        <h3><i class="fas fa-award me-2"></i>Certificates & Rewards</h3>
+        <div class="text-center">
+          <p>Earn certificates and rewards for your contributions!</p>
+          <div class="mb-3">
+            <i class="fas fa-certificate text-warning" style="font-size: 3rem;"></i>
+            <p class="mt-2">Make your first donation to unlock certificates</p>
+          </div>
+          <a href="./Donate.html" class="btn btn-primary"><i class="fas fa-trophy me-2"></i>Earn Rewards</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Include Footer -->
+<div id="footer-placeholder"></div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- AOS Animation Library -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<!-- Custom JS -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Initialize AOS animation library
+    AOS.init({
+      duration: 1000,
+      once: true
+    });
+    
+    // Load user data from localStorage
+    const user = JSON.parse(localStorage.getItem("user") || "{}");
+    const loginTime = localStorage.getItem("loginTime") || Date.now();
+    
+    // Update profile information
+    document.getElementById('user-name').textContent = user.name || 'User';
+    document.getElementById('profile-name').value = user.name || '';
+    document.getElementById('profile-email').value = user.email || '';
+    document.getElementById('profile-phone').value = user.phone || '';
+    document.getElementById('profile-address').value = user.address || '';
+    
+    // Set signup date
+    const signupDate = new Date(parseInt(loginTime));
+    document.getElementById('signup-date').textContent = signupDate.toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
+    
+    // Generate random stats for demo purposes
+    document.getElementById('donations-count').textContent = Math.floor(Math.random() * 5);
+    document.getElementById('amount-donated').textContent = '₹' + Math.floor(Math.random() * 10000);
+    document.getElementById('items-donated').textContent = Math.floor(Math.random() * 10);
+    document.getElementById('lives-impacted').textContent = Math.floor(Math.random() * 20);
+    
+    // Save profile changes
+    document.getElementById('save-profile').addEventListener('click', function() {
+      const updatedUser = {
+        ...user,
+        name: document.getElementById('profile-name').value,
+        phone: document.getElementById('profile-phone').value,
+        address: document.getElementById('profile-address').value
+      };
+      
+      localStorage.setItem("user", JSON.stringify(updatedUser));
+      alert('Profile updated successfully!');
+      
+      // Update displayed name
+      document.getElementById('user-name').textContent = updatedUser.name;
+    });
+    
+    // Logout functionality
+    document.getElementById('logoutBtn').addEventListener('click', function() {
+      localStorage.removeItem("isLoggedIn");
+      alert("You have been logged out successfully!");
+      window.location.href = "login.html";
+    });
+    
+    // Load footer
+    fetch('components/footer.html')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('footer-placeholder').innerHTML = data;
+      });
+  });
+</script>
+</body>
+</html>

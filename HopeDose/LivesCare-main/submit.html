@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Submit Request - HopeDose</title>
+  <!-- Bootstrap & FontAwesome -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .navbar {
+      background: linear-gradient(90deg, #007bff, #00c6ff);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      padding: 12px 0;
+    }
+
+    .navbar a {
+      color: white !important;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+
+    .navbar a:hover {
+      color: #ffd700 !important;
+      transform: translateY(-2px);
+    }
+
+    .logo {
+      width: 60px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+    
+    .page-header {
+      background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+                  url('https://images.unsplash.com/photo-1593113598332-cd59a93c5156?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center;
+      background-size: cover;
+      color: white;
+      padding: 60px 0;
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    
+    .page-title {
+      font-size: 2.5rem;
+      font-weight: bold;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    }
+    
+    .breadcrumb {
+      background: transparent;
+      justify-content: center;
+    }
+    
+    .breadcrumb-item a {
+      color: #fff;
+      text-decoration: none;
+    }
+    
+    .breadcrumb-item.active {
+      color: #ffd700;
+    }
+    
+    .form-container {
+      max-width: 800px;
+      margin: 0 auto 40px;
+      padding: 30px;
+      background-color: #fff;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .form-container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 10px;
+      background: linear-gradient(90deg, #007bff, #00c6ff);
+    }
+    
+    .form-title {
+      color: #002f61;
+      font-weight: bold;
+      margin-bottom: 30px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid #eee;
+      position: relative;
+    }
+    
+    .form-title::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      width: 80px;
+      height: 3px;
+      background: linear-gradient(90deg, #007bff, #00c6ff);
+    }
+    
+    .form-label {
+      font-weight: 600;
+      color: #495057;
+    }
+    
+    .form-control {
+      border-radius: 8px;
+      padding: 12px 15px;
+      border: 1px solid #ced4da;
+      transition: all 0.3s;
+    }
+    
+    .form-control:focus {
+      border-color: #007bff;
+      box-shadow: 0 0 0 0.25rem rgba(0, 123, 255, 0.25);
+    }
+    
+    .form-select {
+      border-radius: 8px;
+      padding: 12px 15px;
+      height: auto;
+    }
+    
+    .btn-primary {
+      background: linear-gradient(90deg, #007bff, #00c6ff);
+      border: none;
+      border-radius: 50px;
+      padding: 12px 30px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+      transition: all 0.3s;
+    }
+    
+    .btn-primary:hover {
+      background: linear-gradient(90deg, #0056b3, #0099cc);
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(0, 123, 255, 0.4);
+    }
+    
+    .form-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(90deg, #007bff, #00c6ff);
+      color: white;
+      border-radius: 50%;
+      margin-right: 15px;
+    }
+    
+    .form-step {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    
+    .form-step-title {
+      font-weight: 600;
+      margin: 0;
+    }
+    
+    .form-step-subtitle {
+      color: #6c757d;
+      margin: 0;
+      font-size: 0.9rem;
+    }
+    
+    .footer {
+      background: linear-gradient(90deg, #343a40, #212529);
+      color: #fff;
+      padding: 2rem 0 1rem;
+      margin-top: auto;
+    }
+    
+    .footer-col h4 {
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+      position: relative;
+      padding-bottom: 10px;
+    }
+    
+    .footer-col h4::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 50px;
+      height: 3px;
+      background: linear-gradient(90deg, #007bff, #00c6ff);
+    }
+    
+    .footer-col ul {
+      list-style: none;
+      padding: 0;
+    }
+    
+    .footer-col ul li a {
+      color: #cecece;
+      text-decoration: none;
+      display: block;
+      margin-bottom: 0.5rem;
+      transition: all 0.3s;
+    }
+    
+    .footer-col ul li a:hover {
+      color: #fff;
+      transform: translateX(5px);
+    }
+    
+    .social-links a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 50%;
+      color: #fff;
+      font-size: 1rem;
+      margin-right: 10px;
+      transition: all 0.3s;
+    }
+    
+    .social-links a:hover {
+      background: linear-gradient(90deg, #007bff, #00c6ff);
+      transform: translateY(-3px);
+    }
+    
+    .success-message {
+      display: none;
+      text-align: center;
+      padding: 30px;
+    }
+    
+    .success-icon {
+      font-size: 5rem;
+      color: #28a745;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center" href="index.html">
+      <img src="images/donation.jpg" alt="logo" class="logo me-2">
+      <span>HopeDose</span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarContent">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="index.html"><i class="fas fa-home me-1"></i> Home</a></li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown"><i class="fas fa-info-circle me-1"></i> About Us</a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="./about.html">Overview</a></li>
+            <li><a class="dropdown-item" href="./vm.html">Vision & Mission</a></li>
+          </ul>
+        </li>
+        <li class="nav-item"><a class="nav-link active" href="./submit.html"><i class="fas fa-paper-plane me-1"></i> Submit Request</a></li>
+        <li class="nav-item"><a class="nav-link" href="./inventory.html"><i class="fas fa-boxes me-1"></i> Inventory</a></li>
+        <li class="nav-item"><a class="nav-link" href="./Donate.html"><i class="fas fa-hand-holding-heart me-1"></i> Donate</a></li>
+        <li class="nav-item"><a class="nav-link" href="./login.html"><i class="fas fa-sign-in-alt me-1"></i> Login</a></li>
+        <li class="nav-item"><a class="nav-link" href="./signup.html"><i class="fas fa-user-plus me-1"></i> Sign Up</a></li>
+        <!-- Logout Button -->
+        <li class="nav-item"><button id="logoutButton" class="btn btn-danger btn-sm ms-2" style="display: none;">Logout</button></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Page Header -->
+<div class="page-header">
+  <div class="container">
+    <h1 class="page-title">Submit Your Request</h1>
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Submit Request</li>
+      </ol>
+    </nav>
+  </div>
+</div>
+
+<div class="container">
+  <div class="form-container" id="requestFormContainer">
+    <h2 class="form-title">Request Form</h2>
+    <p class="lead mb-4">Please fill out the form below with your request details. We'll review your submission and get back to you as soon as possible.</p>
+    
+    <div class="form-step">
+      <div class="form-icon">
+        <i class="fas fa-user"></i>
+      </div>
+      <div>
+        <h5 class="form-step-title">Personal Information</h5>
+        <p class="form-step-subtitle">Tell us about yourself</p>
+      </div>
+    </div>
+    
+    <form id="requestForm" class="needs-validation" novalidate>
+      <div class="row mb-3">
+        <div class="col-md-6 mb-3">
+          <label for="name" class="form-label">Full Name</label>
+          <input type="text" class="form-control" id="name" placeholder="Enter your full name" required>
+          <div class="invalid-feedback">Please provide your name.</div>
+        </div>
+        <div class="col-md-6 mb-3">
+          <label for="email" class="form-label">Email Address</label>
+          <input type="email" class="form-control" id="email" placeholder="Enter your email address" required>
+          <div class="invalid-feedback">Please provide a valid email address.</div>
+        </div>
+      </div>
+      
+      <div class="row mb-3">
+        <div class="col-md-6 mb-3">
+          <label for="phone" class="form-label">Phone Number</label>
+          <input type="tel" class="form-control" id="phone" placeholder="Enter your phone number">
+        </div>
+        <div class="col-md-6 mb-3">
+          <label for="location" class="form-label">Location</label>
+          <input type="text" class="form-control" id="location" placeholder="Enter your city/area">
+        </div>
+      </div>
+      
+      <div class="form-step mt-4">
+        <div class="form-icon">
+          <i class="fas fa-clipboard-list"></i>
+        </div>
+        <div>
+          <h5 class="form-step-title">Request Details</h5>
+          <p class="form-step-subtitle">Tell us what you need</p>
+        </div>
+      </div>
+      
+      <div class="mb-3">
+        <label for="requestType" class="form-label">Request Type</label>
+        <select class="form-select" id="requestType" required>
+          <option value="" selected disabled>Select request type</option>
+          <option value="food">Food</option>
+          <option value="clothing">Clothing</option>
+          <option value="books">Books</option>
+          <option value="toys">Toys</option>
+          <option value="medicine">Medicine</option>
+          <option value="financial">Financial Assistance</option>
+          <option value="other">Other</option>
+        </select>
+        <div class="invalid-feedback">Please select a request type.</div>
+      </div>
+      
+      <div class="mb-3">
+        <label for="requestTitle" class="form-label">Request Title</label>
+        <input type="text" class="form-control" id="requestTitle" placeholder="Brief title for your request" required>
+        <div class="invalid-feedback">Please provide a title for your request.</div>
+      </div>
+      
+      <div class="mb-3">
+        <label for="request" class="form-label">Request Details</label>
+        <textarea class="form-control" id="request" rows="5" placeholder="Please describe your request in detail..." required></textarea>
+        <div class="invalid-feedback">Please provide details about your request.</div>
+      </div>
+      
+      <div class="mb-3">
+        <label for="urgency" class="form-label">Urgency Level</label>
+        <select class="form-select" id="urgency">
+          <option value="low">Low - Within a month</option>
+          <option value="medium" selected>Medium - Within a week</option>
+          <option value="high">High - Within 48 hours</option>
+          <option value="critical">Critical - Immediate assistance needed</option>
+        </select>
+      </div>
+      
+      <div class="mb-4">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="termsCheck" required>
+          <label class="form-check-label" for="termsCheck">
+            I agree to the <a href="#" data-bs-toggle="modal" data-bs-target="#termsModal">terms and conditions</a>
+          </label>
+          <div class="invalid-feedback">You must agree before submitting.</div>
+        </div>
+      </div>
+      
+      <button type="submit" class="btn btn-primary w-100">
+        <i class="fas fa-paper-plane me-2"></i> Submit Request
+      </button>
+    </form>
+    
+    <!-- Success Message (Hidden by default) -->
+    <div id="successMessage" class="success-message">
+      <i class="fas fa-check-circle success-icon"></i>
+      <h3>Thank You!</h3>
+      <p class="lead">Your request has been submitted successfully.</p>
+      <p>We'll review your request and get back to you as soon as possible.</p>
+      <a href="index.html" class="btn btn-primary mt-3">
+        <i class="fas fa-home me-2"></i> Back to Home
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- Terms and Conditions Modal -->
+<div class="modal fade" id="termsModal" tabindex="-1" aria-labelledby="termsModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="termsModalLabel">Terms and Conditions</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <h6>1. Request Submission</h6>
+        <p>By submitting a request through our platform, you acknowledge that:</p>
+        <ul>
+          <li>All information provided is accurate and truthful</li>
+          <li>HopeDose will review your request and determine if we can fulfill it</li>
+          <li>Submission of a request does not guarantee fulfillment</li>
+        </ul>
+        
+        <h6>2. Personal Information</h6>
+        <p>We collect personal information to process your request. We will:</p>
+        <ul>
+          <li>Keep your information confidential</li>
+          <li>Use it only for the purpose of fulfilling your request</li>
+          <li>Not share it with third parties without your consent</li>
+        </ul>
+        
+        <h6>3. Communication</h6>
+        <p>By submitting a request, you agree to be contacted by HopeDose representatives regarding your request.</p>
+        
+        <h6>4. Request Fulfillment</h6>
+        <p>HopeDose will make reasonable efforts to fulfill requests based on:</p>
+        <ul>
+          <li>Availability of requested items</li>
+          <li>Urgency of the request</li>
+          <li>Our capacity to deliver</li>
+        </ul>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">I Understand</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3 footer-col mb-4">
+        <h4>HopeDose</h4>
+        <ul class="list-unstyled">
+          <li><a href="./about.html">About us</a></li>
+          <li><a href="#">Our services</a></li>
+          <li><a href="#">Privacy policy</a></li>
+        </ul>
+      </div>
+      <div class="col-md-3 footer-col mb-4">
+        <h4>Get Help</h4>
+        <ul class="list-unstyled">
+          <li><a href="#">FAQ</a></li>
+          <li><a href="./submit.html">Request</a></li>
+          <li><a href="./payment.html">Payment Options</a></li>
+        </ul>
+      </div>
+      <div class="col-md-3 footer-col mb-4">
+        <h4>Donate & Request</h4>
+        <ul class="list-unstyled">
+          <li><a href="./Books.html">Books</a></li>
+          <li><a href="./toys.html">Toys</a></li>
+          <li><a href="./Food.html">Food</a></li>
+          <li><a href="./payment.html">Cash</a></li>
+        </ul>
+      </div>
+      <div class="col-md-3 footer-col mb-4">
+        <h4>Follow Us</h4>
+        <div class="social-links">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="text-center small pt-3 border-top border-secondary mt-3">
+      &copy; 2025 HopeDose. All rights reserved.
+    </div>
+  </div>
+</footer>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+  // Form validation
+  (function() {
+    'use strict';
+    
+    // Fetch all forms we want to apply validation to
+    const forms = document.querySelectorAll('.needs-validation');
+    
+    // Loop over them and prevent submission
+    Array.from(forms).forEach(form => {
+      form.addEventListener('submit', event => {
+        if (!form.checkValidity()) {
+          event.preventDefault();
+          event.stopPropagation();
+        } else {
+          event.preventDefault();
+          submitForm();
+        }
+        
+        form.classList.add('was-validated');
+      }, false);
+    });
+  })();
+  
+  // Handle form submission
+  function submitForm() {
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const phone = document.getElementById('phone').value;
+    const location = document.getElementById('location').value;
+    const requestType = document.getElementById('requestType').value;
+    const requestTitle = document.getElementById('requestTitle').value;
+    const request = document.getElementById('request').value;
+    const urgency = document.getElementById('urgency').value;
+    
+    // Save data to local storage
+    localStorage.setItem('requestData', JSON.stringify({ 
+      name, 
+      email, 
+      phone,
+      location,
+      requestType,
+      requestTitle,
+      request,
+      urgency,
+      date: new Date().toISOString()
+    }));
+    
+    // Show success message
+    document.getElementById('requestForm').style.display = 'none';
+    document.getElementById('successMessage').style.display = 'block';
+    
+    // Scroll to success message
+    document.getElementById('successMessage').scrollIntoView({ behavior: 'smooth' });
+  }
+  
+  // Check if the user is logged in
+  document.addEventListener('DOMContentLoaded', function() {
+    const isLoggedIn = localStorage.getItem("isLoggedIn");
+    
+    if (isLoggedIn) {
+      // Hide login and signup links if the user is logged in
+      document.querySelector('a[href="./login.html"]').style.display = 'none';
+      document.querySelector('a[href="./signup.html"]').style.display = 'none';
+      // Show logout button
+      document.getElementById("logoutButton").style.display = 'block';
+    } else {
+      // If not logged in, hide the logout button
+      document.getElementById("logoutButton").style.display = 'none';
+    }
+  });
+
+  // Handle logout
+  document.getElementById("logoutButton").addEventListener("click", function () {
+    localStorage.removeItem("isLoggedIn");
+    alert("Logged out successfully!");
+    window.location.href = "login.html";
+  });
+</script>
+</body>
+</html>
+

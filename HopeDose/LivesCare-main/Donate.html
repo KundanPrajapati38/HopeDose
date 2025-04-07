@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Donate - HopeDose</title>
+  <!-- Bootstrap & FontAwesome -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+  <!-- AOS Animation Library -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/donate.css">
+</head>
+<body>
+
+<!-- Include Header -->
+<div id="header-placeholder"></div>
+
+<!-- Page Header -->
+<div class="page-header">
+  <div class="container">
+    <h1 class="page-title" data-aos="fade-up">Make a Donation</h1>
+    <p class="page-subtitle" data-aos="fade-up" data-aos-delay="200">
+      Your generosity can change lives. Every contribution, no matter how small, makes a significant impact.
+    </p>
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Donate</li>
+      </ol>
+    </nav>
+  </div>
+</div>
+
+<div class="container">
+  <!-- Donation Options Section -->
+  <h2 class="section-title" data-aos="fade-up">Ways to Donate</h2>
+  <section class="donation-options">
+    <div class="row">
+      <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="100">
+        <div class="donation-card">
+          <div class="donation-icon">
+            <i class="fas fa-hand-holding-usd"></i>
+          </div>
+          <h4 class="donation-title">Financial Donation</h4>
+          <p class="donation-text">
+            Your monetary contributions help us provide essential services, purchase supplies, and support those in need.
+          </p>
+          <a href="#donate-form" class="donation-btn">Donate Now</a>
+        </div>
+      </div>
+      <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="200">
+        <div class="donation-card">
+          <div class="donation-icon">
+            <i class="fas fa-box-open"></i>
+          </div>
+          <h4 class="donation-title">Donate Items</h4>
+          <p class="donation-text">
+            Donate clothes, food, books, toys, and other essential items that can directly benefit individuals and families.
+          </p>
+          <a href="submit.html" class="donation-btn">Donate Items</a>
+        </div>
+      </div>
+      <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="300">
+        <div class="donation-card">
+          <div class="donation-icon">
+            <i class="fas fa-clock"></i>
+          </div>
+          <h4 class="donation-title">Volunteer Time</h4>
+          <p class="donation-text">
+            Your time and skills are valuable. Join our volunteer team and help make a difference in your community.
+          </p>
+          <a href="contact.html" class="donation-btn">Volunteer Now</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Donation Form Section -->
+  <section class="donation-form-section" id="donate-form" data-aos="fade-up">
+    <div class="row">
+      <div class="col-lg-8 mx-auto">
+        <h3 class="form-title">Make a Financial Donation</h3>
+        <form id="donationForm">
+          <div class="row mb-4">
+            <div class="col-md-6 mb-3">
+              <label for="firstName" class="form-label">First Name</label>
+              <input type="text" class="form-control" id="firstName" required>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="lastName" class="form-label">Last Name</label>
+              <input type="text" class="form-control" id="lastName" required>
+            </div>
+          </div>
+          
+          <div class="mb-4">
+            <label for="email" class="form-label">Email Address</label>
+            <input type="email" class="form-control" id="email" required>
+          </div>
+          
+          <div class="mb-4">
+            <label for="phone" class="form-label">Phone Number</label>
+            <input type="tel" class="form-control" id="phone">
+          </div>
+          
+          <div class="mb-4">
+            <label class="form-label">Donation Amount</label>
+            <div class="amount-options">
+              <div class="amount-option">
+                <input type="radio" name="amount" id="amount500" value="500" checked>
+                <label for="amount500">₹500</label>
+              </div>
+              <div class="amount-option">
+                <input type="radio" name="amount" id="amount1000" value="1000">
+                <label for="amount1000">₹1,000</label>
+              </div>
+              <div class="amount-option">
+                <input type="radio" name="amount" id="amount2000" value="2000">
+                <label for="amount2000">₹2,000</label>
+              </div>
+              <div class="amount-option">
+                <input type="radio" name="amount" id="amount5000" value="5000">
+                <label for="amount5000">₹5,000</label>
+              </div>
+              <div class="amount-option">
+                <input type="radio" name="amount" id="amountCustom" value="custom">
+                <label for="amountCustom">Custom</label>
+              </div>
+            </div>
+            <div class="custom-amount" id="customAmountContainer" style="display: none;">
+              <label for="customAmount" class="form-label">Enter Amount (₹)</label>
+              <input type="number" class="form-control" id="customAmount" min="1">
+            </div>
+          </div>
+          
+          <div class="mb-4">
+            <label class="form-label">Donation Frequency</label>
+            <div class="form-check mb-2">
+              <input class="form-check-input" type="radio" name="frequency" id="oneTime" value="one-time" checked>
+              <label class="form-check-label" for="oneTime">
+                One-time Donation
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="frequency" id="monthly" value="monthly">
+              <label class="form-check-label" for="monthly">
+                Monthly Donation
+              </label>
+            </div>
+          </div>
+          
+          <div class="mb-4">
+            <label for="cause" class="form-label">Donation Purpose</label>
+            <select class="form-select" id="cause">
+              <option value="general">General Fund</option>
+              <option value="education">Education Support</option>
+              <option value="health">Healthcare Initiatives</option>
+              <option value="food">Food Distribution</option>
+              <option value="emergency">Emergency Relief</option>
+            </select>
+          </div>
+          
+          <div class="mb-4">
+            <label class="form-label">Payment Method</label>
+            <div class="payment-methods">
+              <div class="payment-method">
+                <input type="radio" name="paymentMethod" id="creditCard" value="credit-card" checked>
+                <label for="creditCard">Credit/Debit Card</label>
+                <img src="https://via.placeholder.com/40x25/007bff/ffffff?text=VISA" alt="Visa" class="payment-icon">
+                <img src="https://via.placeholder.com/40x25/ff5722/ffffff?text=MC" alt="MasterCard" class="payment-icon">
+              </div>
+              <div class="payment-method">
+                <input type="radio" name="paymentMethod" id="upi" value="upi">
+                <label for="upi">UPI</label>
+                <img src="https://via.placeholder.com/40x25/4caf50/ffffff?text=UPI" alt="UPI" class="payment-icon">
+              </div>
+              <div class="payment-method">
+                <input type="radio" name="paymentMethod" id="netBanking" value="net-banking">
+                <label for="netBanking">Net Banking</label>
+                <img src="https://via.placeholder.com/40x25/9c27b0/ffffff?text=BANK" alt="Net Banking" class="payment-icon">
+              </div>
+            </div>
+          </div>
+          
+          <div class="mb-4 form-check">
+            <input type="checkbox" class="form-check-input" id="anonymous">
+            <label class="form-check-label" for="anonymous">Make this donation anonymous</label>
+          </div>
+          
+          <div class="mb-4 form-check">
+            <input type="checkbox" class="form-check-input" id="newsletter" checked>
+            <label class="form-check-label" for="newsletter">Subscribe to our newsletter</label>
+          </div>
+          
+          <button type="submit" class="btn submit-btn">Complete Donation</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Impact Section -->
+  <h2 class="section-title" data-aos="fade-up">Your Impact</h2>
+  <section class="impact-section">
+    <div class="row">
+      <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="100">
+        <div class="impact-card">
+          <div class="impact-img-container">
+            <img src="https://images.unsplash.com/photo-1511949860663-92c5c57d48a7?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60" alt="Education Impact" class="impact-img">
+          </div>
+          <div class="impact-content">
+            <h4 class="impact-title">Education Support</h4>
+            <p class="impact-text">
+              Your donation of ₹1,000 can provide educational materials for a child for an entire month, including textbooks, notebooks, and stationery.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="200">
+        <div class="impact-card">
+          <div class="impact-img-container">
+            <img src="https://images.unsplash.com/photo-1536856136534-bb679c52a9aa?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60" alt="Healthcare Impact" class="impact-img">
+          </div>
+          <div class="impact-content">
+            <h4 class="impact-title">Healthcare Access</h4>
+            <p class="impact-text">
+              A donation of ₹2,000 can provide basic healthcare services for a family of four, including check-ups and essential medications.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="300">
+        <div class="impact-card">
+          <div class="impact-img-container">
+            <img src="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60" alt="Nutrition Impact" class="impact-img">
+          </div>
+          <div class="impact-content">
+            <h4 class="impact-title">Nutrition Program</h4>
+            <p class="impact-text">
+              Your contribution of ₹5,000 can provide nutritious meals for 50 children for a week, ensuring they have the energy to learn and grow.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonial Section -->
+  <section class="testimonial-section" data-aos="fade-up">
+    <div class="container">
+      <h2 class="section-title text-white mb-5">Donor Stories</h2>
+      <div class="row">
+        <div class="col-md-6 mb-4 mb-md-0">
+          <div class="testimonial-card">
+            <p class="testimonial-quote">
+              Donating to HopeDose has been one of the most fulfilling experiences. Knowing that my contribution is making a real difference in someone's life gives me immense joy.
+            </p>
+            <div class="testimonial-author">Ravi Sharma</div>
+            <div class="testimonial-role">Regular Donor since 2021</div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="testimonial-card">
+            <p class="testimonial-quote">
+              I started with a small monthly donation, but seeing the impact reports and stories of those helped by HopeDose inspired me to increase my support. It's amazing what we can achieve together.
+            </p>
+            <div class="testimonial-author">Anjali Patel</div>
+            <div class="testimonial-role">Monthly Donor</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <h2 class="section-title" data-aos="fade-up">Frequently Asked Questions</h2>
+  <section class="faq-section">
+    <div class="row">
+      <div class="col-lg-10 mx-auto">
+        <div class="faq-card" data-aos="fade-up">
+          <div class="accordion-item active">
+            <div class="accordion-header">
+              <span>How is my donation used?</span>
+              <i class="fas fa-chevron-down accordion-icon"></i>
+            </div>
+            <div class="accordion-content" style="max-height: 1000px;">
+              <p>Your donation directly supports our programs and initiatives. We allocate funds based on current needs, with a focus on education, healthcare, nutrition, and emergency relief. We maintain transparency by publishing regular reports on how donations are utilized.</p>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <div class="accordion-header">
+              <span>Is my donation tax-deductible?</span>
+              <i class="fas fa-chevron-down accordion-icon"></i>
+            </div>
+            <div class="accordion-content">
+              <p>Yes, all donations to HopeDose are tax-deductible. You will receive a receipt for your donation that you can use for tax purposes. Our organization is registered under Section 80G of the Income Tax Act.</p>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <div class="accordion-header">
+              <span>Can I specify how my donation is used?</span>
+              <i class="fas fa-chevron-down accordion-icon"></i>
+            </div>
+            <div class="accordion-content">
+              <p>Absolutely! You can choose a specific cause or program when making your donation. If you have a particular project in mind that isn't listed, please contact us, and we'll do our best to accommodate your request.</p>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <div class="accordion-header">
+              <span>How do I know my donation is making an impact?</span>
+              <i class="fas fa-chevron-down accordion-icon"></i>
+            </div>
+            <div class="accordion-content">
+              <p>We provide regular updates through our newsletter, social media, and annual reports. These updates include stories of individuals and communities benefiting from our programs, as well as statistical data on our impact. Donors also receive personalized impact reports.</p>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <div class="accordion-header">
+              <span>Can I set up a recurring donation?</span>
+              <i class="fas fa-chevron-down accordion-icon"></i>
+            </div>
+            <div class="accordion-content">
+              <p>Yes, you can set up monthly recurring donations through our donation form. Recurring donations help us plan and sustain our programs over the long term. You can modify or cancel your recurring donation at any time.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- Include Footer -->
+<div id="footer-placeholder"></div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- AOS Animation Library -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<!-- Custom JS -->
+<script src="js/donate.js"></script>
+<!-- Component Loader -->
+<script>
+  // Load header and footer components
+  fetch('components/header.html')
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById('header-placeholder').innerHTML = data;
+      // After loading header, update active link
+      setTimeout(() => {
+        const donateLink = document.querySelector('a[href="./Donate.html"]');
+        if (donateLink) {
+          donateLink.classList.add('active');
+        }
+        document.querySelector('a[href="index.html"]').classList.remove('active');
+      }, 100);
+    });
+  
+  fetch('components/footer.html')
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById('footer-placeholder').innerHTML = data;
+    });
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+

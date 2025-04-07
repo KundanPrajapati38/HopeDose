@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donate</title>
+    <Style>
+
+
+*{
+    margin: 0px;
+    padding: 0px;
+ }
+   body{
+    font-family: arial;
+   }
+
+   .main{
+   margin: 2%;
+ 
+   }
+   
+   .card{
+        width: 20%;
+        display: inline-block;
+        box-shadow: 0px 0px 20px rgba(194, 168, 168, 0.812);
+        border-radius: 5px; 
+        margin: 25px;
+        margin-left: 30px ;
+        margin-right: 30px ;
+         border-left: 30px ;
+       }
+   
+   .image img{
+     width: 100%;
+     border-top-right-radius: 5px;
+     border-top-left-radius: 5px;
+ 
+     
+   
+    
+    }
+   
+   .title{
+    
+     text-align: center;
+     padding: 10px;
+     
+    }
+   
+   h1{
+     font-size: 20px;
+     align-content: center;
+
+    }
+   
+   .des{
+     padding: 3px;
+     text-align: center;
+    
+    padding-top: 10px;
+    border-bottom-right-radius: 5px;
+     border-bottom-left-radius: 5px;
+   }
+   button{
+     margin-top: 40px;
+     margin-bottom: 10px;
+     background-color:rgba(203, 178, 190, 0.264);
+     border: 1px solid rgba(0, 0, 0, 0.142);
+     border-radius: 5px;
+     padding:10px;
+   }
+   button:hover{
+     background-color:darkcyan;
+     color: white;
+     transition: .5s;
+     cursor: pointer;
+   }
+   #items{
+    text-align: center;
+    padding-top: 20px ;
+    padding-bottom: 20px;
+    font-size: 25px;
+    
+    background-color: rgba(202, 227, 224, 0.21);
+   }
+   
+   /* navbar */
+   .dropdown{
+    margin: 0 auto;
+  }
+  nav{
+    height: 90px;
+    background:rgb(255, 255, 255);
+    box-shadow: 0px  0px 0.1px ;
+    position:fixed;
+    width: 100%;
+    box-shadow: 0px 0px 18px 0px #00000029
+  }
+  .logo{
+    padding:5px 0 0 10px ;
+    width: 200px;
+    height: 60px;
+  }
+  nav ul{
+    padding: 0;
+    margin-top: 10px;
+    float:right;
+    margin-right: 0px;
+  }
+  nav ul li{
+    width: 200px;
+   background:white ;
+    position:relative;
+    list-style:none;
+    display:inline-block;
+    text-align: center;
+  
+  }
+  nav ul li a{
+    display:contents;
+    margin: 0%;
+    padding:0px ;
+    color: black;
+   line-height:60px;
+    font-size:20px ;
+  text-decoration:none;
+  
+  
+   
+  }
+  nav ul li a:hover{
+    background: white;
+  
+  }
+  nav ul ul {
+    position:relative;
+    top: 5px;
+    display:none;
+    text-align: center;
+  }
+  nav ul li:hover> ul{
+    display: block;
+  }
+  nav ul ul li{
+   
+    float: none;
+    display:block;
+    position:relative;
+  }
+  nav ul ul ul li{
+    position: relative;
+    top:px;
+    left:px;
+  
+  }
+  
+  
+  
+  
+  
+  
+  
+  
+  @media (max-width: 980px){
+    nav .menu-icon,
+    nav .cancel-icon,
+    nav .search-icon{
+      margin: 0 20px;
+    }
+    nav form{
+      right: 30px;
+    }
+  }
+  @media (max-width: 350px){
+    nav .menu-icon,
+    nav .cancel-icon,
+    nav .search-icon{
+      margin: 0 10px;
+      font-size: 16px;
+    }
+  }
+  .content{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .content header{
+    font-size: 30px;
+    font-weight: 700;
+  }
+  .content .text{
+    font-size: 30px;
+    font-weight: 700;
+  }
+  .content .space{
+    margin: 10px 0;
+  }
+
+
+  /* toy css starts here  */
+
+
+.toybox {
+  padding-top: 200px ;
+  display: flex;
+  justify-content: center;
+  box-sizing: border-box;
+
+}
+
+.toybox>form{
+    width: 50%;
+    max-width: 1000px;
+}
+form {border: 3px solid #f1f1f1be;}
+
+input[type=text], input[type=password] {
+  width:100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+
+}
+
+button {
+  background-color: #04AA6D;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+
+button:hover {
+  opacity: 0.8;
+}
+
+
+
+.imgcontainer {
+  text-align: center;
+  margin: 24px 0 12px 0;
+}
+
+img.avatar {
+    
+  width: 50%;
+  border-radius: 50%;
+}
+
+.container {
+  padding: 16px;
+}
+
+span.psw {
+  float: right;
+  padding-top: 16px;
+}
+h2{
+    text-align: center;
+}
+
+/* Change styles for span and cancel button on extra small screens */
+@media screen and (max-width: 300px) {
+  span.psw {
+    /* display: block;*/
+     float: none;
+  }
+  .cancelbtn {
+     width: 100%;
+  }
+}
+
+
+
+
+
+    </Style>
+</head>
+<body>
+    
+    <h2></h2>
+<!-- Nav start Here -->
+<div class="fullcontainer banner" id="homeSection">
+  <div class ="dropdown">
+      <nav>
+          <a href="#"><img src="images/logog.png" alt=" logo" class = "logo"></a>
+       
+          <ul>
+              <li><a href ="./index.html">Home</a></li>
+              <li><a href ="./about.html" >About us </a>
+                  <ul>
+                      <li><a href="./about.html">Overview</a></li>
+                      <li><a href="vm.html" target="">Vision & Misson</a></li>
+                  </ul>
+              <li><a href ="./submit.html" target="">Submit Request</a></li>
+              <!--
+<li><a href ="./Queue.html" target="">Requests Queue</a></li>
+
+              -->
+              
+              <li><a href ="./inventory.html" target="">Inventory</a></li>
+              <li><a href ="Donate.html" target="">Donate</a></li>
+           </div>
+          </ul>
+      </nav>
+  </div>
+
+<!--Nav end Here -->
+      <div class ="toybox ">
+    <form  action="mailto:mysocialinterection.com" method="post" enctype="text/plain">
+      <div class="imgcontainer">
+        <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTJ8fGhlYWx0aHklMjBmb29kfGVufDB8fDB8fA%3D%3D&w=1000&q=80" alt="Avatar" class="avatar">
+      </div>
+    
+      <div class="container">
+        <label for="Name"><b> Enter Your Name</b></label>
+        <input type="text" placeholder="Enter Name" name="Name" required>
+    
+        <label for="Books Name"></label>Food items Name </label>
+        <input type="text" placeholder="Enter Books Name" name="Food Name" required>
+
+    
+        <label for="Toy Name"></label>Food Weight </label>
+        <input type="text" placeholder="Enter Toy Name" name="Food Weight" required>
+
+        <label for="Phone"></label>Phone</label>
+        <input type="text" placeholder="Enter Number" name="Phone" required>
+
+
+        <label for="text"></label>Email</label>
+        <input type="text" placeholder="Enter Address" name="Email" required>
+
+        <label for="text"></label>Address</label>
+        <input type="text" placeholder="Enter Address" name="Address" required>
+
+
+        <label for="text"></label>Description</label>
+        <input type ="text" placeholder=" Description" name="Description"  style ="height: 60px",text-align:top;
+        required>
+
+
+
+        <button type="submit">Donate</button>
+      
+      </div>
+    </div>
+   
+    </form>
+
+
+</body>
+</html>

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Product Management - HopeDose</title>
+  <!-- Authentication Check Script -->
+  <script src="js/auth-check.js"></script>
+  <!-- Bootstrap & FontAwesome -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+  <!-- Add AOS library for scroll animations -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+
+<!-- Include Header -->
+<div id="header-placeholder"></div>
+
+<!-- Main Content -->
+<div class="container py-5">
+  <h1 class="section-title" data-aos="fade-up">Product Management</h1>
+  
+  <div class="row">
+    <!-- Product Entry Form -->
+    <div class="col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="100">
+      <div class="custom-card p-4">
+        <h3 class="mb-4 text-center">Add New Product</h3>
+        <form id="productForm" class="product-form">
+          <div class="mb-3">
+            <label for="productName" class="form-label">Product Name</label>
+            <input type="text" class="form-control" id="productName" required>
+          </div>
+          
+          <div class="mb-3">
+            <label for="productCategory" class="form-label">Category</label>
+            <select class="form-control" id="productCategory" required>
+              <option value="">Select Category</option>
+              <option value="Toys">Toys</option>
+              <option value="Books">Books</option>
+              <option value="Clothes">Clothes</option>
+              <option value="Food">Food</option>
+              <option value="Games Kit">Games Kit</option>
+              <option value="Medicines">Medicines</option>
+              <option value="Others">Others</option>
+            </select>
+          </div>
+          
+          <div class="mb-3">
+            <label for="productQuantity" class="form-label">Quantity</label>
+            <input type="number" class="form-control" id="productQuantity" min="1" required>
+          </div>
+          
+          <div class="mb-3">
+            <label for="productCondition" class="form-label">Condition</label>
+            <select class="form-control" id="productCondition" required>
+              <option value="">Select Condition</option>
+              <option value="New">New</option>
+              <option value="Like New">Like New</option>
+              <option value="Good">Good</option>
+              <option value="Fair">Fair</option>
+            </select>
+          </div>
+          
+          <div class="mb-3">
+            <label for="productDescription" class="form-label">Description</label>
+            <textarea class="form-control" id="productDescription" rows="3" required></textarea>
+          </div>
+          
+          <div class="mb-3">
+            <label for="productManufactureDate" class="form-label">Manufacturing Date</label>
+            <input type="date" class="form-control" id="productManufactureDate">
+          </div>
+          
+          <div class="mb-3">
+            <label for="productExpiryDate" class="form-label">Expiry Date</label>
+            <input type="date" class="form-control" id="productExpiryDate">
+            <small class="text-muted">We'll remind you 10 days before expiry</small>
+          </div>
+          
+          <div class="mb-3">
+            <label for="productImage" class="form-label">Image URL</label>
+            <input type="url" class="form-control" id="productImage" placeholder="https://example.com/image.jpg">
+            <small class="text-muted">Enter a URL for the product image</small>
+          </div>
+          
+          <!-- Add camera capture functionality -->
+          <div class="mb-4">
+            <label class="form-label">Or capture image with camera</label>
+            <div class="camera-container mb-3">
+              <div class="text-center mb-2">
+                <button type="button" id="startCamera" class="btn btn-outline-primary btn-sm me-2">
+                  <i class="fas fa-camera me-1"></i>Start Camera
+                </button>
+                <button type="button" id="captureImage" class="btn btn-outline-success btn-sm me-2" disabled>
+                  <i class="fas fa-image me-1"></i>Capture
+                </button>
+                <button type="button" id="stopCamera" class="btn btn-outline-danger btn-sm" disabled>
+                  <i class="fas fa-stop-circle me-1"></i>Stop
+                </button>
+              </div>
+              <div class="text-center">
+                <video id="cameraFeed" style="max-width: 100%; border-radius: 10px; display: none;" autoplay></video>
+                <canvas id="imageCanvas" style="max-width: 100%; border-radius: 10px; display: none;"></canvas>
+                <div id="cameraStatus" class="alert alert-info mt-2" style="display: none;">Camera is not active</div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="d-grid gap-2">
+            <button type="submit" class="btn btn-primary">
+              <i class="fas fa-plus-circle me-2"></i>Add Product
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+    
+    <!-- Product List -->
+    <div class="col-lg-8" data-aos="fade-up" data-aos-delay="200">
+      <div class="custom-card p-4">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+          <h3 class="mb-0">Product List</h3>
+          <div class="d-flex gap-2">
+            <select id="categoryFilter" class="form-select form-select-sm" style="width: auto;">
+              <option value="All">All Categories</option>
+              <option value="Toys">Toys</option>
+              <option value="Books">Books</option>
+              <option value="Clothes">Clothes</option>
+              <option value="Food">Food</option>
+              <option value="Games Kit">Games Kit</option>
+              <option value="Medicines">Medicines</option>
+              <option value="Others">Others</option>
+            </select>
+            <button id="saveProducts" class="btn btn-sm btn-outline-success">
+              <i class="fas fa-save me-1"></i>Save
+            </button>
+            <button id="clearProducts" class="btn btn-sm btn-outline-danger">
+              <i class="fas fa-trash-alt me-1"></i>Clear All
+            </button>
+          </div>
+        </div>
+        
+        <div id="productList" class="product-list">
+          <div class="no-products">
+            <i class="fas fa-box-open fa-3x mb-3"></i>
+            <h4>No products added yet</h4>
+            <p>Add your first product using the form on the left</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Include Footer -->
+<div id="footer-placeholder"></div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- AOS Animation Library -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<!-- Custom JS -->
+<script src="js/main.js"></script>
+<script src="js/component-loader.js"></script>
+<script src="js/product-management.js"></script>
+</body>
+</html>

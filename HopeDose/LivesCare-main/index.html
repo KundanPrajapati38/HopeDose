@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HOPE DOSE</title>
+  <!-- Bootstrap & FontAwesome -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+  <!-- Add AOS library for scroll animations -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    }
+
+    .navbar {
+      background: linear-gradient(90deg, #007bff, #00c6ff);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      padding: 12px 0;
+    }
+
+    .navbar a {
+      color: white !important;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+
+    .navbar a:hover {
+      color: #ffd700 !important;
+      transform: translateY(-2px);
+    }
+
+    .logo {
+      width: 60px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+
+    .banner {
+      background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1509099836639-18ba1795216d') no-repeat center center;
+      background-size: cover;
+      height: 500px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      color: rgb(255, 255, 255);
+      text-shadow: 2px 2px 10px rgba(0,0,0,0.6);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .banner::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 123, 255, 0.2);
+      z-index: 0;
+    }
+    
+    .banner-content {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+    }
+    
+    .banner-title {
+      font-size: 4rem;
+      font-weight: bold;
+      margin-bottom: 1rem;
+    }
+    
+    .banner-subtitle {
+      font-size: 1.5rem;
+      max-width: 700px;
+      margin: 0 auto 2rem;
+    }
+    
+    .banner-btn {
+      padding: 12px 30px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      border-radius: 50px;
+      background: linear-gradient(90deg, #007bff, #00c6ff);
+      border: none;
+      box-shadow: 0 4px 15px rgba(0, 123, 255, 0.4);
+      transition: all 0.3s ease;
+    }
+    
+    .banner-btn:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0, 123, 255, 0.6);
+    }
+
+    .section-title {
+      text-align: center;
+      margin: 3rem 0;
+      font-size: 2.5rem;
+      color: #002f61;
+      font-weight: bold;
+      position: relative;
+      padding-bottom: 15px;
+    }
+    
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background: linear-gradient(90deg, #007bff, #00c6ff);
+      border-radius: 2px;
+    }
+
+    .main, .main-items {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+      padding: 2rem 0;
+    }
+
+    .custom-card {
+      border: none;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+      background: white;
+    }
+
+    .custom-card:hover {
+      transform: translateY(-15px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+    }
+
+    .card-img-top {
+      height: 200px;
+      object-fit: cover;
+      transition: all 0.5s ease;
+    }
+    
+    .custom-card:hover .card-img-top {
+      transform: scale(1.1);
+    }
+
+    .card-body {
+      padding: 1.5rem;
+    }
+
+    .card-title {
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: #002f61;
+      margin-bottom: 0.8rem;
+    }
+
+    .card-text {
+      color: #6c757d;
+      margin-bottom: 1.2rem;
+    }
+
+    .btn-primary {
+      background: linear-gradient(90deg, #007bff, #00c6ff);
+      border: none;
+      border-radius: 50px;
+      padding: 8px 20px;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+
+    .btn-primary:hover {
+      background: linear-gradient(90deg, #0056b3, #0099cc);
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(0, 123, 255, 0.4);
+    }
+
+    .bg-light {
+      background-color: rgba(255, 255, 255, 0.8) !important;
+    }
+
+    .footer {
+      background: linear-gradient(90deg, #343a40, #212529);
+      color: #fff;
+      padding: 3rem 0 1rem;
+      margin-top: 3rem;
+    }
+
+    .footer-col h4 {
+      font-size: 1.3rem;
+      margin-bottom: 1.5rem;
+      position: relative;
+      padding-bottom: 10px;
+    }
+    
+    .footer-col h4::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 50px;
+      height: 3px;
+      background: linear-gradient(90deg, #007bff, #00c6ff);
+    }
+
+    .footer-col ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .footer-col ul li {
+      margin-bottom: 12px;
+    }
+
+    .footer-col ul li a {
+      color: #cecece;
+      text-decoration: none;
+      display: block;
+      transition: all 0.3s ease;
+      position: relative;
+      padding-left: 15px;
+    }
+    
+    .footer-col ul li a::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      top: 0;
+      transition: all 0.3s ease;
+    }
+
+    .footer-col ul li a:hover {
+      color: #fff;
+      transform: translateX(5px);
+    }
+    
+    .footer-col ul li a:hover::before {
+      color: #007bff;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 15px;
+    }
+
+    .social-links a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 50%;
+      color: #fff;
+      font-size: 1.2rem;
+      transition: all 0.3s ease;
+    }
+
+    .social-links a:hover {
+      background: linear-gradient(90deg, #007bff, #00c6ff);
+      transform: translateY(-5px);
+    }
+
+    .copyright {
+      text-align: center;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      margin-top: 30px;
+    }
+
+    @media (max-width: 768px) {
+      .banner-title {
+        font-size: 2.5rem;
+      }
+      
+      .banner-subtitle {
+        font-size: 1.1rem;
+      }
+      
+      .section-title {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center" href="#">
+      <img src="images/donation.jpg" alt="logo" class="logo me-2">
+      <span>HOPE DOSE</span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarContent">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link active" href="index.html"><i class="fas fa-home me-1"></i> Home</a></li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown"><i class="fas fa-info-circle me-1"></i> About Us</a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="./about.html">Overview</a></li>
+            <li><a class="dropdown-item" href="./vm.html">Vision & Mission</a></li>
+          </ul>
+        </li>
+        <li class="nav-item"><a class="nav-link" href="./submit.html"><i class="fas fa-paper-plane me-1"></i> Submit Request</a></li>
+        <li class="nav-item"><a class="nav-link" href="./inventory.html"><i class="fas fa-boxes me-1"></i> Inventory</a></li>
+        <li class="nav-item"><a class="nav-link" href="./Donate.html"><i class="fas fa-hand-holding-heart me-1"></i> Donate</a></li>
+        <li class="nav-item"><a class="nav-link" href="./login.html"><i class="fas fa-sign-in-alt me-1"></i> Login</a></li>
+        <li class="nav-item"><a class="nav-link" href="./signup.html"><i class="fas fa-user-plus me-1"></i> Sign Up</a></li>
+        <!-- Logout Button -->
+        <li class="nav-item"><button id="logoutButton" class="btn btn-danger btn-sm ms-2" style="display: none;">Logout</button></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Banner -->
+<div class="banner">
+  <div class="banner-content">
+    <h1 class="banner-title" data-aos="fade-up">Welcome to HOPE DOSE</h1>
+    <p class="banner-subtitle" data-aos="fade-up" data-aos-delay="200">Empowering communities through generosity and support. Together we can make a difference.</p>
+    <a href="./Donate.html" class="btn btn-light banner-btn" data-aos="fade-up" data-aos-delay="400">Donate Now</a>
+  </div>
+</div>
+
+<!-- Features -->
+<h1 class="section-title" id="Features" data-aos="fade-up">Our Features</h1>
+<div class="container">
+  <div class="row g-4">
+    <!-- Submit Request -->
+    <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="100">
+      <div class="custom-card h-100">
+        <div class="overflow-hidden">
+          <img src="https://st3.depositphotos.com/24261740/35326/i/450/depositphotos_353269088-stock-photo-bearded-adult-man-praying-god.jpg" class="card-img-top" alt="Submit Request">
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Submit Request</h5>
+          <p class="card-text">Need help? Submit your request and we'll do our best to assist you.</p>
+          <a href="./submit.html" class="btn btn-primary">Get Started</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Requests Queue -->
+    <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="200">
+      <div class="custom-card h-100">
+        <div class="overflow-hidden">
+          <img src="https://img.freepik.com/premium-photo/group-happy-young-people-standing-line_252847-5942.jpg?w=996" class="card-img-top" alt="Requests Queue">
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Requests Queue</h5>
+          <p class="card-text">View current requests and see how you can help others in need.</p>
+          <a href="./submit.html" class="btn btn-primary">View Requests</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Inventory -->
+    <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="300">
+      <div class="custom-card h-100">
+        <div class="overflow-hidden">
+          <img src="https://media.sortly.com/wp-content/uploads/2020/02/12130157/Retail-Inventory.jpg" class="card-img-top" alt="Inventory">
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Inventory</h5>
+          <p class="card-text">Check our current inventory to see what items are available.</p>
+          <a href="./inventory.html" class="btn btn-primary">Browse Items</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Donate Here -->
+    <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="400">
+      <div class="custom-card h-100">
+        <div class="overflow-hidden">
+          <img src="https://www.safesmartliving.com/wp-content/uploads/hands-holding-donation-sign-jpg.jpg.webp" class="card-img-top" alt="Donate Here">
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Donate Here</h5>
+          <p class="card-text">Your generosity can change lives. Donate today and make a difference.</p>
+          <a href="./Donate.html" class="btn btn-primary">Donate Now</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Items -->
+<h1 class="section-title" id="items" data-aos="fade-up">Our Items</h1>
+<div class="container">
+  <div class="row g-4">
+    <!-- Toys -->
+    <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="100">
+      <div class="custom-card h-100">
+        <div class="overflow-hidden">
+          <img src="https://img.freepik.com/premium-photo/many-colorful-toys-collection-wooden-desk_488220-17409.jpg?w=2000" class="card-img-top" alt="Toys">
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Toys</h5>
+          <p class="card-text">Donate toys to bring joy and happiness to children in need.</p>
+          <a href="./toys.html" class="btn btn-primary">Donate Toys</a>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Books -->
+    <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="200">
+      <div class="custom-card h-100">
+        <div class="overflow-hidden">
+          <img src="https://media.istockphoto.com/id/1335708681/photo/stacks-of-books-for-teaching-knowledge-college-library-green-background.jpg?b=1&s=170667a&w=0&k=20&c=_-kpFpVyUWgiCafriJgZ6Wr_kLQ2kt19SSCZvlWK63Y=" class="card-img-top" alt="Books">
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Books</h5>
+          <p class="card-text">Share knowledge and inspire learning through book donations.</p>
+          <a href="./Books.html" class="btn btn-primary">Donate Books</a>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Cash -->
+    <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="300">
+      <div class="custom-card h-100">
+        <div class="overflow-hidden">
+          <img src="https://media.istockphoto.com/id/955864548/photo/businessman-giving-money-in-the-form-of-indian-rupees-for-services-rendered.jpg?s=612x612&w=0&k=20&c=HAs9z7fTUh2WoD9XqbAFqdFr56SQtYhxscmD6YC_VZ8=" class="card-img-top" alt="Cash">
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Cash</h5>
+          <p class="card-text">Financial contributions help us support more people in need.</p>
+          <a href="./payment.html" class="btn btn-primary">Donate Cash</a>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Clothes -->
+    <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="400">
+      <div class="custom-card h-100">
+        <div class="overflow-hidden">
+          <img src="https://thumbs.dreamstime.com/b/clothes-shop-9280981.jpg" class="card-img-top" alt="Clothes">
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Clothes</h5>
+          <p class="card-text">Donate clothes to help those in need stay warm and dignified.</p>
+          <a href="./Clothes.html" class="btn btn-primary">Donate Clothes</a>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Food -->
+    <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="100">
+      <div class="custom-card h-100">
+        <div class="overflow-hidden">
+          <img src="https://thumbs.dreamstime.com/b/assorted-indian-recipes-food-various-spices-rice-wooden-table-92742528.jpg" class="card-img-top" alt="Food">
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Food</h5>
+          <p class="card-text">Help fight hunger by donating food to those who need it most.</p>
+          <a href="./Food.html" class="btn btn-primary">Donate Food</a>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Games Kit -->
+    <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="200">
+      <div class="custom-card h-100">
+        <div class="overflow-hidden">
+          <img src="https://media.istockphoto.com/id/497203317/photo/the-tools-for-a-batsman.jpg?b=1&s=170667a&w=0&k=20&c=Xr5tRw7jXw-aGq9-BicshRYoN9Z2unI1bXTUwc0TmKo=" class="card-img-top" alt="Games Kit">
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Games Kit</h5>
+          <p class="card-text">Sports equipment donations help promote healthy activities.</p>
+          <a href="./Gameskit.html" class="btn btn-primary">Donate Kits</a>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Medicines -->
+    <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="300">
+      <div class="custom-card h-100">
+        <div class="overflow-hidden">
+          <img src="https://t4.ftcdn.net/jpg/02/81/42/77/360_F_281427785_gfahY8bX4VYCGo6jlfO8St38wS9cJQop.jpg" class="card-img-top" alt="Medicines">
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Medicines</h5>
+          <p class="card-text">Donate medicines to help those who cannot afford healthcare.</p>
+          <a href="./Medicines.html" class="btn btn-primary">Donate Medicines</a>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Others -->
+    <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="400">
+      <div class="custom-card h-100">
+        <div class="overflow-hidden">
+          <img src="https://hr.mcmaster.ca/app/uploads/2019/12/brainstorm-1400x600-720x405.png" class="card-img-top" alt="Others">
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Others</h5>
+          <p class="card-text">Have something else to donate? We welcome all kinds of help.</p>
+          <a href="./Others.html" class="btn btn-primary">Donate Items</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Testimonials Section -->
+<section class="py-5 bg-light mt-5">
+  <div class="container">
+    <h2 class="section-title" data-aos="fade-up">What People Say</h2>
+    <div class="row">
+      <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="100">
+        <div class="custom-card h-100 p-4">
+          <div class="d-flex align-items-center mb-3">
+            <div class="rounded-circle overflow-hidden me-3" style="width: 60px; height: 60px;">
+              <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Testimonial" class="img-fluid">
+            </div>
+            <div>
+              <h5 class="mb-0">Priya Sharma</h5>
+              <small class="text-muted">Donor</small>
+            </div>
+          </div>
+          <p class="card-text">"Donating through HOPE DOSE has been an incredible experience. I know my contributions are making a real difference in people's lives."</p>
+          <div class="text-warning">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="200">
+        <div class="custom-card h-100 p-4">
+          <div class="d-flex align-items-center mb-3">
+            <div class="rounded-circle overflow-hidden me-3" style="width: 60px; height: 60px;">
+              <img src="https://randomuser.me/api/portraits/men/44.jpg" alt="Testimonial" class="img-fluid">
+            </div>
+            <div>
+              <h5 class="mb-0">Rahul Patel</h5>
+              <small class="text-muted">Volunteer</small>
+            </div>
+          </div>
+          <p class="card-text">"Working with HOPE DOSE has shown me how a small act of kindness can transform someone's life. The platform makes helping others so easy."</p>
+          <div class="text-warning">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star-half-alt"></i>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="300">
+        <div class="custom-card h-100 p-4">
+          <div class="d-flex align-items-center mb-3">
+            <div class="rounded-circle overflow-hidden me-3" style="width: 60px; height: 60px;">
+              <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Testimonial" class="img-fluid">
+            </div>
+            <div>
+              <h5 class="mb-0">Anita Desai</h5>
+              <small class="text-muted">Beneficiary</small>
+            </div>
+          </div>
+          <p class="card-text">"The support I received from HOPE DOSE during a difficult time was life-changing. I'm forever grateful for the generosity of donors."</p>
+          <div class="text-warning">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Include Footer -->
+<div id="footer-placeholder"></div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- AOS Animation Library -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<!-- Custom JS -->
+<script src="js/main.js"></script>
+<!-- Component Loader -->
+<script>
+  // Load header and footer components
+  fetch('components/header.html')
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById('header-placeholder').innerHTML = data;
+      // After loading header, check login status
+      const isLoggedIn = localStorage.getItem("isLoggedIn");
+      if (isLoggedIn) {
+        document.querySelector('a[href="./login.html"]').style.display = 'none';
+        document.querySelector('a[href="./signup.html"]').style.display = 'none';
+        document.getElementById("logoutButton").style.display = 'block';
+      }
+    });
+  
+  fetch('components/footer.html')
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById('footer-placeholder').innerHTML = data;
+    });
+</script>
+</body>
+</html>
