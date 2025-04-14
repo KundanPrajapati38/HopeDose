@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Submit Request - HopeDose</title>
+  <!-- Authentication Check Script -->
+  <script src="js/auth-check.js"></script>
+  <!-- Bootstrap & FontAwesome -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Add AOS library for scroll animations -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/submit.css">
+  <style>
+    /* Additional custom styles */
+    .page-header {
+      background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+                  url('images/D1.jpg') no-repeat center center;
+      background-size: cover;
+      position: relative;
+    }
+    
+    .floating-shapes {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: 1;
+    }
+    
+    .shape {
+      position: absolute;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      animation: float 15s infinite linear;
+    }
+    
+    @keyframes float {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0.8;
+      }
+      100% {
+        transform: translateY(-1000px) rotate(720deg);
+        opacity: 0;
+      }
+    }
+    
+    .form-container {
+      background-color: rgba(255, 255, 255, 0.98);
+      backdrop-filter: blur(10px);
+    }
+    
+    .form-step {
+      transition: all 0.3s ease;
+    }
+    
+    .form-step:hover {
+      transform: translateX(5px);
+    }
+    
+    .form-control, .form-select {
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+    
+    .btn-primary {
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+    }
+    
+    .btn-primary::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: rgba(255,255,255,0.2);
+      z-index: -1;
+      transition: all 0.4s ease;
+    }
+    
+    .btn-primary:hover::after {
+      left: 100%;
+    }
+    
+    .success-message {
+      position: relative;
+    }
+    
+    .confetti {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background-color: #f0f;
+      animation: confetti 5s ease-in-out infinite;
+    }
+    
+    @keyframes confetti {
+      0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Include the header component -->
+<div id="header-container"></div>
+
+<!-- Page Header -->
+<div class="page-header">
+  <div class="floating-shapes" id="floatingShapes"></div>
+  <div class="container" style="position: relative; z-index: 2; margin: 10%;">
+    <h1 class="page-title" data-aos="fade-up">Submit Your Request</h1>
+    <p class="page-subtitle" data-aos="fade-up" data-aos-delay="100">We're here to help. Let us know what you need, and we'll do our best to assist you.</p>
+    <nav aria-label="breadcrumb" data-aos="fade-up" data-aos-delay="200">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Submit Request</li>
+      </ol>
+    </nav>
+  </div>
+</div>
+
+<div class="container">
+  <div class="form-container" id="requestFormContainer" data-aos="fade-up">
+    <h2 class="form-title">Request Form</h2>
+    <p class="lead mb-4">Please fill out the form below with your request details. We'll review your submission and get back to you as soon as possible.</p>
+    
+    <div class="form-step">
+      <div class="form-icon">
+        <i class="fas fa-user"></i>
+      </div>
+      <div>
+        <h5 class="form-step-title">Personal Information</h5>
+        <p class="form-step-subtitle">Tell us about yourself</p>
+      </div>
+    </div>
+    
+    <form id="requestForm" class="needs-validation" novalidate>
+      <div class="row mb-3">
+        <div class="col-md-6 mb-3">
+          <label for="name" class="form-label">Full Name</label>
+          <div class="input-group">
+            <span class="input-group-text"><i class="fas fa-user-circle"></i></span>
+            <input type="text" class="form-control" id="name" placeholder="Enter your full name" required>
+          </div>
+          <div class="invalid-feedback">Please provide your name.</div>
+        </div>
+        <div class="col-md-6 mb-3">
+          <label for="email" class="form-label">Email Address</label>
+          <div class="input-group">
+            <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+            <input type="email" class="form-control" id="email" placeholder="Enter your email address" required>
+          </div>
+          <div class="invalid-feedback">Please provide a valid email address.</div>
+        </div>
+      </div>
+      
+      <div class="row mb-3">
+        <div class="col-md-6 mb-3">
+          <label for="phone" class="form-label">Phone Number</label>
+          <div class="input-group">
+            <span class="input-group-text"><i class="fas fa-phone-alt"></i></span>
+            <input type="tel" class="form-control" id="phone" placeholder="Enter your phone number">
+          </div>
+        </div>
+        <div class="col-md-6 mb-3">
+          <label for="location" class="form-label">Location</label>
+          <div class="input-group">
+            <span class="input-group-text"><i class="fas fa-map-marker-alt"></i></span>
+            <input type="text" class="form-control" id="location" placeholder="Enter your city/area">
+          </div>
+        </div>
+      </div>
+      
+      <div class="form-step mt-4">
+        <div class="form-icon">
+          <i class="fas fa-clipboard-list"></i>
+        </div>
+        <div>
+          <h5 class="form-step-title">Request Details</h5>
+          <p class="form-step-subtitle">Tell us what you need</p>
+        </div>
+      </div>
+      
+      <div class="mb-3">
+        <label for="requestType" class="form-label">Request Type</label>
+        <select class="form-select" id="requestType" required>
+          <option value="" selected disabled>Select request type</option>
+          <option value="food">Food</option>
+          <option value="clothing">Clothing</option>
+          <option value="books">Books</option>
+          <option value="toys">Toys</option>
+          <option value="medicine">Medicine</option>
+          <option value="financial">Financial Assistance</option>
+          <option value="other">Other</option>
+        </select>
+        <div class="invalid-feedback">Please select a request type.</div>
+      </div>
+      
+      <div class="mb-3">
+        <label for="requestTitle" class="form-label">Request Title</label>
+        <input type="text" class="form-control" id="requestTitle" placeholder="Brief title for your request" required>
+        <div class="invalid-feedback">Please provide a title for your request.</div>
+      </div>
+      
+      <div class="mb-3">
+        <label for="request" class="form-label">Request Details</label>
+        <textarea class="form-control" id="request" rows="5" placeholder="Please describe your request in detail..." required></textarea>
+        <div class="invalid-feedback">Please provide details about your request.</div>
+        <small class="text-muted">Please be as specific as possible to help us understand your needs better.</small>
+      </div>
+      
+      <div class="mb-3">
+        <label for="urgency" class="form-label">Urgency Level</label>
+        <select class="form-select" id="urgency">
+          <option value="low">Low - Within a month</option>
+          <option value="medium" selected>Medium - Within a week</option>
+          <option value="high">High - Within 48 hours</option>
+          <option value="critical">Critical - Immediate assistance needed</option>
+        </select>
+      </div>
+      
+      <div class="mb-4">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="termsCheck" required>
+          <label class="form-check-label" for="termsCheck">
+            I agree to the <a href="#" data-bs-toggle="modal" data-bs-target="#termsModal">terms and conditions</a>
+          </label>
+          <div class="invalid-feedback">You must agree before submitting.</div>
+        </div>
+      </div>
+      
+      <button type="submit" class="btn btn-primary w-100">
+        <i class="fas fa-paper-plane me-2"></i> Submit Request
+      </button>
+    </form>
+    
+    <!-- Success Message (Hidden by default) -->
+    <div id="successMessage" class="success-message">
+      <div id="confettiContainer"></div>
+      <i class="fas fa-check-circle success-icon"></i>
+      <h3>Thank You!</h3>
+      <p class="lead">Your request has been submitted successfully.</p>
+      <p>We'll review your request and get back to you as soon as possible.</p>
+      <div class="d-flex justify-content-center gap-3 mt-4">
+        <a href="index.html" class="btn btn-primary">
+          <i class="fas fa-home me-2"></i> Back to Home
+        </a>
+        <a href="dashboard.html" class="btn btn-outline-primary">
+          <i class="fas fa-tachometer-alt me-2"></i> Go to Dashboard
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Terms and Conditions Modal -->
+<div class="modal fade" id="termsModal" tabindex="-1" aria-labelledby="termsModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="termsModalLabel">Terms and Conditions</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <h6>1. Request Submission</h6>
+        <p>By submitting a request through our platform, you acknowledge that:</p>
+        <ul>
+          <li>All information provided is accurate and truthful</li>
+          <li>HopeDose will review your request and determine if we can fulfill it</li>
+          <li>Submission of a request does not guarantee fulfillment</li>
+        </ul>
+        
+        <h6>2. Personal Information</h6>
+        <p>We collect personal information to process your request. We will:</p>
+        <ul>
+          <li>Keep your information confidential</li>
+          <li>Use it only for the purpose of fulfilling your request</li>
+          <li>Not share it with third parties without your consent</li>
+        </ul>
+        
+        <h6>3. Communication</h6>
+        <p>By submitting a request, you agree to be contacted by HopeDose representatives regarding your request.</p>
+        
+        <h6>4. Request Fulfillment</h6>
+        <p>HopeDose will make reasonable efforts to fulfill requests based on:</p>
+        <ul>
+          <li>Availability of requested items</li>
+          <li>Urgency of the request</li>
+          <li>Our capacity to deliver</li>
+        </ul>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="document.getElementById('termsCheck').checked = true;">I Agree</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<div id="footer-container"></div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- AOS Animation Library -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+<script>
+  // Load header component
+  fetch('components/header.html')
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById('header-container').innerHTML = data;
+      
+      // Execute header scripts after loading
+      const headerScripts = document.getElementById('header-container').querySelectorAll('script');
+      headerScripts.forEach(script => {
+        const newScript = document.createElement('script');
+        if (script.src) {
+          newScript.src = script.src;
+        } else {
+          newScript.textContent = script.textContent;
+        }
+        document.body.appendChild(newScript);
+      });
+      
+      // Mark the Submit Request link as active
+      setTimeout(() => {
+        const submitLink = document.querySelector('.nav-link[href="submit.html"]');
+        if (submitLink) {
+          submitLink.classList.add('active');
+        }
+      }, 100);
+    });
+  
+  // Load footer component
+  fetch('components/footer.html')
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById('footer-container').innerHTML = data;
+    });
+  
+  // Create floating shapes for header background
+  function createFloatingShapes() {
+    const container = document.getElementById('floatingShapes');
+    const colors = ['#4db8ff', '#ff6b6b', '#7bed9f', '#ffa502', '#70a1ff'];
+    
+    for (let i = 0; i < 15; i++) {
+      const shape = document.createElement('div');
+      shape.classList.add('shape');
+      
+      // Random properties
+      const size = Math.random() * 50 + 10;
+      const posX = Math.random() * 100;
+      const posY = Math.random() * 100;
+      const delay = Math.random() * 5;
+      const duration = Math.random() * 10 + 10;
+      const color = colors[Math.floor(Math.random() * colors.length)];
+      
+      // Apply styles
+      shape.style.width = `${size}px`;
+      shape.style.height = `${size}px`;
+      shape.style.left = `${posX}%`;
+      shape.style.top = `${posY}%`;
+      shape.style.animationDelay = `${delay}s`;
+      shape.style.animationDuration = `${duration}s`;
+      shape.style.backgroundColor = color;
+      shape.style.opacity = '0.2';
+      
+      container.appendChild(shape);
+    }
+  }
+  
+  // Create confetti for success message
+  function createConfetti() {
+    const container = document.getElementById('confettiContainer');
+    const colors = ['#4db8ff', '#ff6b6b', '#7bed9f', '#ffa502', '#70a1ff'];
+    
+    for (let i = 0; i < 100; i++) {
+      const confetti = document.createElement('div');
+      confetti.classList.add('confetti');
+      
+      // Random properties
+      const size = Math.random() * 10 + 5;
+      const posX = Math.random() * 100;
+      const delay = Math.random() * 5;
+      const duration = Math.random() * 3 + 2;
+      const color = colors[Math.floor(Math.random() * colors.length)];
+      
+      // Apply styles
+      confetti.style.width = `${size}px`;
+      confetti.style.height = `${size}px`;
+      confetti.style.left = `${posX}%`;
+      confetti.style.top = '-10px';
+      confetti.style.animationDelay = `${delay}s`;
+      confetti.style.animationDuration = `${duration}s`;
+      confetti.style.backgroundColor = color;
+      
+      container.appendChild(confetti);
+    }
+  }
+  
+  // Initialize AOS animations
+  document.addEventListener('DOMContentLoaded', function() {
+    AOS.init({
+      duration: 800,
+      once: true
+    });
+    
+    // Create floating shapes
+    createFloatingShapes();
+    
+    // Add fade-in animation to form elements
+    const formElements = document.querySelectorAll('.form-control, .form-select, .form-check, .btn-primary');
+    formElements.forEach((element, index) => {
+      element.classList.add('fade-in');
+      element.style.animationDelay = `${0.1 + (index * 0.05)}s`;
+    });
+    
+    // Add input focus effects
+    const inputs = document.querySelectorAll('.form-control, .form-select');
+    inputs.forEach(input => {
+      input.addEventListener('focus', function() {
+        this.parentElement.classList.add('input-focused');
+      });
+      
+      input.addEventListener('blur', function() {
+        this.parentElement.classList.remove('input-focused');
+      });
+    });
+  });
+  
+  // Form validation
+  (function() {
+    'use strict';
+    
+    // Fetch all forms we want to apply validation to
+    const forms = document.querySelectorAll('.needs-validation');
+    
+    // Loop over them and prevent submission
+    Array.from(forms).forEach(form => {
+      form.addEventListener('submit', event => {
+        if (!form.checkValidity()) {
+          event.preventDefault();
+          event.stopPropagation();
+        } else {
+          event.preventDefault();
+          submitForm();
+        }
+        
+        form.classList.add('was-validated');
+      }, false);
+    });
+  })();
+  
+  // Handle form submission
+  function submitForm() {
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const phone = document.getElementById('phone').value;
+    const location = document.getElementById('location').value;
+    const requestType = document.getElementById('requestType').value;
+    const requestTitle = document.getElementById('requestTitle').value;
+    const request = document.getElementById('request').value;
+    const urgency = document.getElementById('urgency').value;
+    
+    // Save data to local storage
+    const requestData = { 
+      name, 
+      email, 
+      phone,
+      location,
+      requestType,
+      requestTitle,
+      request,
+      urgency,
+      status: 'pending',
+      date: new Date().toISOString(),
+      id: 'REQ-' + Date.now()
+    };
+    
+    // Get existing requests or initialize empty array
+    const existingRequests = JSON.parse(localStorage.getItem('userRequests')) || [];
+    existingRequests.push(requestData);
+    localStorage.setItem('userRequests', JSON.stringify(existingRequests));
+    
+    // Show loading state
+    const submitBtn = document.querySelector('button[type="submit"]');
+    const originalBtnText = submitBtn.innerHTML;
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i> Processing...';
+    submitBtn.disabled = true;
+    
+    // Simulate form processing
+    setTimeout(() => {
+      // Show success message
+      document.getElementById('requestForm').style.display = 'none';
+      document.getElementById('successMessage').style.display = 'block';
+      
+      // Create confetti effect
+      createConfetti();
+      
+      // Scroll to success message
+      document.getElementById('successMessage').scrollIntoView({ behavior: 'smooth' });
+      
+      // Reset button state
+      submitBtn.innerHTML = originalBtnText;
+      submitBtn.disabled = false;
+    }, 1500);
+  }
+</script>
+</body>
+</html>
+

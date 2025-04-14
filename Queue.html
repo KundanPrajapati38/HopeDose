@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Requests Queue | HopeDose</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #2c3e50;
+            color: #333;
+            padding-top: 76px;
+        }
+        
+        .queue-container {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .queue-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #0a4d68;
+        }
+        
+        .queue-header h1 {
+            color: #0a4d68;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .queue-header p {
+            color: #666;
+            font-size: 1.1rem;
+        }
+        
+        .queue-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+        }
+        
+        .queue-table th {
+            background-color: #0a4d68;
+            color: white;
+            padding: 12px 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        .queue-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .queue-table tr:hover {
+            background-color: #f5f5f5;
+        }
+        
+        .queue-table .status {
+            font-weight: bold;
+            padding: 5px 10px;
+            border-radius: 20px;
+            display: inline-block;
+            text-align: center;
+            min-width: 100px;
+        }
+        
+        .status-pending {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+        
+        .status-processing {
+            background-color: #cce5ff;
+            color: #004085;
+        }
+        
+        .status-completed {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        
+        .status-rejected {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        
+        .action-btn {
+            padding: 6px 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            margin-right: 5px;
+        }
+        
+        .view-btn {
+            background-color: #0a4d68;
+            color: white;
+        }
+        
+        .view-btn:hover {
+            background-color: #083d54;
+            transform: translateY(-2px);
+        }
+        
+        .filter-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .filter-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .filter-select {
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: white;
+        }
+        
+        .search-box {
+            display: flex;
+            align-items: center;
+        }
+        
+        .search-input {
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px 0 0 4px;
+            width: 250px;
+        }
+        
+        .search-btn {
+            background-color: #0a4d68;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+        }
+        
+        .pagination {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            padding: 0;
+            margin-top: 20px;
+        }
+        
+        .pagination li {
+            margin: 0 5px;
+        }
+        
+        .pagination a {
+            display: block;
+            padding: 8px 12px;
+            text-decoration: none;
+            color: #0a4d68;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+        
+        .pagination a:hover,
+        .pagination a.active {
+            background-color: #0a4d68;
+            color: white;
+            border-color: #0a4d68;
+        }
+        
+        .empty-queue {
+            text-align: center;
+            padding: 50px 0;
+            color: #666;
+        }
+        
+        .empty-queue i {
+            font-size: 4rem;
+            color: #0a4d68;
+            margin-bottom: 20px;
+            opacity: 0.5;
+        }
+        
+        .empty-queue h2 {
+            margin-bottom: 15px;
+            color: #0a4d68;
+        }
+        
+        .empty-queue p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+        
+        .submit-request-btn {
+            display: inline-block;
+            background-color: #0a4d68;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .submit-request-btn:hover {
+            background-color: #083d54;
+            transform: translateY(-2px);
+            color: white;
+        }
+        
+        @media (max-width: 768px) {
+            .queue-table {
+                display: block;
+                overflow-x: auto;
+            }
+            
+            .filter-section {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .search-box {
+                width: 100%;
+                margin-top: 10px;
+            }
+            
+            .search-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header will be loaded with JavaScript -->
+    <div id="header-placeholder"></div>
+
+    <!-- Main Content -->
+    <div class="queue-container">
+        <div class="queue-header">
+            <h1>Requests Queue</h1>
+            <p>Track the status of donation requests and their processing stages</p>
+        </div>
+
+        <div class="filter-section">
+            <div class="filter-group">
+                <label for="status-filter">Filter by Status:</label>
+                <select id="status-filter" class="filter-select">
+                    <option value="all">All Requests</option>
+                    <option value="pending">Pending</option>
+                    <option value="processing">Processing</option>
+                    <option value="completed">Completed</option>
+                    <option value="rejected">Rejected</option>
+                </select>
+            </div>
+            <div class="search-box">
+                <input type="text" class="search-input" placeholder="Search by request ID or name...">
+                <button class="search-btn"><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+
+        <!-- Sample data - replace with actual data -->
+        <table class="queue-table">
+            <thead>
+                <tr>
+                    <th>Request ID</th>
+                    <th>Date</th>
+                    <th>Type</th>
+                    <th>Requester</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="queue-data">
+                <tr>
+                    <td>#REQ-001</td>
+                    <td>15 May 2023</td>
+                    <td>Food Donation</td>
+                    <td>John Smith</td>
+                    <td><span class="status status-pending">Pending</span></td>
+                    <td><button class="action-btn view-btn">View Details</button></td>
+                </tr>
+                <tr>
+                    <td>#REQ-002</td>
+                    <td>12 May 2023</td>
+                    <td>Clothes Donation</td>
+                    <td>Sarah Johnson</td>
+                    <td><span class="status status-processing">Processing</span></td>
+                    <td><button class="action-btn view-btn">View Details</button></td>
+                </tr>
+                <tr>
+                    <td>#REQ-003</td>
+                    <td>10 May 2023</td>
+                    <td>Toy Donation</td>
+                    <td>Michael Brown</td>
+                    <td><span class="status status-completed">Completed</span></td>
+                    <td><button class="action-btn view-btn">View Details</button></td>
+                </tr>
+                <tr>
+                    <td>#REQ-004</td>
+                    <td>08 May 2023</td>
+                    <td>Book Donation</td>
+                    <td>Emily Davis</td>
+                    <td><span class="status status-rejected">Rejected</span></td>
+                    <td><button class="action-btn view-btn">View Details</button></td>
+                </tr>
+                <tr>
+                    <td>#REQ-005</td>
+                    <td>05 May 2023</td>
+                    <td>Food Donation</td>
+                    <td>Robert Wilson</td>
+                    <td><span class="status status-completed">Completed</span></td>
+                    <td><button class="action-btn view-btn">View Details</button></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Pagination -->
+        <ul class="pagination">
+            <li><a href="#"><i class="fas fa-angle-double-left"></i></a></li>
+            <li><a href="#"><i class="fas fa-angle-left"></i></a></li>
+            <li><a href="#" class="active">1</a></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#"><i class="fas fa-angle-right"></i></a></li>
+            <li><a href="#"><i class="fas fa-angle-double-right"></i></a></li>
+        </ul>
+
+        <!-- Empty state (hidden by default, show when no requests) -->
+        <div class="empty-queue" style="display: none;">
+            <i class="fas fa-inbox"></i>
+            <h2>No Requests Found</h2>
+            <p>There are currently no donation requests in the queue.</p>
+            <a href="submit.html" class="submit-request-btn">Submit a Request</a>
+        </div>
+    </div>
+
+    <!-- Footer will be loaded with JavaScript -->
+    <div id="footer-placeholder"></div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="js/script.js"></script>
+    <script>
+        $(function() {
+            // Load header and footer
+            $("#header-placeholder").load("components/header.html", function() {
+                // After header is loaded, check if user is logged in
+                checkLoginStatus();
+                
+                // Add active class to current nav item
+                const currentLocation = location.href;
+                const navItems = document.querySelectorAll('.navbar .nav-link');
+                navItems.forEach(item => {
+                    if (item.href === currentLocation) {
+                        item.classList.add('active');
+                    }
+                });
+            });
+            $("#footer-placeholder").load("components/footer.html");
+            
+            // Check login status
+            function checkLoginStatus() {
+                const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+                const authLinks = document.querySelectorAll('.auth-link');
+                const dropdownLink = document.querySelector('.nav-item.dropdown');
+                
+                if (isLoggedIn) {
+                    // Hide login/signup links and show dropdown
+                    authLinks.forEach(link => link.style.display = 'none');
+                    if (dropdownLink) dropdownLink.style.display = 'block';
+                } else {
+                    // Show login/signup links and hide dropdown
+                    authLinks.forEach(link => link.style.display = 'block');
+                    if (dropdownLink) dropdownLink.style.display = 'none';
+                }
+            }
+            
+            // Logout functionality
+            $(document).on('click', '#logoutBtn', function(e) {
+                e.preventDefault();
+                if (confirm('Are you sure you want to logout?')) {
+                    localStorage.removeItem('isLoggedIn');
+                    localStorage.removeItem('userData');
+                    window.location.href = 'login.html';
+                }
+            });
+            
+            // Queue page specific functionality
+            const statusFilter = document.getElementById('status-filter');
+            statusFilter.addEventListener('change', function() {
+                filterRequests();
+            });
+            
+            const searchInput = document.querySelector('.search-input');
+            const searchBtn = document.querySelector('.search-btn');
+            
+            searchBtn.addEventListener('click', function() {
+                filterRequests();
+            });
+            
+            searchInput.addEventListener('keyup', function(e) {
+                if (e.key === 'Enter') {
+                    filterRequests();
+                }
+            });
+            
+            function filterRequests() {
+                const status = statusFilter.value;
+                const searchTerm = searchInput.value.toLowerCase();
+                const rows = document.querySelectorAll('.queue-table tbody tr');
+                
+                let visibleCount = 0;
+                
+                rows.forEach(row => {
+                    const requestId = row.cells[0].textContent.toLowerCase();
+                    const requester = row.cells[3].textContent.toLowerCase();
+                    const rowStatus = row.cells[4].querySelector('.status').textContent.toLowerCase();
+                    
+                    const statusMatch = status === 'all' || rowStatus === status;
+                    const searchMatch = requestId.includes(searchTerm) || requester.includes(searchTerm);
+                    
+                    if (statusMatch && searchMatch) {
+                        row.style.display = '';
+                        visibleCount++;
+                    } else {
+                        row.style.display = 'none';
+                    }
+                });
+                
+                // Show/hide empty state
+                const emptyState = document.querySelector('.empty-queue');
+                if (visibleCount === 0) {
+                    emptyState.style.display = 'block';
+                    document.querySelector('.queue-table').style.display = 'none';
+                    document.querySelector('.pagination').style.display = 'none';
+                } else {
+                    emptyState.style.display = 'none';
+                    document.querySelector('.queue-table').style.display = 'table';
+                    document.querySelector('.pagination').style.display = 'flex';
+                }
+            }
+            
+            // View details button functionality
+            $(document).on('click', '.view-btn', function() {
+                const row = $(this).closest('tr');
+                const requestId = row.find('td:first').text();
+                alert(`Viewing details for request ${requestId}`);
+                // In a real application, you would redirect to a details page or show a modal
+            });
+            
+            // Navbar scroll effect
+            $(window).scroll(function() {
+                if ($(this).scrollTop() > 30) {
+                    $('.navbar').addClass('scrolled');
+                } else {
+                    $('.navbar').removeClass('scrolled');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

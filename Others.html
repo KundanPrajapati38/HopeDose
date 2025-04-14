@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donate Other Items | HopeDose</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+    
+    <style>
+        .donation-form-section {
+            padding: 120px 0 60px;
+            background: linear-gradient(rgba(10, 46, 61, 0.8), rgba(10, 46, 61, 0.9)), 
+                        url('https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+        }
+        
+        .form-container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            color: #333;
+        }
+        
+        .form-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .form-header img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin-bottom: 15px;
+            padding: 15px;
+            background: #f8f9fa;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .form-control {
+            border-radius: 8px;
+            padding: 12px 15px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            transition: all 0.3s;
+        }
+        
+        .form-control:focus {
+            border-color: #4db8ff;
+            box-shadow: 0 0 0 0.25rem rgba(77, 184, 255, 0.25);
+        }
+        
+        .form-label {
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #0a4d68;
+        }
+        
+        .btn-donate {
+            background: linear-gradient(to right, #0a4d68, #088395);
+            border: none;
+            border-radius: 8px;
+            padding: 12px 20px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+            margin-top: 15px;
+        }
+        
+        .btn-donate:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            background: linear-gradient(to right, #088395, #0a4d68);
+        }
+        
+        .benefits-section {
+            padding: 60px 0;
+            background: #f8f9fa;
+        }
+        
+        .benefit-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s;
+            height: 100%;
+            border-top: 4px solid #0a4d68;
+        }
+        
+        .benefit-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .benefit-icon {
+            font-size: 2.5rem;
+            color: #0a4d68;
+            margin-bottom: 15px;
+        }
+        
+        .section-title {
+            position: relative;
+            margin-bottom: 40px;
+            font-weight: 700;
+            color: #0a4d68;
+            text-align: center;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(to right, #0a4d68, #088395);
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Placeholder -->
+    <div id="header-placeholder"></div>
+    
+    <!-- Donation Form Section -->
+    <section class="donation-form-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8" data-aos="fade-up">
+                    <div class="form-container">
+                        <div class="form-header">
+                            <img src="https://cdn-icons-png.flaticon.com/512/3502/3502685.png" alt="Other Items" class="img-fluid">
+                            <h2 class="text-primary">Donate Other Items</h2>
+                            <p class="text-muted">Your generosity can make a difference in someone's life</p>
+                        </div>
+                        
+                        <form id="otherDonationForm">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="donorName" class="form-label">Your Name</label>
+                                        <input type="text" class="form-control" id="donorName" placeholder="Enter your full name" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="donorPhone" class="form-label">Phone Number</label>
+                                        <input type="tel" class="form-control" id="donorPhone" placeholder="Enter your phone number" required>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="donorEmail" class="form-label">Email Address</label>
+                                <input type="email" class="form-control" id="donorEmail" placeholder="Enter your email address" required>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="donorAddress" class="form-label">Address</label>
+                                <input type="text" class="form-control" id="donorAddress" placeholder="Enter your address" required>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="itemName" class="form-label">Item Name</label>
+                                        <input type="text" class="form-control" id="itemName" placeholder="Enter item name" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="itemWeight" class="form-label">Item Weight/Quantity</label>
+                                        <input type="text" class="form-control" id="itemWeight" placeholder="Enter weight or quantity" required>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="itemCondition" class="form-label">Item Condition</label>
+                                <select class="form-select" id="itemCondition" required>
+                                    <option value="" selected disabled>Select condition</option>
+                                    <option value="New">New</option>
+                                    <option value="Like New">Like New</option>
+                                    <option value="Good">Good</option>
+                                    <option value="Fair">Fair</option>
+                                </select>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="itemDescription" class="form-label">Description</label>
+                                <textarea class="form-control" id="itemDescription" rows="4" placeholder="Please describe the item(s) you wish to donate" required></textarea>
+                            </div>
+                            
+                            <div class="mb-3 form-check">
+                                <input type="checkbox" class="form-check-input" id="pickupCheck">
+                                <label class="form-check-label" for="pickupCheck">I need the item to be picked up</label>
+                            </div>
+                            
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary btn-donate">
+                                    <i class="fas fa-heart me-2"></i> Donate Now
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Benefits Section -->
+    <section class="benefits-section">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">Benefits of Donating</h2>
+            
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="100">
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <h4>Help Those in Need</h4>
+                        <p>Your donations directly help individuals and families who are struggling with basic necessities.</p>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="200">
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <i class="fas fa-leaf"></i>
+                        </div>
+                        <h4>Environmental Impact</h4>
+                        <p>Donating items reduces waste and gives your unused items a second life instead of ending up in landfills.</p>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="300">
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <i class="fas fa-home"></i>
+                        </div>
+                        <h4>Declutter Your Space</h4>
+                        <p>Donating items you no longer need helps create a more organized and peaceful living environment.</p>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="400">
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <i class="fas fa-hand-holding-heart"></i>
+                        </div>
+                        <h4>Feel Good Factor</h4>
+                        <p>Knowing that your donations are making a positive difference in someone's life brings joy and satisfaction.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer Placeholder -->
+    <div id="footer-placeholder"></div>
+    
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- AOS Animation Library -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    <!-- Custom JS -->
+    <script>
+        $(function() {
+            // Load header and footer
+            $("#header-placeholder").load("components/header.html", function() {
+                // After loading header, update active link
+                setTimeout(() => {
+                    const donateLink = document.querySelector('a[href="Donate.html"]');
+                    if (donateLink) {
+                        donateLink.classList.add('active');
+                    }
+                }, 100);
+            });
+            
+            $("#footer-placeholder").load("components/footer.html");
+            
+            // Initialize AOS animation library
+            AOS.init({
+                duration: 800,
+                easing: 'ease-in-out',
+                once: true
+            });
+            
+            // Form submission
+            $("#otherDonationForm").submit(function(e) {
+                e.preventDefault();
+                
+                // Get form data
+                const donationData = {
+                    name: $("#donorName").val(),
+                    phone: $("#donorPhone").val(),
+                    email: $("#donorEmail").val(),
+                    address: $("#donorAddress").val(),
+                    itemName: $("#itemName").val(),
+                    itemWeight: $("#itemWeight").val(),
+                    itemCondition: $("#itemCondition").val(),
+                    description: $("#itemDescription").val(),
+                    needsPickup: $("#pickupCheck").is(":checked")
+                };
+                
+                // Save to localStorage (in a real app, you would send to server)
+                const donations = JSON.parse(localStorage.getItem('donations') || '[]');
+                donations.push({
+                    ...donationData,
+                    type: 'other',
+                    date: new Date().toISOString(),
+                    status: 'pending'
+                });
+                localStorage.setItem('donations', JSON.stringify(donations));
+                
+                // Show success message
+                alert("Thank you for your donation! We will contact you soon to arrange the details.");
+                
+                // Reset form
+                this.reset();
+                
+                // Redirect to thank you page or dashboard
+                setTimeout(() => {
+                    window.location.href = "Donate.html";
+                }, 1000);
+            });
+        });
+    </script>
+</body>
+</html>

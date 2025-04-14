@@ -1,0 +1,1227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - HopeDose</title>
+  <!-- Authentication Check Script -->
+  <script>
+    // Authentication check - redirect to login if not authenticated
+    (function() {
+      const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+      if (!isLoggedIn) {
+        // User is not logged in, redirect to login page
+        window.location.href = "login.html";
+      }
+    })();
+  </script>
+  <!-- Bootstrap & FontAwesome -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Add AOS library for scroll animations -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <!-- Custom CSS -->
+  <style>
+    :root {
+      --primary-color: #0a4d68;
+      --primary-light: #088395;
+      --primary-gradient: linear-gradient(90deg, #0a4d68, #088395);
+      --accent-color: #4db8ff;
+      --text-color: #333;
+      --light-bg: #f5f7fa;
+      --card-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      --hover-shadow: 0 15px 40px rgba(0,0,0,0.15);
+    }
+    
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      color: var(--text-color);
+      min-height: 100vh;
+      padding-top: 60px;
+    }
+    
+    /* Enhanced Dashboard Header with Particles */
+    .dashboard-header {
+      background: linear-gradient(rgba(10, 46, 61, 0.8), rgba(10, 46, 61, 0.9)), url('https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80') no-repeat center center;
+      background-size: cover;
+      color: white;
+      padding: 120px 0 80px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      margin-top: -60px;
+    }
+    
+    .dashboard-header::before {
+      content: '';
+      position: absolute;
+      bottom: -50px;
+      left: 0;
+      width: 100%;
+      height: 100px;
+      background: linear-gradient(to bottom right, transparent 49%, white 50%);
+    }
+    
+    .particles-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: 1;
+    }
+    
+    .particle {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.2);
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+      animation: float 15s infinite linear;
+    }
+    
+    @keyframes float {
+      0% { transform: translateY(0) rotate(0deg); }
+      100% { transform: translateY(-100vh) rotate(360deg); }
+    }
+    
+    /* Enhanced Card Styles */
+    .dashboard-card {
+      background: white;
+      border-radius: 15px;
+      box-shadow: var(--card-shadow);
+      padding: 30px;
+      margin-bottom: 30px;
+      position: relative;
+      z-index: 10;
+      border: 1px solid rgba(0,0,0,0.05);
+      transition: all 0.3s ease;
+      overflow: hidden;
+    }
+    
+    .dashboard-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: var(--primary-gradient);
+    }
+    
+    .dashboard-card:hover {
+      box-shadow: var(--hover-shadow);
+      transform: translateY(-5px);
+    }
+    
+    /* Enhanced Profile Section */
+    .profile-image {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 5px solid white;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+    }
+    
+    .profile-image:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+      border-color: var(--accent-color);
+    }
+    
+    /* Enhanced Stat Cards */
+    .stat-card {
+      background: white;
+      border-radius: 15px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      transition: all 0.3s ease;
+      height: 100%;
+      border: 1px solid rgba(0,0,0,0.05);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .stat-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: var(--primary-gradient);
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+      transform-origin: left;
+    }
+    
+    .stat-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    }
+    
+    .stat-card:hover::after {
+      transform: scaleX(1);
+    }
+    
+    .stat-icon {
+      width: 70px;
+      height: 70px;
+      background: var(--primary-gradient);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 28px;
+      margin: 0 auto 15px;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 15px rgba(10, 77, 104, 0.2);
+    }
+    
+    .stat-card:hover .stat-icon {
+      transform: scale(1.1) rotate(5deg);
+      box-shadow: 0 8px 20px rgba(10, 77, 104, 0.3);
+    }
+    
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: bold;
+      background: var(--primary-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin: 10px 0;
+    }
+    
+    .stat-label {
+      color: #6c757d;
+      font-size: 1.1rem;
+      font-weight: 500;
+    }
+    
+    /* Enhanced Section Titles */
+    .section-title {
+      font-weight: 700;
+      position: relative;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--primary-color);
+      margin-bottom: 25px;
+      display: inline-block;
+    }
+    
+    .section-title:after {
+      content: '';
+      display: block;
+      width: 50px;
+      height: 3px;
+      background: var(--primary-gradient);
+      margin-top: 10px;
+      border-radius: 2px;
+    }
+    
+    /* Enhanced Activity Items */
+    .activity-item {
+      padding: 20px;
+      border-left: 4px solid var(--primary-color);
+      margin-bottom: 15px;
+      background-color: white;
+      border-radius: 0 10px 10px 0;
+      transition: all 0.3s ease;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .activity-item::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(10, 77, 104, 0.05) 0%, rgba(8, 131, 149, 0.05) 100%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    
+    .activity-item:hover {
+      transform: translateX(5px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    
+    .activity-item:hover::before {
+      opacity: 1;
+    }
+    
+    .activity-item .date {
+      color: #6c757d;
+      font-size: 0.85rem;
+      display: inline-block;
+      padding: 3px 8px;
+      background: #f8f9fa;
+      border-radius: 4px;
+    }
+    
+    /* Enhanced Buttons */
+    .btn-primary {
+      background: var(--primary-gradient);
+      border: none;
+      border-radius: 50px;
+      padding: 10px 25px;
+      font-weight: 600;
+      box-shadow: 0 4px 15px rgba(10, 77, 104, 0.3);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+    }
+    
+    .btn-primary::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: all 0.6s ease;
+      z-index: -1;
+    }
+    
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(10, 77, 104, 0.4);
+      background: linear-gradient(90deg, #088395, #0a4d68);
+    }
+    
+    .btn-primary:hover::before {
+      left: 100%;
+    }
+    
+    /* Enhanced Form Controls */
+    .form-control {
+      border-radius: 10px;
+      padding: 12px 15px;
+      border: 1px solid rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+      background-color: #f8f9fa;
+    }
+    
+    .form-control:focus {
+      box-shadow: 0 0 0 3px rgba(10, 77, 104, 0.1);
+      border-color: var(--primary-color);
+      background-color: #fff;
+    }
+    
+    .form-label {
+      font-weight: 600;
+      color: #495057;
+      margin-bottom: 8px;
+    }
+    
+    /* Enhanced Upcoming Donation Cards */
+    .upcoming-donation {
+      background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+      border-radius: 15px;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-left: 4px solid var(--primary-color);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .upcoming-donation::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 0 30px 30px 0;
+      border-color: transparent var(--primary-color) transparent transparent;
+      transition: all 0.3s ease;
+      opacity: 0.5;
+    }
+    
+    .upcoming-donation:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+    }
+    
+    .upcoming-donation:hover::after {
+      opacity: 0.8;
+    }
+    
+    /* Enhanced Tabs */
+    .nav-tabs {
+      color: #000000;
+      border-bottom: 2px solid #000000;
+      margin-bottom: 20px;
+      justify-content: center;
+
+    }
+    
+    .nav-tabs .nav-link {
+      border: none;
+      color: #000000;
+      font-weight: 600;
+      padding: 12px 20px;
+      border-radius: 0;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+    
+    .nav-tabs .nav-link:hover {
+      color: var(black);
+      background: rgba(10, 77, 104, 0.05);
+    }
+    
+    .nav-tabs .nav-link.active {
+      color: var(--primary-color);
+      background: transparent;
+    }
+    
+    .nav-tabs .nav-link.active::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: var(--primary-gradient);
+    }
+    
+    /* Responsive Adjustments */
+    @media (max-width: 992px) {
+      .dashboard-header {
+        padding: 100px 0 60px;
+      }
+      
+      .profile-image {
+        width: 120px;
+        height: 120px;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .dashboard-header {
+        padding: 80px 0 50px;
+      }
+      
+      .dashboard-card {
+        padding: 20px;
+      }
+      
+      .profile-image {
+        width: 100px;
+        height: 100px;
+        margin-bottom: 15px;
+      }
+      
+      .stat-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 24px;
+      }
+      
+      .stat-number {
+        font-size: 2rem;
+      }
+      
+      .nav-tabs .nav-link {
+        padding: 10px 15px;
+        font-size: 0.9rem;
+      }
+    }
+    
+    @media (max-width: 576px) {
+      .dashboard-header {
+        padding: 60px 0 40px;
+      }
+      
+      .dashboard-card {
+        padding: 15px;
+      }
+      
+      .profile-image {
+        width: 80px;
+        height: 80px;
+      }
+      
+      .stat-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 20px;
+      }
+      
+      .stat-number {
+        font-size: 1.8rem;
+      }
+      
+      .nav-tabs {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+      
+      .nav-tabs .nav-link {
+        white-space: nowrap;
+        padding: 8px 12px;
+        font-size: 0.85rem;
+      }
+    }
+    
+    /* Animation for Impact Numbers */
+    @keyframes countUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .animate-count {
+      animation: countUp 1s ease-out forwards;
+    }
+    
+    /* Badge Styles */
+    .badge {
+      padding: 6px 12px;
+      border-radius: 50px;
+      font-weight: 500;
+      font-size: 0.8rem;
+      letter-spacing: 0.5px;
+    }
+    
+    .badge.bg-primary {
+      background: var(--primary-gradient) !important;
+      box-shadow: 0 3px 8px rgba(10, 77, 104, 0.2);
+    }
+    
+    .badge.bg-success {
+      background: linear-gradient(90deg, #28a745, #20c997) !important;
+      box-shadow: 0 3px 8px rgba(40, 167, 69, 0.2);
+    }
+    
+    /* Table Styles */
+    .table {
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    }
+    
+    .table thead th {
+      background: var(--primary-gradient);
+      color: white;
+      border: none;
+      padding: 15px;
+      font-weight: 600;
+    }
+    
+    .table tbody tr {
+      transition: all 0.3s ease;
+    }
+    
+    .table tbody tr:hover {
+      background-color: rgba(10, 77, 104, 0.05);
+    }
+    
+    .table tbody td {
+      padding: 15px;
+      vertical-align: middle;
+      border-color: #f0f0f0;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Header Placeholder -->
+<div id="header-placeholder"></div>
+
+<!-- Dashboard Header -->
+<header class="dashboard-header">
+  <div class="particles-container" id="particles-container"></div>
+  <div class="container" style="position: relative; z-index: 2;">
+    <h1 class="display-4 fw-bold" data-aos="fade-up">My Dashboard</h1>
+    <p class="lead" data-aos="fade-up" data-aos-delay="200">Manage your account, track your donations, and view your impact</p>
+  </div>
+</header>
+
+<!-- Dashboard Content -->
+<section class="py-5">
+  <div class="container">
+    <!-- User Profile Summary -->
+    <div class="row mb-4">
+      <div class="row mb-4">
+        <div class="col-lg-12" data-aos="fade-up">
+          <div class="dashboard-card d-flex flex-column flex-md-row align-items-center justify-content-between">
+            <!-- Left: Profile Image -->
+            <div class="text-center" style="width: 150px;">
+              <img src="images/donation.jpg" alt="Profile" class="profile-image" id="profile-image">
+            </div>
+            
+            <!-- Center: User Info -->
+            <div class="text-center mt-3 mt-md-0 flex-grow-1">
+              <h2 class="mb-1" id="user-name">Welcome, User!</h2>
+              <p class="text-muted mb-2" id="user-email">user@example.com</p>
+              <a href="profile.html" class="btn btn-sm btn-outline-primary mt-2"><i class="fas fa-user-edit me-1"></i> Edit Profile</a>
+            </div>
+            
+            <!-- Right: Badges -->
+            <div class="d-flex flex-column align-items-end mt-3 mt-md-0">
+              <span class="badge bg-primary me-2 mb-2"><i class="fas fa-check-circle me-1"></i> $Verified Donor</span>
+              <span class="badge bg-success me-2"><i class="fas fa-user-check me-1"></i> Active Member</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Stats Row -->
+    <div class="row g-4 mb-4">
+      <div class="col-6 col-md-3" data-aos="fade-up" data-aos-delay="100">
+        <div class="stat-card">
+          <div class="stat-icon">
+            <i class="fas fa-hand-holding-heart"></i>
+          </div>
+          <div class="stat-number animate-count" id="donations-count">0</div>
+          <div class="stat-label">Total Donations</div>
+        </div>
+      </div>
+      <div class="col-6 col-md-3" data-aos="fade-up" data-aos-delay="200">
+        <div class="stat-card">
+          <div class="stat-icon">
+            <i class="fas fa-rupee-sign"></i>
+          </div>
+          <div class="stat-number animate-count" id="amount-donated">₹0</div>
+          <div class="stat-label">Amount Donated</div>
+        </div>
+      </div>
+      <div class="col-6 col-md-3" data-aos="fade-up" data-aos-delay="300">
+        <div class="stat-card">
+          <div class="stat-icon">
+            <i class="fas fa-box-open"></i>
+          </div>
+          <div class="stat-number animate-count" id="items-donated">0</div>
+          <div class="stat-label">Items Donated</div>
+        </div>
+      </div>
+      <div class="col-6 col-md-3" data-aos="fade-up" data-aos-delay="400">
+        <div class="stat-card">
+          <div class="stat-icon">
+            <i class="fas fa-heart"></i>
+          </div>
+          <div class="stat-number animate-count" id="lives-impacted">0</div>
+          <div class="stat-label">Lives Impacted</div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Dashboard Tabs -->
+    <ul class="nav nav-tabs" id="dashboardTabs" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="overview-tab" data-bs-toggle="tab" data-bs-target="#overview" type="button" role="tab" aria-controls="overview" aria-selected="true">
+          <i class="fas fa-th-large me-2"></i>Overview
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">
+          <i class="fas fa-user me-2"></i>Profile
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="donations-tab" data-bs-toggle="tab" data-bs-target="#donations" type="button" role="tab" aria-controls="donations" aria-selected="false">
+          <i class="fas fa-donate me-2"></i>Donations
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="upcoming-tab" data-bs-toggle="tab" data-bs-target="#upcoming" type="button" role="tab" aria-controls="upcoming" aria-selected="false">
+          <i class="fas fa-calendar-alt me-2"></i>Upcoming
+        </button>
+      </li>
+    </ul>
+    
+    <!-- Tab Content -->
+    <div class="tab-content" id="dashboardTabContent">
+      <!-- Overview Tab -->
+      <div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview-tab">
+        <div class="row g-4 mt-3">
+          <!-- Recent Activity -->
+          <div class="col-lg-8" data-aos="fade-up">
+            <div class="dashboard-card">
+              <h4 class="section-title">Recent Activity</h4>
+              <div class="activity-list">
+                <div class="activity-item">
+                  <div class="d-flex justify-content-between align-items-center mb-2">
+                    <h5 class="mb-0">Donated ₹2,500</h5>
+                    <span class="date"><i class="far fa-calendar-alt me-1"></i> 15 Jan 2025</span>
+                  </div>
+                  <p class="mb-0 text-muted">Your donation to "Education for All" campaign has helped 5 children.</p>
+                </div>
+                <div class="activity-item">
+                  <div class="d-flex justify-content-between align-items-center mb-2">
+                    <h5 class="mb-0">Donated Clothes</h5>
+                    <span class="date"><i class="far fa-calendar-alt me-1"></i> 2 jan 2025</span>
+                  </div>
+                  <p class="mb-0 text-muted">You donated 12 items of clothing to "Winter Relief" drive.</p>
+                </div>
+                <div class="activity-item">
+                  <div class="d-flex justify-content-between align-items-center mb-2">
+                    <h5 class="mb-0">Donated ₹5,000</h5>
+                    <span class="date"><i class="far fa-calendar-alt me-1"></i> 20 May 2025</span>
+                  </div>
+                  <p class="mb-0 text-muted">Your donation to "Flood Relief" has provided emergency supplies to 10 families.</p>
+                </div>
+              </div>
+              <div class="text-center mt-4">
+                <a href="#" class="btn btn-outline-primary btn-sm">View All Activity</a>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Impact Summary -->
+          <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
+            <div class="dashboard-card">
+              <h4 class="section-title">Your Impact</h4>
+              <div class="impact-stats">
+                <div class="mb-4 text-center">
+                  <div class="stat-icon">
+                    <i class="fas fa-utensils"></i>
+                  </div>
+                  <div class="stat-number animate-count" id="meals-count">0</div>
+                  <div class="stat-label">Meals Provided</div>
+                </div>
+                <div class="mb-4 text-center">
+                  <div class="stat-icon">
+                    <i class="fas fa-tshirt"></i>
+                  </div>
+                  <div class="stat-number animate-count" id="clothing-count">0</div>
+                  <div class="stat-label">Clothing Items</div>
+                </div>
+                <div class="text-center">
+                  <div class="stat-icon">
+                    <i class="fas fa-book"></i>
+                  </div>
+                  <div class="stat-number animate-count" id="education-count">0</div>
+                  <div class="stat-label">Education Support</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Upcoming Donations -->
+          <div class="col-lg-12" data-aos="fade-up">
+            <div class="dashboard-card">
+              <h4 class="section-title">Upcoming Donations</h4>
+              <div class="row g-4">
+                <div class="col-md-6">
+                  <div class="upcoming-donation">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                      <h5 class="mb-0">Monthly Education Support</h5>
+                      <span class="badge bg-primary">Recurring</span>
+                    </div>
+                    <p class="text-muted mb-2">₹1,000 scheduled for 1st July 2025</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <span class="text-success"><i class="fas fa-check-circle me-1"></i> Active</span>
+                      <div>
+                        <button class="btn btn-sm btn-outline-primary me-1">Edit</button>
+                        <button class="btn btn-sm btn-outline-danger">Cancel</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="upcoming-donation">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                      <h5 class="mb-0">Food Distribution Drive</h5>
+                      <span class="badge bg-success">One-time</span>
+                    </div>
+                    <p class="text-muted mb-2">Volunteering on 10th July 2025, 9:00 AM</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <span class="text-success"><i class="fas fa-check-circle me-1"></i> Confirmed</span>
+                      <div>
+                        <button class="btn btn-sm btn-outline-primary me-1">Details</button>
+                        <button class="btn btn-sm btn-outline-danger">Cancel</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Profile Tab -->
+      <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+        <div class="row g-4 mt-3">
+          <div class="col-lg-8" data-aos="fade-up">
+            <div class="dashboard-card">
+              <h4 class="section-title">Personal Information</h4>
+              <form id="profile-form">
+                <div class="row mb-3">
+                  <div class="col-md-6">
+                    <label for="profile-name" class="form-label">Full Name</label>
+                    <input type="text" class="form-control" id="profile-name" placeholder="Your Name">
+                  </div>
+                  <div class="col-md-6">
+                    <label for="profile-email" class="form-label">Email Address</label>
+                    <input type="email" class="form-control" id="profile-email" placeholder="your.email@example.com" readonly>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <div class="col-md-6">
+                    <label for="profile-phone" class="form-label">Phone Number</label>
+                    <input type="tel" class="form-control" id="profile-phone" placeholder="Your Phone Number">
+                  </div>
+                  <div class="col-md-6">
+                    <label for="profile-dob" class="form-label">Date of Birth</label>
+                    <input type="date" class="form-control" id="profile-dob">
+                  </div>
+                </div>
+                <div class="mb-3">
+                                    <label for="profile-address" class="form-label">Address</label>
+                  <textarea class="form-control" id="profile-address" rows="3" placeholder="Your Address"></textarea>
+                </div>
+                <div class="text-end">
+                  <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-save me-2"></i>Save Changes
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+          
+          <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
+            <div class="dashboard-card">
+              <h4 class="section-title">Account Information</h4>
+              <div class="mb-4">
+                <div class="d-flex justify-content-between mb-2">
+                  <span class="text-muted">Member Since</span>
+                  <span class="fw-bold" id="signup-date">jan 1, 2025</span>
+                </div>
+                <div class="d-flex justify-content-between mb-2">
+                  <span class="text-muted">Account Status</span>
+                  <span class="text-success fw-bold">Active</span>
+                </div>
+                <div class="d-flex justify-content-between">
+                  <span class="text-muted">Donor Level</span>
+                  <span class="fw-bold text-primary">Silver</span>
+                </div>
+              </div>
+              <hr>
+              <h5 class="mb-3">Account Actions</h5>
+              <div class="d-grid gap-2">
+                <button class="btn btn-outline-primary">
+                  <i class="fas fa-key me-2"></i>Change Password
+                </button>
+                <button class="btn btn-outline-danger">
+                  <i class="fas fa-bell-slash me-2"></i>Notification Settings
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Donations Tab -->
+      <div class="tab-pane fade" id="donations" role="tabpanel" aria-labelledby="donations-tab">
+        <div class="row g-4 mt-3">
+          <div class="col-lg-12" data-aos="fade-up">
+            <div class="dashboard-card">
+              <h4 class="section-title">Donation History</h4>
+              <div class="table-responsive">
+                <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th>Date</th>
+                      <th>Campaign</th>
+                      <th>Type</th>
+                      <th>Amount/Items</th>
+                      <th>Status</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>15 Jun 2025</td>
+                      <td>Education for All</td>
+                      <td>Money</td>
+                      <td>₹2,500</td>
+                      <td><span class="badge bg-success">Completed</span></td>
+                      <td>
+                        <button class="btn btn-sm btn-outline-primary"><i class="fas fa-receipt"></i></button>
+                        <button class="btn btn-sm btn-outline-info"><i class="fas fa-info-circle"></i></button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>2 Jun 2025</td>
+                      <td>Winter Relief</td>
+                      <td>Clothes</td>
+                      <td>12 items</td>
+                      <td><span class="badge bg-success">Completed</span></td>
+                      <td>
+                        <button class="btn btn-sm btn-outline-primary"><i class="fas fa-receipt"></i></button>
+                        <button class="btn btn-sm btn-outline-info"><i class="fas fa-info-circle"></i></button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>10 May 2025</td>
+                      <td>Flood Relief</td>
+                      <td>Money</td>
+                      <td>₹5,000</td>
+                      <td><span class="badge bg-success">Completed</span></td>
+                      <td>
+                        <button class="btn btn-sm btn-outline-primary"><i class="fas fa-receipt"></i></button>
+                        <button class="btn btn-sm btn-outline-info"><i class="fas fa-info-circle"></i></button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>5 May 2025</td>
+                      <td>Food for All</td>
+                      <td>Food</td>
+                      <td>25 kg</td>
+                      <td><span class="badge bg-success">Completed</span></td>
+                      <td>
+                        <button class="btn btn-sm btn-outline-primary"><i class="fas fa-receipt"></i></button>
+                        <button class="btn btn-sm btn-outline-info"><i class="fas fa-info-circle"></i></button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>15 Apr 2025</td>
+                      <td>Education for All</td>
+                      <td>Money</td>
+                      <td>₹5,000</td>
+                      <td><span class="badge bg-success">Completed</span></td>
+                      <td>
+                        <button class="btn btn-sm btn-outline-primary"><i class="fas fa-receipt"></i></button>
+                        <button class="btn btn-sm btn-outline-info"><i class="fas fa-info-circle"></i></button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="d-flex justify-content-between align-items-center mt-4">
+                <div>
+                  <span class="text-muted">Showing 5 of 12 donations</span>
+                </div>
+                <div>
+                  <button class="btn btn-outline-primary btn-sm">
+                    <i class="fas fa-chevron-left me-1"></i> Previous
+                  </button>
+                  <button class="btn btn-outline-primary btn-sm">
+                    Next <i class="fas fa-chevron-right ms-1"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-lg-12" data-aos="fade-up">
+            <div class="dashboard-card">
+              <h4 class="section-title">Make a New Donation</h4>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="card border-0 shadow-sm mb-4">
+                    <div class="card-body text-center p-4">
+                      <div class="mb-3">
+                        <i class="fas fa-money-bill-wave fa-3x text-primary"></i>
+                      </div>
+                      <h5 class="card-title">Donate Money</h5>
+                      <p class="card-text">Support our causes with financial contributions</p>
+                      <a href="Donate.html" class="btn btn-primary">Donate Now</a>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="card border-0 shadow-sm mb-4">
+                    <div class="card-body text-center p-4">
+                      <div class="mb-3">
+                        <i class="fas fa-box-open fa-3x text-primary"></i>
+                      </div>
+                      <h5 class="card-title">Donate Items</h5>
+                      <p class="card-text">Donate clothes, food, books, and other essential items</p>
+                      <a href="Donate.html" class="btn btn-primary">Donate Now</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Upcoming Tab -->
+      <div class="tab-pane fade" id="upcoming" role="tabpanel" aria-labelledby="upcoming-tab">
+        <div class="row g-4 mt-3">
+          <div class="col-lg-12" data-aos="fade-up">
+            <div class="dashboard-card">
+              <h4 class="section-title">Upcoming Donations</h4>
+              <div class="table-responsive">
+                <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th>Date</th>
+                      <th>Campaign</th>
+                      <th>Type</th>
+                      <th>Amount/Items</th>
+                      <th>Status</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>1 Jul 2025</td>
+                      <td>Education for All</td>
+                      <td>Money</td>
+                      <td>₹1,000</td>
+                      <td><span class="badge bg-primary">Scheduled</span></td>
+                      <td>
+                        <button class="btn btn-sm btn-outline-primary"><i class="fas fa-edit"></i></button>
+                        <button class="btn btn-sm btn-outline-danger"><i class="fas fa-times"></i></button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>10 Jul 2025</td>
+                      <td>Food Distribution Drive</td>
+                      <td>Volunteer</td>
+                      <td>3 hours</td>
+                      <td><span class="badge bg-success">Confirmed</span></td>
+                      <td>
+                        <button class="btn btn-sm btn-outline-primary"><i class="fas fa-info-circle"></i></button>
+                        <button class="btn btn-sm btn-outline-danger"><i class="fas fa-times"></i></button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-lg-12" data-aos="fade-up">
+            <div class="dashboard-card">
+              <h4 class="section-title">Upcoming Events</h4>
+              <div class="row g-4">
+                <div class="col-md-6">
+                  <div class="card border-0 shadow-sm mb-4">
+                    <img src="./images/Food1.jpg" class="card-img-top" alt="Event Image" style="height: 200px; object-fit: cover;">
+                    <div class="card-body p-4">
+                      <div class="d-flex justify-content-between align-items-center mb-2">
+                        <h5 class="card-title mb-0">Community Food Drive</h5>
+                        <span class="badge bg-primary">15 Jul 2025</span>
+                      </div>
+                      <p class="card-text">Join us for a community food drive to help local families in need.</p>
+                      <div class="d-flex justify-content-between align-items-center">
+                        <span class="text-muted"><i class="fas fa-map-marker-alt me-1"></i> City Community Center</span>
+                        <button class="btn btn-sm btn-primary" onclick="window.location.href='Donate.html'">Register</button>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="card border-0 shadow-sm mb-4">
+                    <img src="https://images.unsplash.com/photo-1526976668912-1a811878dd37?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" class="card-img-top" alt="Event Image" style="height: 200px; object-fit: cover;">
+                    <div class="card-body p-4">
+                      <div class="d-flex justify-content-between align-items-center mb-2">
+                        <h5 class="card-title mb-0">Charity Run</h5>
+                        <span class="badge bg-primary">30 Jul 2025</span>
+                      </div>
+                      <p class="card-text">Participate in our annual charity run to raise funds for education.</p>
+                      <div class="d-flex justify-content-between align-items-center">
+                        <span class="text-muted"><i class="fas fa-map-marker-alt me-1"></i> City Park</span>
+                        <button class="btn btn-sm btn-primary" onclick="window.location.href='Donate.html'">Register</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer Placeholder -->
+<div id="footer-placeholder"></div>
+
+<!-- Bootstrap & jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- AOS Animation Library -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<!-- Custom Scripts -->
+<script>
+  // Initialize AOS animations
+  AOS.init({
+    duration: 800,
+    easing: 'ease-in-out',
+    once: true
+  });
+  
+  // Create particles for header background
+  function createParticles() {
+    const container = document.getElementById('particles-container');
+    const particleCount = 20;
+    
+    for (let i = 0; i < particleCount; i++) {
+      const particle = document.createElement('div');
+      particle.classList.add('particle');
+      
+      // Random size between 5px and 20px
+      const size = Math.random() * 15 + 5;
+      particle.style.width = `${size}px`;
+      particle.style.height = `${size}px`;
+      
+      // Random position
+      particle.style.left = `${Math.random() * 100}%`;
+      particle.style.top = `${Math.random() * 100}%`;
+      
+      // Random animation duration between 15s and 30s
+      const duration = Math.random() * 15 + 15;
+      particle.style.animationDuration = `${duration}s`;
+      
+      // Random delay
+      particle.style.animationDelay = `${Math.random() * 5}s`;
+      
+      container.appendChild(particle);
+    }
+  }
+  
+  // Animated counter function
+  function animateCounter(element, target, duration = 1500) {
+    let start = 0;
+    const increment = target / (duration / 16);
+    const timer = setInterval(() => {
+      start += increment;
+      if (start >= target) {
+        clearInterval(timer);
+        start = target;
+      }
+      
+      // Format the number based on whether it's a currency or regular number
+      if (element.id === 'amount-donated') {
+        element.textContent = '₹' + Math.floor(start).toLocaleString();
+      } else {
+        element.textContent = Math.floor(start).toLocaleString();
+      }
+    }, 16);
+  }
+  
+  // Load header and footer
+  $(document).ready(function() {
+    $("#header-placeholder").load("components/header.html", function() {
+      // Update active nav item
+      $('.nav-link[href="dashboard.html"]').addClass('active');
+      
+      // Check if user is logged in and update UI
+      const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+      if (isLoggedIn) {
+        // Call the updateAuthUI function from header.html if it exists
+        if (typeof updateAuthUI === 'function') {
+          updateAuthUI(true);
+        }
+      }
+    });
+    $("#footer-placeholder").load("components/footer.html");
+    
+    // Create particles
+    createParticles();
+    
+    // Load user data
+    loadUserData();
+    
+    // Load dashboard data with animations
+    setTimeout(() => {
+      // Sample donation stats with animation
+      animateCounter(document.getElementById('donations-count'), 5);
+      animateCounter(document.getElementById('amount-donated'), 12500);
+      animateCounter(document.getElementById('items-donated'), 23);
+      animateCounter(document.getElementById('lives-impacted'), 47);
+      
+      // Sample impact stats with animation
+      animateCounter(document.getElementById('meals-count'), 120);
+      animateCounter(document.getElementById('clothing-count'), 35);
+      animateCounter(document.getElementById('education-count'), 18);
+    }, 500);
+    
+    // Handle profile form submission
+    $("#profile-form").on("submit", function(e) {
+      e.preventDefault();
+      saveProfileData();
+    });
+  });
+  
+  // Load user data from localStorage
+  function loadUserData() {
+    const userData = JSON.parse(localStorage.getItem("currentUser") || "{}");
+    const userName = userData.name || "User";
+    const userEmail = userData.email || "user@example.com";
+    
+    // Update user info in the UI
+    $("#user-name").text(`Welcome, ${userName}!`);
+    $("#user-email").text(userEmail);
+    $("#profile-name").val(userName);
+    $("#profile-email").val(userEmail);
+    
+    // Load additional profile data if available
+    const profileData = JSON.parse(localStorage.getItem("profileData") || "{}");
+    if (profileData.phone) $("#profile-phone").val(profileData.phone);
+    if (profileData.address) $("#profile-address").val(profileData.address);
+    if (profileData.dob) $("#profile-dob").val(profileData.dob);
+    
+    // Set signup date
+    const signupDate = new Date(userData.signupDate || Date.now()).toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
+    $("#signup-date").text(signupDate);
+  }
+  
+  // Save profile data
+  function saveProfileData() {
+    const profileData = {
+      name: $("#profile-name").val(),
+      phone: $("#profile-phone").val(),
+      address: $("#profile-address").val(),
+      dob: $("#profile-dob").val()
+    };
+    
+    // Update currentUser name
+    const userData = JSON.parse(localStorage.getItem("currentUser") || "{}");
+    userData.name = profileData.name;
+    localStorage.setItem("currentUser", JSON.stringify(userData));
+    
+    // Save profile data
+    localStorage.setItem("profileData", JSON.stringify(profileData));
+    
+    // Update UI
+    $("#user-name").text(`Welcome, ${profileData.name}!`);
+    
+    // Show success message with animation
+    const successAlert = document.createElement('div');
+    successAlert.className = 'alert alert-success alert-dismissible fade show';
+    successAlert.innerHTML = `
+      <i class="fas fa-check-circle me-2"></i> Profile updated successfully!
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    `;
+    
+    // Insert the alert before the form
+    document.getElementById('profile-form').parentNode.insertBefore(successAlert, document.getElementById('profile-form'));
+    
+    // Auto dismiss after 3 seconds
+    setTimeout(() => {
+      $(successAlert).alert('close');
+    }, 3000);
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Donate - HopeDose</title>
+  <!-- Authentication Check Script -->
+  <script src="js/auth-check.js"></script>
+  <!-- Bootstrap & FontAwesome -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+  <!-- Add AOS library for scroll animations -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <!-- Custom CSS -->
+
+  <link rel="stylesheet" href="css/donate.css">
+</head>
+
+<body>
+  <!-- Include the header component -->
+  <div id="header-container"></div>
+
+  <!-- Page Header -->
+  <header class="page-header">
+    <div class="container">
+      <h1 class="page-title">Make a Difference Today</h1>
+      <p class="page-subtitle">Your generosity can transform lives. Choose how you'd like to contribute to our mission of helping those in need.</p>
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Donate</li>
+        </ol>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <div class="content-container">
+    <div class="container">
+      <h2 class="section-title" data-aos="fade-up">Ways to Donate</h2>
+      <p class="section-subtitle" data-aos="fade-up">Choose the donation method that works best for you. Every contribution, no matter the size, helps us make a positive impact.</p>
+      
+      <!-- Donation Options -->
+      <div class="row g-4 mb-5">
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+          <div class="donation-card h-100">
+            <div class="donation-icon">
+              <i class="fas fa-hand-holding-usd"></i>
+            </div>
+            <h3 class="donation-title">Cash Donation</h3>
+            <p class="donation-text">Support with a financial contribution. Every amount makes a difference in helping us provide essential services.</p>
+            <a href="./payment.html" class="donation-btn">Donate Cash</a>
+          </div>
+        </div>
+        
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+          <div class="donation-card h-100">
+            <div class="donation-icon">
+              <i class="fas fa-box-open"></i>
+            </div>
+            <h3 class="donation-title">Item Donation</h3>
+            <p class="donation-text">Donate clothes, toys, books, and other items to help those in need. Your unused items can bring joy to others.</p>
+            <a href="#itemDonation" class="donation-btn">Donate Items</a>
+          </div>
+        </div>
+        
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+          <div class="donation-card h-100">
+            <div class="donation-icon">
+              <i class="fas fa-clock"></i>
+            </div>
+            <h3 class="donation-title">Volunteer Time</h3>
+            <p class="donation-text">Share your skills and time to help us make a bigger impact in the community. Your time is a valuable resource.</p>
+            <a href="./volunteer.html" class="donation-btn">Volunteer</a>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Cash Donation Section -->
+      <section id="cashDonation" class="py-5">
+        <h2 class="section-title" data-aos="fade-up">Cash Donation</h2>
+        <p class="section-subtitle" data-aos="fade-up">Your financial support helps us provide essential services to those in need.</p>
+        
+        <div class="donation-form-section" data-aos="fade-up">
+          <h3 class="form-title">Make a Donation</h3>
+          
+          <form id="quickDonationForm" action="payment.html" method="get">
+            <div class="row g-4">
+              <div class="col-12">
+                <label class="form-label">Select Donation Amount</label>
+                <div class="amount-options">
+                  <div class="amount-option">
+                    <input type="radio" name="amount" id="amount1" value="100">
+                    <label for="amount1">₹100</label>
+                  </div>
+                  <div class="amount-option">
+                    <input type="radio" name="amount" id="amount2" value="250" checked>
+                    <label for="amount2">₹250</label>
+                  </div>
+                  <div class="amount-option">
+                    <input type="radio" name="amount" id="amount3" value="500">
+                    <label for="amount3">₹500</label>
+                  </div>
+                  <div class="amount-option">
+                    <input type="radio" name="amount" id="amount4" value="1000">
+                    <label for="amount4">₹1000</label>
+                  </div>
+                  <div class="amount-option">
+                    <input type="radio" name="amount" id="amountCustom" value="custom">
+                    <label for="amountCustom">Custom</label>
+                  </div>
+                </div>
+                
+                <div class="custom-amount" id="customAmountContainer">
+                  <div class="input-group mt-3">
+                    <span class="input-group-text">₹</span>
+                    <input type="number" class="form-control" id="customAmountInput" name="customAmount" placeholder="Enter amount">
+                  </div>
+                </div>
+              </div>
+              
+              <div class="col-12 mt-4">
+                <button type="submit" class="submit-btn" id="quickDonateBtn">
+                  <i class="fas fa-heart me-2"></i>Proceed to Payment
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+        
+        <!-- Payment Methods Section -->
+        <div class="payment-methods-section" data-aos="fade-up">
+          <h3 class="text-center mb-4">Secure Payment Methods</h3>
+          <div class="row justify-content-center align-items-center g-4">
+            <div class="col-4 col-md-2 text-center">
+              <img src="https://cdn.iconscout.com/icon/free/png-256/visa-3-226460.png" alt="Visa" class="img-fluid payment-logo">
+            </div>
+            <div class="col-4 col-md-2 text-center">
+              <img src="https://cdn.iconscout.com/icon/free/png-256/mastercard-6-226423.png" alt="Mastercard" class="img-fluid payment-logo">
+            </div>
+            <div class="col-4 col-md-2 text-center">
+              <img src="https://cdn.iconscout.com/icon/free/png-256/paypal-54-675727.png" alt="PayPal" class="img-fluid payment-logo">
+            </div>
+            <div class="col-4 col-md-2 text-center">
+              <img src="https://cdn.iconscout.com/icon/free/png-256/google-pay-2038779-1721670.png" alt="Google Pay" class="img-fluid payment-logo">
+            </div>
+            <div class="col-4 col-md-2 text-center">
+              <img src="https://cdn.iconscout.com/icon/free/png-256/apple-pay-2038784-1721675.png" alt="Apple Pay" class="img-fluid payment-logo">
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Item Donation Section -->
+      <section id="itemDonation" class="py-5">
+        <h2 class="section-title" data-aos="fade-up">Donate Items</h2>
+        <p class="section-subtitle" data-aos="fade-up">Your unused items can make a significant difference in someone's life. Choose from the categories below.</p>
+        
+        <div class="row g-4">
+          <!-- Toys -->
+          <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="100">
+            <div class="custom-card h-100">
+              <div class="overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" class="card-img-top" alt="Toys">
+              </div>
+              <div class="card-body">
+                <h5 class="card-title">Toys & Games</h5>
+                <p class="card-text">Donate new or gently used toys and games to bring joy to children in need.</p>
+                <button class="btn btn-primary" onclick="openModal('Toys & Games')">Donate Toys</button>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Clothes -->
+          <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="200">
+            <div class="custom-card h-100">
+              <div class="overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" class="card-img-top" alt="Clothes">
+              </div>
+              <div class="card-body">
+                <h5 class="card-title">Clothes & Shoes</h5>
+                <p class="card-text">Clean, wearable clothing and shoes can help those in need stay warm and comfortable.</p>
+                <button class="btn btn-primary" onclick="openModal('Clothes & Shoes')">Donate Clothes</button>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Books -->
+          <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="300">
+            <div class="custom-card h-100">
+              <div class="overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1524578271613-d550eacf6090?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" class="card-img-top" alt="Books">
+              </div>
+              <div class="card-body">
+                <h5 class="card-title">Books & Supplies</h5>
+                <p class="card-text">Educational materials and books help provide learning opportunities for all ages.</p>
+                <button class="btn btn-primary" onclick="openModal('Books & Supplies')">Donate Books</button>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Food -->
+          <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="400">
+            <div class="custom-card h-100">
+              <div class="overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1506484381205-f7945653044d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" class="card-img-top" alt="Food">
+              </div>
+              <div class="card-body">
+                <h5 class="card-title">Food & Essentials</h5>
+                <p class="card-text">Non-perishable food items and essential supplies help families meet their basic needs.</p>
+                <button class="btn btn-primary" onclick="openModal('Food & Essentials')">Donate Food</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Donation Benefits -->
+        <div class="donation-benefits mt-5" data-aos="fade-up">
+          <h3 class="text-center mb-4">Benefits of Donating Items</h3>
+          <div class="row g-4">
+            <div class="col-md-6">
+              <div class="benefit-item">
+                <div class="benefit-icon">
+                  <i class="fas fa-heart"></i>
+                </div>
+                <div class="benefit-content">
+                  <h4>Help Those in Need</h4>
+                  <p>Your donations directly help individuals and families who are struggling with basic necessities.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="benefit-item">
+                <div class="benefit-icon">
+                  <i class="fas fa-leaf"></i>
+                </div>
+                <div class="benefit-content">
+                  <h4>Environmental Impact</h4>
+                  <p>Donating items reduces waste and gives your unused items a second life instead of ending up in landfills.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="benefit-item">
+                <div class="benefit-icon">
+                  <i class="fas fa-home"></i>
+                </div>
+                <div class="benefit-content">
+                  <h4>Declutter Your Space</h4>
+                  <p>Donating items you no longer need helps create a more organized and peaceful living environment.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="benefit-item">
+                <div class="benefit-icon">
+                  <i class="fas fa-hand-holding-heart"></i>
+                </div>
+                <div class="benefit-content">
+                  <h4>Feel Good Factor</h4>
+                  <p>Knowing that your donations are making a positive difference in someone's life brings joy and satisfaction.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Impact Section -->
+      <section class="impact-section py-5">
+        <h2 class="section-title" data-aos="fade-up">Your Impact</h2>
+        <p class="section-subtitle" data-aos="fade-up">See how your donations are making a difference in our community.</p>
+        
+        <div class="row g-4">
+          <!-- Impact Section Images -->
+          <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+            <div class="impact-card h-100">
+              <div class="impact-img-container">
+                <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Education Impact" class="impact-img">
+                <div class="impact-stat">500+ Students</div>
+              </div>
+              <div class="impact-content">
+                <h4 class="impact-title">Education Support</h4>
+                <p class="impact-text">Your donations have helped provide educational materials and support to over 500 students in underserved communities.</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+            <div class="impact-card h-100">
+              <div class="impact-img-container">
+                <img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Meals Impact" class="impact-img">
+                <div class="impact-stat">10,000+ Meals</div>
+              </div>
+              <div class="impact-content">
+                <h4 class="impact-title">Hunger Relief</h4>
+                <p class="impact-text">Together, we've provided over 10,000 meals to families facing food insecurity in our local communities.</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+            <div class="impact-card h-100">
+              <div class="impact-img-container">
+                <img src="https://images.unsplash.com/photo-1511895426328-dc8714191300?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Families Impact" class="impact-img">
+                <div class="impact-stat">300+ Families</div>
+              </div>
+              <div class="impact-content">
+                <h4 class="impact-title">Family Support</h4>
+                <p class="impact-text">Your generosity has helped over 300 families with essential items, clothing, and support during difficult times.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Testimonial Section -->
+      <section class="testimonial-section">
+        <div class="container">
+          <h2 class="section-title text-white" data-aos="fade-up">Donor Stories</h2>
+          <p class="section-subtitle text-white-50" data-aos="fade-up">Hear from people who have experienced the joy of giving.</p>
+          
+          <div class="row">
+            <div class="col-md-8 mx-auto" data-aos="fade-up">
+              <div class="testimonial-card">
+                <img src="https://images.unsplash.com/photo-1545696968-1a5245650b36?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Kamal Thakur" class="testimonial-img">
+                <p class="testimonial-quote">Donating to HopeDose has been one of the most rewarding experiences. Knowing that my unused items are helping families in need gives me a sense of purpose and connection to my community.</p>
+                <h4 class="testimonial-author">Kamal Thakur</h4>
+                <p class="testimonial-role">Regular Donor</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- FAQ Section -->
+      <section class="faq-section py-5">
+        <h2 class="section-title" data-aos="fade-up">Frequently Asked Questions</h2>
+        <p class="section-subtitle" data-aos="fade-up">Find answers to common questions about donating to HopeDose.</p>
+        
+        <div class="faq-card" data-aos="fade-up">
+          <div class="accordion-item active">
+            <div class="accordion-header">
+              <span>What items can I donate?</span>
+              <i class="fas fa-chevron-down accordion-icon"></i>
+            </div>
+            <div class="accordion-content">
+              <p>We accept a wide range of items including clothing, shoes, toys, books, non-perishable food, household items, and more. All items should be clean, in good condition, and usable.</p>
+            </div>
+          </div>
+          
+          <div class="accordion-item">
+            <div class="accordion-header">
+              <span>How do I arrange for item pickup?</span>
+              <i class="fas fa-chevron-down accordion-icon"></i>
+            </div>
+            <div class="accordion-content">
+              <p>After submitting your donation information through our website, our team will contact you within 48 hours to arrange a convenient pickup time. We offer pickup services for donations within a 20-mile radius of our center.</p>
+            </div>
+          </div>
+          
+          <div class="accordion-item">
+            <div class="accordion-header">
+              <span>Is my donation tax-deductible?</span>
+              <i class="fas fa-chevron-down accordion-icon"></i>
+            </div>
+            <div class="accordion-content">
+              <p>Yes, HopeDose is a registered 501(c)(3) nonprofit organization, and all donations are tax-deductible. You will receive a receipt for your donation that you can use for tax purposes.</p>
+            </div>
+          </div>
+          
+          <div class="accordion-item">
+            <div class="accordion-header">
+              <span>Where do my donations go?</span>
+              <i class="fas fa-chevron-down accordion-icon"></i>
+            </div>
+            <div class="accordion-content">
+              <p>Your donations directly support individuals and families in need within our local community. We distribute items through our community centers, partner organizations, and direct assistance programs.</p>
+            </div>
+          </div>
+          
+          <div class="accordion-item">
+            <div class="accordion-header">
+              <span>Can I donate anonymously?</span>
+              <i class="fas fa-chevron-down accordion-icon"></i>
+            </div>
+            <div class="accordion-content">
+              <p>Yes, you can choose to donate anonymously. During the donation process, simply select the "Donate Anonymously" option, and your personal information will not be publicly displayed.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+  
+  <!-- Donation Modal -->
+  <div id="donationModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <h3 class="modal-title" id="modalTitle">Donate Items</h3>
+      
+      <form id="donationForm" class="modal-form">
+        <input type="hidden" id="itemType" name="itemType">
+        
+        <div class="form-group">
+          <label for="donorName">Your Name</label>
+          <input type="text" id="donorName" name="donorName" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="donorEmail">Email</label>
+          <input type="email" id="donorEmail" name="donorEmail" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="donorPhone">Phone</label>
+          <input type="tel" id="donorPhone" name="donorPhone" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="itemDescription">Description of Items</label>
+          <textarea id="itemDescription" name="itemDescription" rows="3" required></textarea>
+        </div>
+        
+        <div class="form-group">
+          <label for="itemCondition">Condition</label>
+          <select id="itemCondition" name="itemCondition" required>
+            <option value="">Select condition</option>
+            <option value="New">New</option>
+            <option value="Like New">Like New</option>
+            <option value="Good">Good</option>
+            <option value="Fair">Fair</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="donationMethod">Donation Method</label>
+          <select id="donationMethod" name="donationMethod" required>
+            <option value="">Select method</option>
+            <option value="Drop Off">Drop Off at Center</option>
+            <option value="Pickup">Request Pickup</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="donationDate">Preferred Date</label>
+          <input type="date" id="donationDate" name="donationDate" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="additionalNotes">Additional Notes</label>
+          <textarea id="additionalNotes" name="additionalNotes" rows="2"></textarea>
+        </div>
+        
+        <button type="submit" class="btn btn-primary">Submit Donation</button>
+      </form>
+    </div>
+  </div>
+
+
+  <!-- Include the footer component -->
+  <div id="footer-container"></div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- AOS Animation Library -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <!-- Custom JS -->
+  <script src="donate.js"></script>
+  <script>
+    // Load header component
+    fetch('components/header.html')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('header-container').innerHTML = data;
+        
+        // Execute header scripts after loading
+        const headerScripts = document.getElementById('header-container').querySelectorAll('script');
+        headerScripts.forEach(script => {
+          const newScript = document.createElement('script');
+          if (script.src) {
+            newScript.src = script.src;
+          } else {
+            newScript.textContent = script.textContent;
+          }
+          document.body.appendChild(newScript);
+        });
+        
+        // Mark the Donate link as active
+        setTimeout(() => {
+          const donateLink = document.querySelector('.nav-link[href="Donate.html"]');
+          if (donateLink) {
+            donateLink.classList.add('active');
+          }
+        }, 100);
+      });
+    
+    // Load footer component
+    fetch('components/footer.html')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('footer-container').innerHTML = data;
+      });
+    
+    // Initialize AOS animations
+    AOS.init({
+      duration: 800,
+      once: true
+    });
+  </script>
+</body>
+</html>

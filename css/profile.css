@@ -1,0 +1,446 @@
+/* Profile Page Styles */
+:root {
+  --primary-color: #0a4d68;
+  --primary-light: #088395;
+  --primary-gradient: linear-gradient(90deg, #0a4d68, #088395);
+  --accent-color: #4db8ff;
+  --text-color: #333;
+  --light-bg: #f5f7fa;
+  --card-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  --hover-shadow: 0 15px 40px rgba(0,0,0,0.15);
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  color: #333;
+  min-height: 100vh;
+}
+
+/* Profile Header */
+.profile-header {
+  background: linear-gradient(rgba(10, 46, 61, 0.8), rgba(10, 46, 61, 0.9)), url('../images/profile-header-bg.jpg') no-repeat center center;
+  background-size: cover;
+  color: white;
+  padding: 120px 0 80px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.profile-header::before {
+  content: '';
+  position: absolute;
+  bottom: -50px;
+  left: 0;
+  width: 100%;
+  height: 100px;
+  background: linear-gradient(to bottom right, transparent 49%, white 50%);
+}
+
+/* Card Styles */
+.profile-card {
+  background: white;
+  border-radius: 15px;
+  box-shadow: var(--card-shadow);
+  padding: 30px;
+ 
+  position: relative;
+  z-index: 10;
+  border: 1px solid rgba(0,0,0,0.05);
+  transition: all 0.3s ease;
+}
+
+.profile-card:hover {
+  box-shadow: var(--hover-shadow);
+  transform: translateY(-5px);
+}
+
+.profile-image {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 5px solid white;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+}
+
+.profile-image:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+.profile-stats {
+  background: white;
+  border-radius: 15px;
+  box-shadow: var(--card-shadow);
+  padding: 20px;
+  height: 100%;
+  border: 1px solid rgba(0,0,0,0.05);
+  transition: all 0.3s ease;
+}
+
+.profile-stats:hover {
+  box-shadow: var(--hover-shadow);
+  transform: translateY(-5px);
+}
+
+.stat-item {
+  text-align: center;
+  padding: 15px;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.stat-item:hover {
+  background-color: #f8f9fa;
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+.stat-icon {
+  width: 60px;
+  height: 60px;
+  background: var(--primary-gradient);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 24px;
+  margin: 0 auto 15px;
+  transition: all 0.3s ease;
+}
+
+.stat-item:hover .stat-icon {
+  transform: scale(1.1) rotate(5deg);
+  box-shadow: 0 5px 15px rgba(10, 77, 104, 0.3);
+}
+
+/* Section Title */
+.section-title {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-weight: 700;
+  position: relative;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--primary-color);
+}
+
+.section-title:after {
+  content: '';
+  display: block;
+  width: 80px;
+  height: 4px;
+  background: var(--primary-gradient);
+  margin: 15px auto 0;
+  border-radius: 2px;
+}
+
+/* Activity Items */
+.activity-item {
+  padding: 20px;
+  border-left: 4px solid var(--primary-color);
+  margin-bottom: 20px;
+  background-color: white;
+  border-radius: 0 10px 10px 0;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+.activity-item:hover {
+  transform: translateX(5px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+}
+
+/* Button Styles */
+.edit-profile-btn {
+  background: var(blue
+  );
+  border: none;
+  border-radius: 50px;
+  padding: 10px 25px;
+  color: white;
+  font-weight: 600;
+  box-shadow: 0 4px 15px rgba(46, 154, 196, 0.893);
+  transition: all 0.3s ease;
+}
+
+.edit-profile-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(10, 77, 104, 0.4);
+  background: linear-gradient(90deg, #088395, #0a4d68);
+}
+
+/* List Group */
+.list-group-item {
+  border: none;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+  padding: 12px 0;
+}
+
+.list-group-item:last-child {
+  border-bottom: none;
+}
+
+/* Badge Styles */
+.badge {
+  padding: 6px 12px;
+  border-radius: 30px;
+  font-weight: 500;
+  font-size: 0.8rem;
+}
+
+.bg-primary {
+  background-color: var(--primary-color) !important;
+}
+
+.btn-outline-primary {
+  color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.btn-outline-primary:hover {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.text-primary {
+  color: var(--primary-color) !important;
+}
+
+.donation-badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  margin-left: 10px;
+  background-color: rgba(10, 77, 104, 0.1);
+  color: var(--primary-color);
+}
+
+.achievement-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--primary-gradient);
+  color: white;
+  font-size: 14px;
+  margin-right: 5px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* Tab Styles */
+.profile-tabs {
+  margin-top: 30px;
+}
+
+.nav-tabs {
+  border-bottom: 2px solid #eee;
+}
+
+.nav-tabs .nav-link {
+  border: none;
+  color: #666;
+  font-weight: 600;
+  padding: 12px 20px;
+  border-radius: 0;
+  position: relative;
+}
+
+.nav-tabs .nav-link.active {
+  color: var(--primary-color);
+  background: transparent;
+}
+
+.nav-tabs .nav-link.active::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--primary-gradient);
+}
+
+.tab-content {
+  padding: 20px 0;
+}
+
+.bg-light {
+  background-color: #f8f9fa !important;
+}
+
+/* Event Cards */
+.card {
+  transition: all 0.3s ease;
+  border: none;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+}
+
+/* Progress Bars */
+.progress {
+  height: 8px;
+  border-radius: 4px;
+  overflow: hidden;
+  background-color: #e9ecef;
+}
+
+.progress-bar {
+  border-radius: 4px;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 1200px) {
+  .profile-card, .profile-stats {
+    padding: 25px;
+  }
+}
+
+@media (max-width: 992px) {
+  .profile-header {
+    padding: 100px 0 70px;
+  }
+  
+  .profile-card {
+    margin-top: -40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .profile-header {
+    padding: 80px 0 60px;
+  }
+  
+  .profile-card {
+    margin-top: -30px;
+    padding: 20px;
+  }
+  
+  .profile-image {
+    width: 120px;
+    height: 120px;
+  }
+  
+  .stat-icon {
+    width: 50px;
+    height: 50px;
+    font-size: 20px;
+  }
+  
+  .nav-tabs .nav-link {
+    padding: 10px 15px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .profile-header {
+    padding: 60px 0 50px;
+  }
+  
+  .profile-card, .profile-stats {
+    padding: 15px;
+  }
+  
+  .profile-image {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .section-title {
+    font-size: 1.5rem;
+  }
+  
+  .activity-item {
+    padding: 15px;
+  }
+  
+  .stat-item {
+    padding: 10px;
+  }
+  
+  .stat-icon {
+    width: 45px;
+    height: 45px;
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  
+  .nav-tabs {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .nav-tabs .nav-link {
+    white-space: nowrap;
+    padding: 8px 12px;
+    font-size: 0.85rem;
+  }
+}
+
+/* Profile image styling */
+.profile-image-container {
+  width: 150px;
+  height: 150px;
+  overflow: hidden;
+}
+
+.profile-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.profile-image:hover {
+  transform: scale(1.05);
+}
+
+/* Profile card styling */
+.profile-card {
+  background-color: #fff;
+  border-radius: 15px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.profile-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
+}
+
+/* Achievement badges */
+.achievement-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  transition: transform 0.3s ease;
+}
+
+.achievement-badge:hover {
+  transform: scale(1.2);
+}
+
+/* Edit profile button */
+.edit-profile-btn {
+  transition: all 0.3s ease;
+}
+
+.edit-profile-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}

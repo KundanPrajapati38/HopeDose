@@ -1,0 +1,1096 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Account Settings - HopeDose</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+  <!-- AOS Animation Library -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <!-- Custom CSS -->
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    }
+    
+    .settings-header {
+      background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80') no-repeat center center;
+      background-size: cover;
+      color: rgb(255, 255, 255);
+      padding: 120px 0 80px;
+      text-align: center;
+    }
+    
+    .settings-card {
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      padding: 30px;
+      margin-top: -50px;
+    }
+    
+    .nav-pills .nav-link {
+      color: #495057;
+      border-radius: 10px;
+      padding: 15px 20px;
+      margin-bottom: 10px;
+      transition: all 0.3s ease;
+    }
+    
+    .nav-pills .nav-link.active {
+      background: linear-gradient(90deg, #007bff, #00c6ff);
+      color: white;
+      box-shadow: 0 4px 15px rgba(0,123,255,0.3);
+    }
+    
+    .nav-pills .nav-link:hover:not(.active) {
+      background-color: #f8f9fa;
+      transform: translateX(5px);
+    }
+    
+    .nav-pills .nav-link i {
+      margin-right: 10px;
+      width: 20px;
+      text-align: center;
+    }
+    
+    .form-control, .form-select {
+      padding: 12px;
+      border-radius: 10px;
+      border: 1px solid #ced4da;
+      transition: all 0.3s ease;
+    }
+    
+    .form-control:focus, .form-select:focus {
+      border-color: #80bdff;
+      box-shadow: 0 0 0 0.25rem rgba(0,123,255,0.25);
+    }
+    
+    .profile-image-container {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      overflow: hidden;
+      margin: 0 auto 20px;
+      position: relative;
+      border: 5px solid white;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    
+    .profile-image-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .image-upload-btn {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      background: linear-gradient(90deg, #007bff, #00c6ff);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(0,123,255,0.3);
+      transition: all 0.3s ease;
+    }
+    
+    .image-upload-btn:hover {
+      transform: scale(1.1);
+    }
+    
+    .save-btn {
+      background: linear-gradient(90deg, #007bff, #00c6ff);
+      border: none;
+      border-radius: 50px;
+      padding: 12px 30px;
+      color: white;
+      font-weight: 600;
+      box-shadow: 0 4px 15px rgba(0,123,255,0.3);
+      transition: all 0.3s ease;
+    }
+    
+    .save-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(0,123,255,0.4);
+    }
+    
+    .cancel-btn {
+      background: #f8f9fa;
+      border: none;
+      border-radius: 50px;
+      padding: 12px 30px;
+      color: #495057;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+    
+    .cancel-btn:hover {
+      background: #e9ecef;
+    }
+    
+    .section-title {
+      text-align: center;
+      margin-bottom: 2rem;
+      font-weight: 700;
+      position: relative;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    
+    .section-title:after {
+      content: '';
+      display: block;
+      width: 80px;
+      height: 4px;
+      background: linear-gradient(90deg, #007bff, #00c6ff);
+      margin: 15px auto 0;
+      border-radius: 2px;
+    }
+    
+    .form-check-input:checked {
+      background-color: #007bff;
+      border-color: #007bff;
+    }
+    
+    .category-badge {
+      background: #e9f5ff;
+      color: #007bff;
+      border-radius: 50px;
+      padding: 8px 15px;
+      margin: 5px;
+      display: inline-block;
+      font-size: 14px;
+      transition: all 0.3s ease;
+    }
+    
+    .category-badge:hover {
+      background: #007bff;
+      color: white;
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(0,123,255,0.2);
+    }
+    
+    .category-badge i {
+      margin-right: 5px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Header Placeholder -->
+<div id="header-placeholder"></div>
+
+<!-- Settings Header -->
+<header class="settings-header">
+  <div class="container">
+    <h1 class="display-4 fw-bold" data-aos="fade-up">Account Settings</h1>
+    <p class="lead" data-aos="fade-up" data-aos-delay="200">Manage your account preferences and personal information</p>
+  </div>
+</header>
+
+<!-- Settings Section -->
+<section class="py-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-10 mx-auto" data-aos="fade-up">
+        <div class="settings-card">
+          <div class="row">
+            <div class="col-md-3">
+              <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                <button class="nav-link active" id="profile-tab" data-bs-toggle="pill" data-bs-target="#profile" type="button" role="tab">
+                  <i class="fas fa-user"></i> Profile
+                </button>
+                <button class="nav-link" id="account-tab" data-bs-toggle="pill" data-bs-target="#account" type="button" role="tab">
+                  <i class="fas fa-user-cog"></i> Account
+                </button>
+                <button class="nav-link" id="preferences-tab" data-bs-toggle="pill" data-bs-target="#preferences" type="button" role="tab">
+                  <i class="fas fa-sliders-h"></i> Preferences
+                </button>
+                <button class="nav-link" id="notifications-tab" data-bs-toggle="pill" data-bs-target="#notifications" type="button" role="tab">
+                  <i class="fas fa-bell"></i> Notifications
+                </button>
+                <button class="nav-link" id="privacy-tab" data-bs-toggle="pill" data-bs-target="#privacy" type="button" role="tab">
+                  <i class="fas fa-shield-alt"></i> Privacy
+                </button>
+              </div>
+            </div>
+            <div class="col-md-9">
+              <div class="tab-content" id="v-pills-tabContent">
+                <!-- Profile Tab -->
+                <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                  <h4 class="mb-4">Profile Information</h4>
+                  
+                  <form id="profileForm">
+                    <div class="profile-image-container mb-4">
+                      <img src="images/donation.jpg" alt="Profile Picture" id="profileImagePreview">
+                     
+                   
+                      <label for="profileImageUpload" class="image-upload-btn">
+                        <i class="fas fa-camera"></i>
+                      </label>
+                      <input type="file" id="profileImageUpload" accept="image/*" style="display: none;">
+                    </div>
+                    
+                    <div class="row g-3">
+                      <div class="col-md-6">
+                        <label for="firstName" class="form-label">First Name</label>
+                        <input type="text" class="form-control" id="firstName" value="Kundan">
+                      </div>
+                      <div class="col-md-6">
+                        <label for="lastName" class="form-label">Last Name</label>
+                        <input type="text" class="form-control" id="lastName" value="Kumar">
+                      </div>
+                      <div class="col-md-6">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" value="kundan@example.com">
+                      </div>
+                      <div class="col-md-6">
+                        <label for="phone" class="form-label">Phone</label>
+                        <input type="tel" class="form-control" id="phone" value="+91 9876543210">
+                      </div>
+                      <div class="col-12">
+                        <label for="address" class="form-label">Address</label>
+                        <input type="text" class="form-control" id="address" value="123 Main Street">
+                      </div>
+                      <div class="col-md-6">
+                        <label for="city" class="form-label">City</label>
+                        <input type="text" class="form-control" id="city" value="Delhi">
+                      </div>
+                      <div class="col-md-6">
+                        <label for="postalCode" class="form-label">Postal Code</label>
+                        <input type="text" class="form-control" id="postalCode" value="110001">
+                      </div>
+                      <div class="col-12">
+                        <label for="bio" class="form-label">Bio</label>
+                        <textarea class="form-control" id="bio" rows="3">I am passionate about helping others and making a positive impact in my community.</textarea>
+                      </div>
+                    </div>
+                    
+                    <div class="mt-4 d-flex justify-content-end">
+                      <button type="button" class="btn cancel-btn me-2" onclick="window.location.href='profile.html'">Cancel</button>
+                      <button type="submit" class="btn save-btn">Save Changes</button>
+                    </div>
+                  </form>
+                </div>
+                
+                <!-- Account Tab -->
+                <div class="tab-pane fade" id="account" role="tabpanel" aria-labelledby="account-tab">
+                  <h4 class="mb-4">Account Settings</h4>
+                  
+                  <form id="accountForm">
+                    <div class="mb-4">
+                      <h5 class="mb-3">Change Password</h5>
+                      <div class="mb-3">
+                        <label for="currentPassword" class="form-label">Current Password</label>
+                        <input type="password" class="form-control" id="currentPassword">
+                      </div>
+                      <div class="mb-3">
+                        <label for="newPassword" class="form-label">New Password</label>
+                        <input type="password" class="form-control" id="newPassword">
+                      </div>
+                      <div class="mb-3">
+                        <label for="confirmPassword" class="form-label">Confirm New Password</label>
+                        <input type="password" class="form-control" id="confirmPassword">
+                      </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                      <h5 class="mb-3">Account Type</h5>
+                      <select class="form-select" id="accountType">
+                        <option value="donor">Donor</option>
+                        <option value="volunteer">Volunteer</option>
+                        <option value="both">Both Donor & Volunteer</option>
+                      </select>
+                    </div>
+                    
+                    <div class="mb-4">
+                      <h5 class="mb-3">Language Preference</h5>
+                      <select class="form-select" id="language">
+                        <option value="en">English</option>
+                        <option value="hi">Hindi</option>
+                        <option value="bn">Bengali</option>
+                        <option value="ta">Tamil</option>
+                      </select>
+                    </div>
+                    
+                    <div class="mb-4">
+                      <h5 class="mb-3">Danger Zone</h5>
+                      <div class="card border-danger">
+                        <div class="card-body">
+                          <h6 class="card-title text-danger">Delete Account</h6>
+                          <p class="card-text">Once you delete your account, there is no going back. Please be certain.</p>
+                          <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteAccountModal">
+                            Delete My Account
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div class="mt-4 d-flex justify-content-end">
+                      <button type="button" class="btn cancel-btn me-2" onclick="window.location.href='profile.html'">Cancel</button>
+                      <button type="submit" class="btn save-btn">Save Changes</button>
+                    </div>
+                  </form>
+                </div>
+                
+                <!-- Preferences Tab -->
+                <div class="tab-pane fade" id="preferences" role="tabpanel" aria-labelledby="preferences-tab">
+                  <h4 class="mb-4">Donation Preferences</h4>
+                  
+                  <form id="preferencesForm">
+                    <div class="mb-4">
+                      <h5 class="mb-3">Preferred Donation Categories</h5>
+                      <p class="text-muted mb-3">Select the categories you're interested in donating to:</p>
+                      
+                      <div class="row g-3">
+                        <div class="col-md-6">
+                          <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="books" checked>
+                            <label class="form-check-label" for="books">Books</label>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="clothes" checked>
+                            <label class="form-check-label" for="clothes">Clothes</label>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="food" checked>
+                            <label class="form-check-label" for="food">Food</label>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="toys">
+                            <label class="form-check-label" for="toys">Toys</label>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="medicines">
+                            <label class="form-check-label" for="medicines">Medicines</label>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="cash">
+                            <label class="form-check-label" for="cash">Cash</label>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="gamesKit">
+                            <label class="form-check-label" for="gamesKit">Games Kit</label>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="others">
+                            <label class="form-check-label" for="others">Others</label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                      <h5 class="mb-3">Donation Frequency</h5>
+                      <select class="form-select" id="donationFrequency">
+                        <option value="monthly">Monthly</option>
+                        <option value="quarterly">Quarterly</option>
+                        <option value="biannually">Bi-annually</option>
+                        <option value="annually">Annually</option>
+                        <option value="oneTime">One-time only</option>
+                      </select>
+                    </div>
+                    
+                    <div class="mb-4">
+                      <h5 class="mb-3">Preferred Donation Method</h5>
+                      <div class="form-check mb-2">
+                        <input class="form-check-input" type="radio" name="donationMethod" id="inPerson" checked>
+                        <label class="form-check-label" for="inPerson">In-person</label>
+                      </div>
+                      <div class="form-check mb-2">
+                        <input class="form-check-input" type="radio" name="donationMethod" id="pickup">
+                        <label class="form-check-label" for="pickup">Request pickup</label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="donationMethod" id="dropOff">
+                        <label class="form-check-label" for="dropOff">Drop-off at collection center</label>
+                      </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                      <h5 class="mb-3">Tax Receipt Preferences</h5>
+                      <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="taxReceipt" checked>
+                        <label class="form-check-label" for="taxReceipt">I would like to receive tax receipts for my donations</label>
+                      </div>
+                    </div>
+                    
+                    <div class="mt-4 d-flex justify-content-end">
+                      <button type="button" class="btn cancel-btn me-2" onclick="window.location.href='profile.html'">Cancel</button>
+                      <button type="submit" class="btn save-btn">Save Changes</button>
+                    </div>
+                  </form>
+                </div>
+                
+                <!-- Preferences Tab -->
+                <div class="tab-pane fade" id="preferences" role="tabpanel" aria-labelledby="preferences-tab">
+                  <h4 class="mb-4">Your Preferences</h4>
+                  
+                  <form id="preferencesForm">
+                    <div class="mb-4">
+                      <h5 class="mb-3">Donation Preferences</h5>
+                      <p class="text-muted mb-3">Select categories you're interested in donating:</p>
+                      
+                      <div class="category-selector">
+                        <div class="category-badge active"><i class="fas fa-tshirt"></i> Clothes</div>
+                        <div class="category-badge"><i class="fas fa-book"></i> Books</div>
+                        <div class="category-badge active"><i class="fas fa-utensils"></i> Food</div>
+                        <div class="category-badge"><i class="fas fa-pills"></i> Medicine</div>
+                        <div class="category-badge active"><i class="fas fa-gamepad"></i> Toys</div>
+                        <div class="category-badge"><i class="fas fa-money-bill-wave"></i> Cash</div>
+                        <div class="category-badge"><i class="fas fa-futbol"></i> Sports</div>
+                        <div class="category-badge"><i class="fas fa-laptop"></i> Electronics</div>
+                      </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                      <h5 class="mb-3">Volunteering Preferences</h5>
+                      <p class="text-muted mb-3">Select areas you're interested in volunteering:</p>
+                      
+                      <div class="category-selector">
+                        <div class="category-badge active"><i class="fas fa-hands-helping"></i> Distribution</div>
+                        <div class="category-badge"><i class="fas fa-truck"></i> Transportation</div>
+                        <div class="category-badge active"><i class="fas fa-warehouse"></i> Inventory</div>
+                        <div class="category-badge"><i class="fas fa-phone-alt"></i> Support</div>
+                        <div class="category-badge"><i class="fas fa-chalkboard-teacher"></i> Teaching</div>
+                        <div class="category-badge"><i class="fas fa-camera"></i> Photography</div>
+                      </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                      <h5 class="mb-3">Communication Preferences</h5>
+                      
+                      <div class="mb-3">
+                        <label for="preferredContact" class="form-label">Preferred Contact Method</label>
+                        <select class="form-select" id="preferredContact">
+                          <option value="email" selected>Email</option>
+                          <option value="phone">Phone</option>
+                          <option value="sms">SMS</option>
+                          <option value="whatsapp">WhatsApp</option>
+                        </select>
+                      </div>
+                      
+                      <div class="mb-3">
+                        <label for="contactFrequency" class="form-label">Contact Frequency</label>
+                        <select class="form-select" id="contactFrequency">
+                          <option value="daily">Daily</option>
+                          <option value="weekly" selected>Weekly</option>
+                          <option value="monthly">Monthly</option>
+                          <option value="quarterly">Quarterly</option>
+                        </select>
+                      </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                      <h5 class="mb-3">Display Preferences</h5>
+                      
+                      <div class="form-check form-switch mb-3">
+                        <input class="form-check-input" type="checkbox" id="darkMode">
+                        <label class="form-check-label" for="darkMode">Dark Mode</label>
+                      </div>
+                      
+                      <div class="form-check form-switch mb-3">
+                        <input class="form-check-input" type="checkbox" id="animations" checked>
+                        <label class="form-check-label" for="animations">Enable Animations</label>
+                      </div>
+                      
+                      <div class="mb-3">
+                        <label for="fontSize" class="form-label">Font Size</label>
+                        <select class="form-select" id="fontSize">
+                          <option value="small">Small</option>
+                          <option value="medium" selected>Medium</option>
+                          <option value="large">Large</option>
+                        </select>
+                      </div>
+                    </div>
+                    
+                    <div class="mt-4 d-flex justify-content-end">
+                      <button type="button" class="btn cancel-btn me-2">Cancel</button>
+                      <button type="submit" class="btn save-btn">Save Preferences</button>
+                    </div>
+                  </form>
+                </div>
+                
+                <!-- Notifications Tab -->
+                <div class="tab-pane fade" id="notifications" role="tabpanel" aria-labelledby="notifications-tab">
+                  <h4 class="mb-4">Notification Settings</h4>
+                  
+                  <form id="notificationsForm">
+                    <div class="mb-4">
+                      <h5 class="mb-3">Email Notifications</h5>
+                      
+                      <div class="notification-item d-flex align-items-center">
+                        <div class="notification-icon">
+                          <i class="fas fa-bell"></i>
+                        </div>
+                        <div class="flex-grow-1 ms-3">
+                          <div class="notification-title">Donation Updates</div>
+                          <p class="notification-description">Receive updates about your donations and their impact</p>
+                        </div>
+                        <div class="form-check form-switch">
+                          <input class="form-check-input" type="checkbox" id="donationUpdates" checked>
+                        </div>
+                      </div>
+                      
+                      <div class="notification-item d-flex align-items-center">
+                        <div class="notification-icon">
+                          <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="flex-grow-1 ms-3">
+                          <div class="notification-title">Newsletter</div>
+                          <p class="notification-description">Receive our monthly newsletter with success stories</p>
+                        </div>
+                        <div class="form-check form-switch">
+                          <input class="form-check-input" type="checkbox" id="newsletter" checked>
+                        </div>
+                      </div>
+                      
+                      <div class="notification-item d-flex align-items-center">
+                        <div class="notification-icon">
+                          <i class="fas fa-calendar-alt"></i>
+                        </div>
+                        <div class="flex-grow-1 ms-3">
+                          <div class="notification-title">Event Invitations</div>
+                          <p class="notification-description">Get notified about upcoming events and volunteer opportunities</p>
+                        </div>
+                        <div class="form-check form-switch">
+                          <input class="form-check-input" type="checkbox" id="eventInvitations" checked>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                      <h5 class="mb-3">Push Notifications</h5>
+                      
+                      <div class="notification-item d-flex align-items-center">
+                        <div class="notification-icon">
+                          <i class="fas fa-comment-alt"></i>
+                        </div>
+                        <div class="flex-grow-1 ms-3">
+                          <div class="notification-title">New Messages</div>
+                          <p class="notification-description">Get notified when you receive new messages</p>
+                        </div>
+                        <div class="form-check form-switch">
+                          <input class="form-check-input" type="checkbox" id="newMessages" checked>
+                        </div>
+                      </div>
+                      
+                      <div class="notification-item d-flex align-items-center">
+                        <div class="notification-icon">
+                          <i class="fas fa-heart"></i>
+                        </div>
+                        <div class="flex-grow-1 ms-3">
+                          <div class="notification-title">Donation Requests</div>
+                          <p class="notification-description">Get notified about urgent donation requests</p>
+                        </div>
+                        <div class="form-check form-switch">
+                          <input class="form-check-input" type="checkbox" id="donationRequests">
+                        </div>
+                      </div>
+                      
+                      <div class="notification-item d-flex align-items-center">
+                        <div class="notification-icon">
+                          <i class="fas fa-thumbs-up"></i>
+                        </div>
+                        <div class="flex-grow-1 ms-3">
+                          <div class="notification-title">Thank You Notes</div>
+                          <p class="notification-description">Get notified when someone thanks you for your donation</p>
+                        </div>
+                        <div class="form-check form-switch">
+                          <input class="form-check-input" type="checkbox" id="thankYouNotes" checked>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div class="mt-4 d-flex justify-content-end">
+                      <button type="button" class="btn cancel-btn me-2">Cancel</button>
+                      <button type="submit" class="btn save-btn">Save Notification Settings</button>
+                    </div>
+                  </form>
+                </div>
+                
+                <!-- Privacy Tab -->
+                <div class="tab-pane fade" id="privacy" role="tabpanel" aria-labelledby="privacy-tab">
+                  <h4 class="mb-4">Privacy Settings</h4>
+                  
+                  <form id="privacyForm">
+                    <div class="mb-4">
+                      <h5 class="mb-3">Profile Visibility</h5>
+                      
+                      <div class="mb-3">
+                        <label for="profileVisibility" class="form-label">Who can see my profile?</label>
+                        <select class="form-select" id="profileVisibility">
+                          <option value="everyone">Everyone</option>
+                          <option value="registered" selected>Registered Users Only</option>
+                          <option value="admins">Administrators Only</option>
+                          <option value="nobody">Nobody (Private)</option>
+                        </select>
+                      </div>
+                      
+                      <div class="form-check form-switch mb-3">
+                        <input class="form-check-input" type="checkbox" id="showDonations" checked>
+                        <label class="form-check-label" for="showDonations">Show my donations on my profile</label>
+                      </div>
+                      
+                      <div class="form-check form-switch mb-3">
+                        <input class="form-check-input" type="checkbox" id="showLocation">
+                        <label class="form-check-label" for="showLocation">Show my location on my profile</label>
+                      </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                      <h5 class="mb-3">Data Usage</h5>
+                      
+                      <div class="form-check form-switch mb-3">
+                        <input class="form-check-input" type="checkbox" id="allowAnalytics" checked>
+                        <label class="form-check-label" for="allowAnalytics">Allow analytics to improve user experience</label>
+                      </div>
+                      
+                      <div class="form-check form-switch mb-3">
+                        <input class="form-check-input" type="checkbox" id="allowPersonalization" checked>
+                        <label class="form-check-label" for="allowPersonalization">Allow personalization based on my activity</label>
+                      </div>
+                      
+                      <div class="form-check form-switch mb-3">
+                        <input class="form-check-input" type="checkbox" id="allowThirdParty">
+                        <label class="form-check-label" for="allowThirdParty">Allow sharing data with third parties</label>
+                      </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                      <h5 class="mb-3">Account Security</h5>
+                      
+                      <div class="form-check form-switch mb-3">
+                        <input class="form-check-input" type="checkbox" id="twoFactorAuth">
+                        <label class="form-check-label" for="twoFactorAuth">Enable two-factor authentication</label>
+                      </div>
+                      
+                      <div class="form-check form-switch mb-3">
+                        <input class="form-check-input" type="checkbox" id="loginAlerts" checked>
+                        <label class="form-check-label" for="loginAlerts">Receive alerts for new login attempts</label>
+                      </div>
+                    </div>
+                    
+                    <div class="mt-4 d-flex justify-content-end">
+                      <button type="button" class="btn cancel-btn me-2">Cancel</button>
+                      <button type="submit" class="btn save-btn">Save Privacy Settings</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Delete Account Modal -->
+  <div class="modal fade" id="deleteAccountModal" tabindex="-1" aria-labelledby="deleteAccountModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="deleteAccountModalLabel">Delete Account</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="alert alert-danger">
+            <i class="fas fa-exclamation-triangle me-2"></i> This action cannot be undone.
+          </div>
+          <p>Are you sure you want to delete your account? All your data will be permanently removed.</p>
+          <div class="mb-3">
+            <label for="deleteConfirmation" class="form-label">Type "DELETE" to confirm:</label>
+            <input type="text" class="form-control" id="deleteConfirmation">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-danger" id="confirmDeleteBtn" disabled>Delete Account</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Success Toast -->
+  <div class="settings-success-toast" id="settingsSuccessToast">
+    <i class="fas fa-check-circle"></i>
+    <span>Settings saved successfully!</span>
+  </div>
+
+  <!-- Footer Placeholder -->
+  <div id="footer-placeholder"></div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <!-- AOS Animation Library -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <!-- Custom JS -->
+  <script>
+    $(function() {
+      // Load header and footer
+      $("#header-placeholder").load("components/header.html");
+      $("#footer-placeholder").load("components/footer.html");
+      
+      // Initialize AOS animation library
+      AOS.init({
+        duration: 800,
+        easing: 'ease-in-out',
+        once: true
+      });
+      
+      // Profile image upload preview
+      $("#profileImageUpload").change(function() {
+        if (this.files && this.files[0]) {
+          var reader = new FileReader();
+          reader.onload = function(e) {
+            $("#profileImagePreview").attr('src', e.target.result);
+            // Store the image data in localStorage
+            localStorage.setItem('profileImage', e.target.result);
+          }
+          reader.readAsDataURL(this.files[0]);
+        }
+      });
+      
+      // Category badges toggle
+      $(".category-badge").click(function() {
+        $(this).toggleClass("active");
+      });
+      
+      // Load user data from localStorage
+      function loadUserData() {
+        // Get data from localStorage
+        const userData = JSON.parse(localStorage.getItem('userData') || '{}');
+        const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+        const profileData = JSON.parse(localStorage.getItem('profileData') || '{}');
+        
+        // Merge data from different sources with priority
+        const mergedData = {
+          ...userData,
+          ...currentUser,
+          ...profileData
+        };
+        
+        // Set profile form values
+        if (mergedData.name) {
+          const nameParts = mergedData.name.split(' ');
+          $("#firstName").val(nameParts[0] || '');
+          $("#lastName").val(nameParts.slice(1).join(' ') || '');
+        }
+        
+        if (mergedData.email) $("#email").val(mergedData.email);
+        if (mergedData.phone) $("#phone").val(mergedData.phone);
+        if (mergedData.address) $("#address").val(mergedData.address);
+        if (mergedData.city) $("#city").val(mergedData.city);
+        if (mergedData.postalCode) $("#postalCode").val(mergedData.postalCode);
+        if (mergedData.bio) $("#bio").val(mergedData.bio);
+        
+        // Set account preferences
+        if (mergedData.accountType) $("#accountType").val(mergedData.accountType);
+        if (mergedData.language) $("#language").val(mergedData.language);
+        
+        // Set donation preferences
+        if (mergedData.donationCategories) {
+          const categories = mergedData.donationCategories;
+          $("#books").prop('checked', categories.includes('books'));
+          $("#clothes").prop('checked', categories.includes('clothes'));
+          $("#food").prop('checked', categories.includes('food'));
+          $("#toys").prop('checked', categories.includes('toys'));
+          $("#medicines").prop('checked', categories.includes('medicines'));
+          $("#cash").prop('checked', categories.includes('cash'));
+          $("#gamesKit").prop('checked', categories.includes('gamesKit'));
+          $("#others").prop('checked', categories.includes('others'));
+        }
+        
+        if (mergedData.donationFrequency) $("#donationFrequency").val(mergedData.donationFrequency);
+        if (mergedData.donationMethod) {
+          $(`input[name="donationMethod"][id="${mergedData.donationMethod}"]`).prop('checked', true);
+        }
+        if (mergedData.taxReceipt !== undefined) $("#taxReceipt").prop('checked', mergedData.taxReceipt);
+        
+        // Set notification preferences
+        if (mergedData.donationUpdates !== undefined) $("#donationUpdates").prop('checked', mergedData.donationUpdates);
+        if (mergedData.newsletter !== undefined) $("#newsletter").prop('checked', mergedData.newsletter);
+        if (mergedData.eventInvitations !== undefined) $("#eventInvitations").prop('checked', mergedData.eventInvitations);
+        if (mergedData.newMessages !== undefined) $("#newMessages").prop('checked', mergedData.newMessages);
+        if (mergedData.donationRequests !== undefined) $("#donationRequests").prop('checked', mergedData.donationRequests);
+        if (mergedData.thankYouNotes !== undefined) $("#thankYouNotes").prop('checked', mergedData.thankYouNotes);
+        
+        // Set privacy settings
+        if (mergedData.profileVisibility) $("#profileVisibility").val(mergedData.profileVisibility);
+        if (mergedData.showDonations !== undefined) $("#showDonations").prop('checked', mergedData.showDonations);
+        if (mergedData.showLocation !== undefined) $("#showLocation").prop('checked', mergedData.showLocation);
+        if (mergedData.allowAnalytics !== undefined) $("#allowAnalytics").prop('checked', mergedData.allowAnalytics);
+        if (mergedData.allowPersonalization !== undefined) $("#allowPersonalization").prop('checked', mergedData.allowPersonalization);
+        if (mergedData.allowThirdParty !== undefined) $("#allowThirdParty").prop('checked', mergedData.allowThirdParty);
+        if (mergedData.twoFactorAuth !== undefined) $("#twoFactorAuth").prop('checked', mergedData.twoFactorAuth);
+        if (mergedData.loginAlerts !== undefined) $("#loginAlerts").prop('checked', mergedData.loginAlerts);
+        
+        // Load profile image if available
+        if (localStorage.getItem('profileImage')) {
+          $("#profileImagePreview").attr('src', localStorage.getItem('profileImage'));
+        }
+      }
+      
+      // Save user data to localStorage
+      function saveUserData(formData) {
+        // Get existing data
+        const userData = JSON.parse(localStorage.getItem('userData') || '{}');
+        const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+        const profileData = JSON.parse(localStorage.getItem('profileData') || '{}');
+        
+        // Merge with new data
+        const mergedData = {
+          ...userData,
+          ...currentUser,
+          ...profileData,
+          ...formData
+        };
+        
+        // Save to all storage locations for consistency
+        localStorage.setItem('userData', JSON.stringify(mergedData));
+        localStorage.setItem('currentUser', JSON.stringify(mergedData));
+        localStorage.setItem('profileData', JSON.stringify(mergedData));
+        
+        // Show success toast
+        showSuccessToast();
+      }
+      
+      // Show success toast
+      function showSuccessToast() {
+        $("#settingsSuccessToast").addClass("show");
+        setTimeout(function() {
+          $("#settingsSuccessToast").removeClass("show");
+        }, 3000);
+      }
+      
+      // Handle profile form submission
+      $("#profileForm").submit(function(e) {
+        e.preventDefault();
+        
+        // Get form data
+        const firstName = $("#firstName").val();
+        const lastName = $("#lastName").val();
+        const fullName = `${firstName} ${lastName}`.trim();
+        const email = $("#email").val();
+        const phone = $("#phone").val();
+        const address = $("#address").val();
+        const city = $("#city").val();
+        const postalCode = $("#postalCode").val();
+        const bio = $("#bio").val();
+        
+        // Create data object
+        const formData = {
+          name: fullName,
+          email: email,
+          phone: phone,
+          address: address,
+          city: city,
+          postalCode: postalCode,
+          bio: bio,
+          location: city // For compatibility with profile page
+        };
+        
+        // Save data
+        saveUserData(formData);
+      });
+      
+      // Handle account form submission
+      $("#accountForm").submit(function(e) {
+        e.preventDefault();
+        
+        // Get form data
+        const currentPassword = $("#currentPassword").val();
+        const newPassword = $("#newPassword").val();
+        const confirmPassword = $("#confirmPassword").val();
+        const accountType = $("#accountType").val();
+        const language = $("#language").val();
+        
+        // Validate password if changing
+        if (newPassword) {
+          if (newPassword !== confirmPassword) {
+            alert("New passwords don't match!");
+            return;
+          }
+          
+          // In a real app, you would verify the current password
+          // and hash the new password before storing
+          
+          // For demo purposes, we'll just store that the password was changed
+          localStorage.setItem('passwordChanged', 'true');
+        }
+        
+        // Create data object
+        const formData = {
+          accountType: accountType,
+          language: language
+        };
+        
+        // Save data
+        saveUserData(formData);
+      });
+      
+      // Handle preferences form submission
+      $("#preferencesForm").submit(function(e) {
+        e.preventDefault();
+        
+        // Get donation categories
+        const donationCategories = [];
+        if ($("#books").is(':checked')) donationCategories.push('books');
+        if ($("#clothes").is(':checked')) donationCategories.push('clothes');
+        if ($("#food").is(':checked')) donationCategories.push('food');
+        if ($("#toys").is(':checked')) donationCategories.push('toys');
+        if ($("#medicines").is(':checked')) donationCategories.push('medicines');
+        if ($("#cash").is(':checked')) donationCategories.push('cash');
+        if ($("#gamesKit").is(':checked')) donationCategories.push('gamesKit');
+        if ($("#others").is(':checked')) donationCategories.push('others');
+        
+        // Get donation preferences
+        const donationFrequency = $("#donationFrequency").val();
+        const donationMethod = $("input[name='donationMethod']:checked").attr('id');
+        const taxReceipt = $("#taxReceipt").is(':checked');
+        
+        // Create data object
+        const formData = {
+          donationCategories: donationCategories,
+          donationFrequency: donationFrequency,
+          donationMethod: donationMethod,
+          taxReceipt: taxReceipt,
+          // For compatibility with profile page
+          categories: donationCategories.join(', '),
+          frequency: donationFrequency,
+          method: donationMethod,
+          taxReceipts: taxReceipt ? 'Yes' : 'No'
+        };
+        
+        // Save data
+        saveUserData(formData);
+      });
+      
+      // Handle notifications form submission
+      $("#notificationsForm").submit(function(e) {
+        e.preventDefault();
+        
+        // Get notification preferences
+        const donationUpdates = $("#donationUpdates").is(':checked');
+        const newsletter = $("#newsletter").is(':checked');
+        const eventInvitations = $("#eventInvitations").is(':checked');
+        const newMessages = $("#newMessages").is(':checked');
+        const donationRequests = $("#donationRequests").is(':checked');
+        const thankYouNotes = $("#thankYouNotes").is(':checked');
+        
+        // Create data object
+        const formData = {
+          donationUpdates: donationUpdates,
+          newsletter: newsletter,
+          eventInvitations: eventInvitations,
+          newMessages: newMessages,
+          donationRequests: donationRequests,
+          thankYouNotes: thankYouNotes,
+          // For compatibility with profile page
+          emailNotif: donationUpdates ? 'Enabled' : 'Disabled',
+          smsNotif: newMessages ? 'Enabled' : 'Disabled',
+          campaignUpdates: newsletter ? 'Enabled' : 'Disabled',
+          donationReminders: donationRequests ? 'Enabled' : 'Disabled'
+        };
+        
+        // Save data
+        saveUserData(formData);
+      });
+      
+      // Handle privacy form submission
+      $("#privacyForm").submit(function(e) {
+        e.preventDefault();
+        
+        // Get privacy settings
+        const profileVisibility = $("#profileVisibility").val();
+        const showDonations = $("#showDonations").is(':checked');
+        const showLocation = $("#showLocation").is(':checked');
+        const allowAnalytics = $("#allowAnalytics").is(':checked');
+        const allowPersonalization = $("#allowPersonalization").is(':checked');
+        const allowThirdParty = $("#allowThirdParty").is(':checked');
+        const twoFactorAuth = $("#twoFactorAuth").is(':checked');
+        const loginAlerts = $("#loginAlerts").is(':checked');
+        
+        // Create data object
+        const formData = {
+          profileVisibility: profileVisibility,
+          showDonations: showDonations,
+          showLocation: showLocation,
+          allowAnalytics: allowAnalytics,
+          allowPersonalization: allowPersonalization,
+          allowThirdParty: allowThirdParty,
+          twoFactorAuth: twoFactorAuth,
+          loginAlerts: loginAlerts
+        };
+        
+        // Save data
+        saveUserData(formData);
+      });
+      
+      // Delete account confirmation
+      $("#deleteConfirmation").on("input", function() {
+        $("#confirmDeleteBtn").prop("disabled", $(this).val() !== "DELETE");
+      });
+      
+      // Handle delete account button
+      $("#confirmDeleteBtn").click(function() {
+        if ($("#deleteConfirmation").val() === "DELETE") {
+          // Clear all user data
+          localStorage.removeItem('userData');
+          localStorage.removeItem('currentUser');
+          localStorage.removeItem('profileData');
+          localStorage.removeItem('isLoggedIn');
+          localStorage.removeItem('profileImage');
+          
+          // Redirect to home page
+          window.location.href = "index.html";
+        }
+      });
+      
+      // Create success toast if it doesn't exist
+      if ($("#settingsSuccessToast").length === 0) {
+        const successToast = `
+          <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+            <div id="settingsSuccessToast" class="toast align-items-center text-white bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
+              <div class="d-flex">
+                <div class="toast-body">
+                  <i class="fas fa-check-circle me-2"></i> Settings saved successfully!
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+              </div>
+            </div>
+          </div>
+        `;
+        $("body").append(successToast);
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Volunteer - HopeDose</title>
+  <!-- Bootstrap & FontAwesome -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+  <!-- AOS Animation Library -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* Volunteer Page Specific Styles */
+    .volunteer-banner {
+      background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1559027615-cd4628902d4a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+      background-size: cover;
+      background-position: center;
+      height: 500px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-align: center;
+      position: relative;
+    }
+    
+    .volunteer-banner::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 100px;
+      background: linear-gradient(to top, rgba(255,255,255,1), transparent);
+    }
+    
+    .volunteer-card {
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+      height: 100%;
+    }
+    
+    .volunteer-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+    }
+    
+    .volunteer-card img {
+      height: 220px;
+      object-fit: cover;
+    }
+    
+    .volunteer-card .card-body {
+      padding: 25px;
+    }
+    
+    .volunteer-card .card-title {
+      color: #0a4d68;
+      font-weight: 600;
+    }
+    
+    .volunteer-form {
+      background: white;
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+    
+    .volunteer-form .form-control {
+      padding: 12px 15px;
+      border-radius: 8px;
+      border: 1px solid #e0e0e0;
+      margin-bottom: 20px;
+    }
+    
+    .volunteer-form .form-control:focus {
+      box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+      border-color: #007bff;
+    }
+    
+    .btn-volunteer {
+      background: linear-gradient(90deg, #007bff, #00c6ff);
+      border: none;
+      padding: 12px 30px;
+      border-radius: 50px;
+      color: white;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+    
+    .btn-volunteer:hover {
+      background: linear-gradient(90deg, #0056b3, #0099cc);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(0, 123, 255, 0.3);
+    }
+    
+    .testimonial-card {
+      background: #f8f9fa;
+      border-radius: 15px;
+      padding: 30px;
+      margin: 20px 0;
+      position: relative;
+    }
+    
+    .testimonial-card::before {
+      content: '\201C';
+      font-size: 80px;
+      position: absolute;
+      top: -20px;
+      left: 20px;
+      color: rgba(0, 123, 255, 0.1);
+      font-family: Georgia, serif;
+    }
+    
+    .volunteer-stats {
+      background: linear-gradient(90deg, #007bff, #00c6ff);
+      padding: 60px 0;
+      color: white;
+      margin: 60px 0;
+    }
+    
+    .stat-item {
+      text-align: center;
+    }
+    
+    .stat-number {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    
+    .stat-label {
+      font-size: 1.2rem;
+      opacity: 0.9;
+    }
+    
+    .faq-item {
+      margin-bottom: 20px;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    }
+    
+    .faq-question {
+      background: white;
+      padding: 20px;
+      cursor: pointer;
+      font-weight: 600;
+      color: #0a4d68;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .faq-answer {
+      padding: 0 20px;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease, padding 0.3s ease;
+    }
+    
+    .faq-item.active .faq-answer {
+      padding: 20px;
+      max-height: 500px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Include Header -->
+<div id="header-placeholder"></div>
+
+<!-- Volunteer Banner -->
+<div class="volunteer-banner">
+  <div class="container" data-aos="fade-up">
+    <h1 class="display-4 fw-bold mb-4">Join Our Volunteer Team</h1>
+    <p class="lead mb-4">Make a difference in your community by volunteering with HopeDose</p>
+    <a href="#volunteer-form" class="btn btn-lg btn-volunteer">Apply Now</a>
+  </div>
+</div>
+
+<!-- Volunteer Opportunities -->
+<section class="py-5">
+  <div class="container">
+    <h2 class="text-center mb-5" data-aos="fade-up">Volunteer Opportunities</h2>
+    <div class="row g-4">
+      <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+        <div class="volunteer-card">
+          <img src="https://images.unsplash.com/photo-1593113630400-ea4288922497?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60" class="card-img-top" alt="Distribution Volunteer">
+          <div class="card-body">
+            <h5 class="card-title">Distribution Volunteer</h5>
+            <p class="card-text">Help sort, package, and distribute donations to those in need. This role involves organizing items and ensuring they reach the right recipients.</p>
+            <div class="d-flex justify-content-between align-items-center mt-3">
+              <span><i class="far fa-clock me-2"></i>4-6 hours/week</span>
+              <a href="#volunteer-form" class="btn btn-sm btn-outline-primary">Apply</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+        <div class="volunteer-card">
+          <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60" class="card-img-top" alt="Event Coordinator">
+          <div class="card-body">
+            <h5 class="card-title">Event Coordinator</h5>
+            <p class="card-text">Plan and execute donation drives, awareness campaigns, and community events. This role requires organizational skills and creativity.</p>
+            <div class="d-flex justify-content-between align-items-center mt-3">
+              <span><i class="far fa-clock me-2"></i>6-8 hours/week</span>
+              <a href="#volunteer-form" class="btn btn-sm btn-outline-primary">Apply</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+        <div class="volunteer-card">
+          <img src="https://images.unsplash.com/photo-1573497491765-dccce02b29df?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60" class="card-img-top" alt="Digital Volunteer">
+          <div class="card-body">
+            <h5 class="card-title">Digital Volunteer</h5>
+            <p class="card-text">Support our online presence through social media management, content creation, and digital marketing to spread awareness about our cause.</p>
+            <div class="d-flex justify-content-between align-items-center mt-3">
+              <span><i class="far fa-clock me-2"></i>Flexible hours</span>
+              <a href="#volunteer-form" class="btn btn-sm btn-outline-primary">Apply</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Volunteer Stats -->
+<section class="volunteer-stats">
+  <div class="container">
+    <div class="row text-center">
+      <div class="col-md-3 stat-item" data-aos="fade-up">
+        <div class="stat-number">200+</div>
+        <div class="stat-label">Active Volunteers</div>
+      </div>
+      <div class="col-md-3 stat-item" data-aos="fade-up" data-aos-delay="100">
+        <div class="stat-number">50+</div>
+        <div class="stat-label">Events Per Year</div>
+      </div>
+      <div class="col-md-3 stat-item" data-aos="fade-up" data-aos-delay="200">
+        <div class="stat-number">5000+</div>
+        <div class="stat-label">People Helped</div>
+      </div>
+      <div class="col-md-3 stat-item" data-aos="fade-up" data-aos-delay="300">
+        <div class="stat-number">10000+</div>
+        <div class="stat-label">Volunteer Hours</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Volunteer Testimonials -->
+<section class="py-5 bg-light">
+  <div class="container">
+    <h2 class="text-center mb-5" data-aos="fade-up">Volunteer Testimonials</h2>
+    <div class="row">
+      <div class="col-md-6" data-aos="fade-up">
+        <div class="testimonial-card">
+          <p class="mb-3">"Volunteering with HopeDose has been one of the most rewarding experiences of my life. Seeing the direct impact of our work on people's lives is incredibly fulfilling."</p>
+          <div class="d-flex align-items-center">
+            <img src="https://randomuser.me/api/portraits/women/45.jpg" alt="Volunteer" class="rounded-circle me-3" width="60">
+            <div>
+              <h5 class="mb-0">Sarah Johnson</h5>
+              <p class="text-muted mb-0">Distribution Volunteer, 2 years</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
+        <div class="testimonial-card">
+          <p class="mb-3">"As a digital volunteer, I've been able to contribute my skills while working remotely. It's amazing to see how our online campaigns have increased donations and awareness."</p>
+          <div class="d-flex align-items-center">
+            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Volunteer" class="rounded-circle me-3" width="60">
+            <div>
+              <h5 class="mb-0">mayur Kumar</h5>
+              <p class="text-muted mb-0">Digital Volunteer, 1 year</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Volunteer Application Form -->
+<section class="py-5" id="volunteer-form">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6 mb-4 mb-lg-0" data-aos="fade-right">
+        <h2 class="mb-4">Apply to Volunteer</h2>
+        <p class="mb-4">Join our team of dedicated volunteers and help make a difference in your community. Fill out the form and we'll get back to you within 48 hours.</p>
+        <div class="volunteer-form">
+          <form id="volunteerApplicationForm">
+            <div class="row">
+              <div class="col-md-6">
+                <input type="text" class="form-control" placeholder="First Name" required>
+              </div>
+              <div class="col-md-6">
+                <input type="text" class="form-control" placeholder="Last Name" required>
+              </div>
+            </div>
+            <input type="email" class="form-control" placeholder="Email Address" required>
+            <input type="tel" class="form-control" placeholder="Phone Number" required>
+            <select class="form-control" required>
+              <option value="" disabled selected>Select Volunteer Position</option>
+              <option value="distribution">Distribution Volunteer</option>
+              <option value="event">Event Coordinator</option>
+              <option value="digital">Digital Volunteer</option>
+              <option value="other">Other</option>
+            </select>
+            <textarea class="form-control" rows="4" placeholder="Tell us why you want to volunteer with us"></textarea>
+            <div class="form-check mb-3">
+              <input class="form-check-input" type="checkbox" id="agreeTerms" required>
+              <label class="form-check-label" for="agreeTerms">
+                I agree to the volunteer terms and conditions
+              </label>
+            </div>
+            <button type="submit" class="btn btn-volunteer w-100">Submit Application</button>
+          </form>
+        </div>
+      </div>
+      <div class="col-lg-6" data-aos="fade-left">
+        <h2 class="mb-4">Frequently Asked Questions</h2>
+        <div class="faq-container">
+          <div class="faq-item">
+            <div class="faq-question">
+              <span>What is the minimum age to volunteer?</span>
+              <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+              <p>The minimum age to volunteer is 16 years. Volunteers under 18 will need parental consent and may have limited roles depending on the activity.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question">
+              <span>How much time do I need to commit?</span>
+              <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+              <p>Time commitments vary by role. Some positions require as little as 4 hours per week, while others may need more. We're flexible and can work with your schedule.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question">
+              <span>Do I need any special skills to volunteer?</span>
+              <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+              <p>Most volunteer positions don't require special skills, just enthusiasm and dedication. For specialized roles like digital marketing or event coordination, relevant experience is helpful but not always necessary.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question">
+              <span>Can I volunteer remotely?</span>
+              <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+              <p>Yes! We offer digital volunteer positions that can be done remotely, including social media management, content creation, and virtual event coordination.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Include Footer -->
+<div id="footer-placeholder"></div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- AOS Animation JS -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<!-- Custom JS -->
+<script>
+  // Load header and footer
+  fetch('components/header.html')
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById('header-placeholder').innerHTML = data;
+      
+      // Add active class to current nav item
+      const navItems = document.querySelectorAll('.navbar .nav-link');
+      navItems.forEach(item => {
+        if (item.getAttribute('href') === 'volunteer.html') {
+          item.classList.add('active');
+        }
+      });
+    });
+  
+  fetch('components/footer.html')
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById('footer-placeholder').innerHTML = data;
+    });
+  
+  // Initialize AOS animations
+  document.addEventListener('DOMContentLoaded', function() {
+    AOS.init({
+      duration: 800,
+      easing: 'ease-in-out',
+      once: true
+    });
+    
+    // FAQ accordion functionality
+    const faqItems = document.querySelectorAll('.faq-item');
+    faqItems.forEach(item => {
+      const question = item.querySelector('.faq-question');
+      question.addEventListener('click', () => {
+        item.classList.toggle('active');
+        const icon = question.querySelector('i');
+        icon.classList.toggle('fa-chevron-down');
+        icon.classList.toggle('fa-chevron-up');
+      });
+    });
+    
+    // Form submission
+    document.getElementById('volunteerApplicationForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      alert('Thank you for your application! We will contact you soon.');
+      this.reset();
+    });
+  });
+</script>
+</body>
+</html>

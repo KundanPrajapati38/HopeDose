@@ -1,0 +1,401 @@
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center" href="index.html">
+      <img src="images/donation.jpg" alt="HopeDose Logo" class="logo me-2">
+      <span class="brand-text">HopeDose</span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto align-items-center">
+        <li class="nav-item mx-1">
+          <a class="nav-link" href="index.html"><i class="fas fa-home me-1"></i> Home</a>
+        </li>
+        <li class="nav-item mx-1">
+          <a class="nav-link" href="Donate.html"><i class="fas fa-hand-holding-heart me-1"></i> Donate</a>
+        </li>
+        <!-- Added Product Management Button -->
+        <li class="nav-item mx-1">
+          <a class="nav-link" href="product-management.html"><i class="fas fa-barcode me-1"></i> Product</a>
+        </li>
+        <!-- Added Inventory Button -->
+        <li class="nav-item mx-1">
+          <a class="nav-link" href="inventory.html"><i class="fas fa-boxes me-1"></i> Inventory</a>
+        </li>
+        <!-- Added Request Button -->
+        <li class="nav-item mx-1">
+          <a class="nav-link" href="submit.html"><i class="fas fa-paper-plane me-1"></i> Request</a>
+        </li>
+        <li class="nav-item mx-1">
+          <a class="nav-link" href="volunteer.html"><i class="fas fa-hands-helping me-1"></i> Volunteer</a>
+        </li>
+        <!-- Changed to dropdown like in index.html -->
+        <li class="nav-item dropdown mx-1">
+          <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown"><i class="fas fa-info-circle me-1"></i> About Us</a>
+          <ul class="dropdown-menu dropdown-menu-animated">
+            <li><a class="dropdown-item" href="about.html">Overview</a></li>
+            <li><a class="dropdown-item" href="vm.html">Vision & Mission</a></li>
+          </ul>
+        </li>
+       
+        <!-- Dashboard link (replacing login/signup) -->
+        <li class="nav-item mx-1">
+         
+          <a class="nav-link" href="dashboard.html"><i class="fas fa-tachometer-alt me-1"></i> Dashboard</a>
+        </li>
+        <!-- Logout Button -->
+        <li class="nav-item mx-1">
+          <button id="logoutBtn" class="btn btn-outline-light  ms-2 logout-btn">
+            <i class="fas fa-sign-out-alt me-1"></i> Logout
+          </button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<style>
+  .navbar {
+    background: linear-gradient(135deg, rgba(10, 46, 61, 0.95), rgba(7, 38, 54, 0.98)); /* Enhanced gradient background */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+    padding: 8px 0; /* Increased padding for thicker navbar */
+    transition: all 0.3s ease;
+    border-bottom: 1px solid rgb(255, 255, 255);
+
+  }
+  
+  .navbar.scrolled {
+    padding: 6px 0; /* Increased scrolled padding */
+    background: linear-gradient(135deg, rgba(7, 38, 54, 0.98), rgba(5, 30, 45, 0.99));
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+  }
+  
+  .navbar .nav-link {
+    color: rgba(255, 255, 255, 0.9) !important; /* Brighter text */
+    font-weight: 500;
+    transition: all 0.3s ease;
+    position: relative;
+    padding: 6px 12px; /* Increased padding */
+    font-size: 0.95rem; /* Slightly larger font */
+    letter-spacing: 0.3px;
+  }
+  
+  .navbar .nav-link:hover {
+    color: #4db8ff !important;
+    transform: translateY(-2px);
+  }
+  
+  .navbar .nav-link.active {
+    color: #4db8ff !important;
+  }
+  
+  .navbar .nav-link.active::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    width: 20px;
+    height: 2px;
+    background-color: #4db8ff;
+    border-radius: 2px;
+    transform: translateX(-50%);
+    transition: width 0.3s ease;
+  }
+  
+  .navbar .nav-link.active:hover::after {
+    width: 30px;
+  }
+  
+  .logo {
+    width: 32px; /* Larger logo */
+    height: 32px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+    object-fit: cover;
+  }
+  
+  .navbar-brand:hover .logo {
+    transform: rotate(5deg);
+  }
+  
+  .brand-text {
+    font-weight: 700;
+    letter-spacing: 1px;
+    font-size: 1.3rem; /* Larger brand text */
+    text-transform: uppercase;
+    background: linear-gradient(to right, #ffffff, #4db8ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  }
+  
+  /* Dropdown styling */
+  .dropdown-menu {
+    background: rgba(255, 255, 255, 0.95);
+    
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    overflow: hidden;
+   
+    padding: 10px;
+    animation: dropdownFade 0.3s ease;
+    margin-top: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+  }
+  
+  .dropdown-menu-animated {
+    animation: dropdownFade 0.3s ease;
+   
+  }
+  
+  @keyframes dropdownFade {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .dropdown-item {
+    padding: 8px 15px;
+    transition: all 0.3s ease;
+    color: #222222 !important;
+    font-weight: 500;
+    border-radius: 8px;
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    font-size: 0.9rem;
+  }
+  .dropdown-item i {
+    color: #0a4d68;
+    margin-right: 10px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    width: 18px;
+    text-align: center;
+  }
+  
+  .dropdown-item:hover {
+    background: linear-gradient(to right, #f0f8ff, #e6f2ff);
+    transform: translateX(5px);
+    color: #0a4d68 !important;
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(0,123,255,0.1);
+  }
+  
+  .dropdown-item:hover i {
+    color: #0a4d68;
+    transform: scale(1.2);
+  }
+  
+  .dropdown-divider {
+    border-color: rgba(0, 0, 0, 0.05);
+    color: #000000;
+    margin: 6px 0;
+    opacity: 0.7;
+  }
+  
+  /* Logout button styling */
+  .logout-btn {
+    border-radius: 30px;
+    padding: 5px 15px;
+    font-size: 0.85rem;
+    transition: all 0.3s ease;
+    border: 1px solid rgb(255, 255, 255);
+    background: rgba(232, 25, 46, 0.989);
+  }
+  
+  .logout-btn:hover {
+    background: rgb(255, 30, 53);
+    font-weight: 600;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(220, 53, 69, 0.15);
+  }
+  
+  /* Special styling for Home and Donate links */
+  .nav-item .nav-link[href="index.html"],
+  .nav-item .nav-link[href="Donate.html"] {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .nav-item .nav-link[href="index.html"]::before,
+  .nav-item .nav-link[href="Donate.html"]::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background-color: #4db8ff;
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+    opacity: 0;
+  }
+  
+  .nav-item .nav-link[href="index.html"]:hover::before,
+  .nav-item .nav-link[href="Donate.html"]:hover::before {
+    width: 70%;
+    opacity: 1;
+  }
+  
+  /* Enhanced styling for Home link */
+  .nav-item .nav-link[href="index.html"] {
+    color: #4db8ff !important;
+    font-weight: 600;
+  }
+  
+  /* Enhanced styling for Donate link */
+  .nav-item .nav-link[href="Donate.html"] {
+   
+    color: #ffffff !important;
+    font-weight: 600;
+   
+   
+    
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .nav-item .nav-link[href="Donate.html"]:hover {
+    background: rgba(255, 77, 116, 0.25);
+    color: #ffffff !important;
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 992px) {
+    .navbar-collapse {
+      background: rgba(10, 46, 61, 0.98);
+      border-radius: 10px;
+      padding: 15px;
+      margin-top: 10px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+    
+    .navbar .nav-link {
+      padding: 8px 15px;
+      margin: 4px 0;
+    }
+    
+    .btn-login-nav, .btn-signup-nav, .logout-btn {
+      margin: 8px 0;
+      text-align: center;
+      display: block;
+      width: 100%;
+      background-color: rgb(22, 48, 91);
+      color: white !important;
+      font-weight: 600;
+      padding: 10px 15px;
+      transition: all 0.3s ease;
+    }
+    
+    .logout-btn {
+      background-color: rgb(255, 46, 67);
+      border-radius: 30px;
+     
+      border: 1px solid rgba(255, 255, 255, 0.995);
+    }
+    
+    .btn-login-nav:hover, .btn-signup-nav:hover {
+      background-color: rgb(246, 29, 29);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    }
+    
+    .logout-btn:hover {
+      background-color: rgb(255, 2, 27);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(220, 53, 69, 0.3);
+    }
+  }
+</style>
+
+<script>
+  // Logout functionality
+  document.getElementById('logoutBtn')?.addEventListener('click', function(e) {
+    e.preventDefault();
+    if (confirm('Are you sure you want to logout?')) {
+      localStorage.removeItem('isLoggedIn');
+      localStorage.removeItem('userData');
+      localStorage.removeItem('currentUser');
+      localStorage.removeItem('userId');
+      localStorage.removeItem('loginTime');
+      
+      // Update UI immediately
+      updateAuthUI(false);
+      
+      window.location.href = 'index.html';
+    }
+  });
+  
+  // Function to update UI based on auth status
+  function updateAuthUI(isLoggedIn) {
+    const authLinks = document.querySelectorAll('.auth-link');
+    const dropdownLink = document.querySelector('.nav-item.dropdown');
+    const dashboardLink = document.querySelector('.dashboard-link');
+    const logoutBtn = document.getElementById('logoutBtn');
+    
+    if (isLoggedIn) {
+      // Hide login/signup links and show dashboard and logout
+      authLinks.forEach(link => link.style.display = 'none');
+      if (dashboardLink) dashboardLink.style.display = 'block';
+      if (logoutBtn) logoutBtn.style.display = 'block';
+      
+      // Update user name if available
+      const userData = JSON.parse(localStorage.getItem('currentUser') || '{}');
+      const userNameElement = document.querySelector('#navbarDropdown');
+      if (userNameElement && userData.name) {
+        userNameElement.innerHTML = `<i class="fas fa-user-circle"></i> ${userData.name}`;
+      }
+    } else {
+      // Show login/signup links and hide dashboard and logout
+      authLinks.forEach(link => link.style.display = 'block');
+      if (dashboardLink) dashboardLink.style.display = 'none';
+      if (logoutBtn) logoutBtn.style.display = 'none';
+    }
+  }
+  
+  // Add active class to current nav item
+  document.addEventListener('DOMContentLoaded', function() {
+    const currentLocation = location.href;
+    const navItems = document.querySelectorAll('.navbar .nav-link');
+    navItems.forEach(item => {
+      if (item.href === currentLocation) {
+        item.classList.add('active');
+      }
+    });
+    
+    // Navbar scroll effect
+    window.addEventListener('scroll', function() {
+      const navbar = document.querySelector('.navbar');
+      if (window.scrollY > 30) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+    });
+    
+    // Check if user is logged in
+    const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+    
+    // Update UI based on login status
+    updateAuthUI(isLoggedIn);
+    
+    // Listen for login/logout events
+    window.addEventListener('storage', function(e) {
+      if (e.key === 'isLoggedIn') {
+        updateAuthUI(e.newValue === 'true');
+      }
+    });
+  });
+</script>

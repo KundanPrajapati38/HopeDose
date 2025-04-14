@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Inventory - HopeDose</title>
+  <!-- Bootstrap & FontAwesome -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+  <!-- Custom CSS -->
+ 
+  <link rel="stylesheet" href="css/inventory.css">
+  
+  <!-- Enhanced dropdown styling -->
+  <style>
+    /* Dark dropdown menu styling */
+    .dropdown-menu {
+      background: #faf8f8;
+      border: none;
+      border-radius: 10px;
+      box-shadow: 0 8px 20px rgba(237, 237, 237, 0.3);
+      padding: 10px;
+      margin-top: 10px;
+      animation: fadeIn 0.3s ease;
+    }
+    
+    .dropdown-item {
+      color: #000000 !important;
+      font-weight: 500;
+      padding: 10px 15px;
+      border-radius: 6px;
+      margin-bottom: 5px;
+      transition: all 0.3s ease;
+    }
+    
+    .dropdown-item:hover {
+      background: linear-gradient(90deg, rgba(0, 123, 255, 0.3), rgba(0, 198, 255, 0.3));
+      color: #000000 !important;
+      transform: translateX(5px);
+    }
+    
+    .dropdown-item:active, .dropdown-item:focus {
+      background: linear-gradient(90deg, rgba(0, 123, 255, 0.4), rgba(0, 198, 255, 0.4));
+      color: #000000 !important;
+    }
+    
+    .dropdown-divider {
+      border-color: #000000;
+    }
+    
+    .dropdown-menu::before {
+      content: '';
+      position: absolute;
+      top: -8px;
+      left: 20px;
+      width: 16px;
+      height: 16px;
+      background: #2a2a2a;
+      transform: rotate(45deg);
+      border-radius: 2px;
+      z-index: -1;
+    }
+    
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Include Header -->
+<div id="header-placeholder"></div>
+
+<!-- Page Header -->
+<div class="page-header">
+  <div class="container">
+    <h1 class="page-title">Our Inventory</h1>
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Inventory</li>
+      </ol>
+    </nav>
+  </div>
+</div>
+
+<div class="container inventory-container">
+  <!-- Filter Section -->
+  <div class="filter-section">
+    <h4 class="filter-title">Filter Items</h4>
+    <div class="row">
+      <div class="col-md-3 mb-3">
+        <label for="categoryFilter" class="form-label">Category</label>
+        <select class="form-select" id="categoryFilter">
+          <option value="all" selected>All Categories</option>
+          <option value="books">Books</option>
+          <option value="toys">Toys</option>
+          <option value="clothes">Clothes</option>
+          <option value="food">Food</option>
+          <option value="medicine">Medicine</option>
+          <option value="sports">Sports Equipment</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+      <div class="col-md-3 mb-3">
+        <label for="availabilityFilter" class="form-label">Availability</label>
+        <select class="form-select" id="availabilityFilter">
+          <option value="all" selected>All</option>
+          <option value="available">Available</option>
+          <option value="low">Low Stock</option>
+        </select>
+      </div>
+      <div class="col-md-3 mb-3">
+        <label for="sortBy" class="form-label">Sort By</label>
+        <select class="form-select" id="sortBy">
+          <option value="newest">Newest First</option>
+          <option value="oldest">Oldest First</option>
+          <option value="name-asc">Name (A-Z)</option>
+          <option value="name-desc">Name (Z-A)</option>
+        </select>
+      </div>
+      <div class="col-md-3 mb-3">
+        <label for="searchInventory" class="form-label">Search</label>
+        <div class="input-group">
+          <input type="text" class="form-control" id="searchInventory" placeholder="Search items...">
+          <button class="btn btn-primary" type="button">
+            <i class="fas fa-search"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Inventory Items -->
+  <div class="row g-4" id="inventoryItems">
+    <!-- Item 1 -->
+    <div class="col-md-6 col-lg-4" data-category="books">
+      <div class="inventory-card">
+        <div class="inventory-img-container">
+          <img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60" class="inventory-img" alt="Educational Books">
+          <span class="inventory-badge badge-new">New</span>
+        </div>
+        <div class="inventory-body">
+          <h5 class="inventory-title">Educational Books</h5>
+          <p class="inventory-text">Collection of educational books for students of all ages. Includes textbooks, reference books, and study guides.</p>
+          <div class="inventory-meta">
+            <div class="inventory-quantity">
+              <i class="fas fa-cubes quantity-icon"></i>
+              <span>Quantity: 25</span>
+            </div>
+            <div class="inventory-date">
+              <i class="far fa-calendar-alt me-1"></i>
+              <span>Added: Jan 15, 2025</span>
+            </div>
+          </div>
+          <div class="inventory-footer">
+            <span class="inventory-category">Books</span>
+            <a href="submit.html" class="btn btn-request">Request Item</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Item 2 -->
+    <div class="col-md-6 col-lg-4" data-category="toys">
+      <div class="inventory-card">
+        <div class="inventory-img-container">
+          <img src="https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60" class="inventory-img" alt="Children's Toys">
+          <span class="inventory-badge badge-low">Low Stock</span>
+        </div>
+        <div class="inventory-body">
+          <h5 class="inventory-title">Children's Toys</h5>
+          <p class="inventory-text">Assorted toys for children of different age groups. Includes puzzles, building blocks, and educational toys.</p>
+          <div class="inventory-meta">
+            <div class="inventory-quantity">
+              <i class="fas fa-cubes quantity-icon"></i>
+              <span>Quantity: 8</span>
+            </div>
+            <div class="inventory-date">
+              <i class="far fa-calendar-alt me-1"></i>
+              <span>Added: Feb 2, 2025</span>
+            </div>
+          </div>
+          <div class="inventory-footer">
+            <span class="inventory-category">Toys</span>
+            <a href="submit.html" class="btn btn-request">Request Item</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Item 3 -->
+    <div class="col-md-6 col-lg-4" data-category="clothes">
+      <div class="inventory-card">
+        <div class="inventory-img-container">
+          <img src="https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60" class="inventory-img" alt="Winter Clothing">
+        </div>
+        <div class="inventory-body">
+          <h5 class="inventory-title">Winter Clothing</h5>
+          <p class="inventory-text">Warm winter clothing including jackets, sweaters, and thermal wear for adults and children.</p>
+          <div class="inventory-meta">
+            <div class="inventory-quantity">
+              <i class="fas fa-cubes quantity-icon"></i>
+              <span>Quantity: 40</span>
+            </div>
+            <div class="inventory-date">
+              <i class="far fa-calendar-alt me-1"></i>
+              <span>Added: April 10, 2025</span>
+            </div>
+          </div>
+          <div class="inventory-footer">
+            <span class="inventory-category">Clothes</span>
+            <a href="submit.html" class="btn btn-request">Request Item</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Item 4 -->
+    <div class="col-md-6 col-lg-4" data-category="food">
+      <div class="inventory-card">
+        <div class="inventory-img-container">
+          <img src="https://images.unsplash.com/photo-1542990253-0d0f5be5f0ed?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60" class="inventory-img" alt="Non-Perishable Food">
+        </div>
+        <div class="inventory-body">
+          <h5 class="inventory-title">Non-Perishable Food</h5>
+          <p class="inventory-text">Canned goods, rice, pasta, and other non-perishable food items with long shelf life.</p>
+          <div class="inventory-meta">
+            <div class="inventory-quantity">
+              <i class="fas fa-cubes quantity-icon"></i>
+              <span>Quantity: 120</span>
+            </div>
+            <div class="inventory-date">
+              <i class="far fa-calendar-alt me-1"></i>
+              <span>Added: March 5, 2025</span>
+            </div>
+          </div>
+          <div class="inventory-footer">
+            <span class="inventory-category">Food</span>
+            <a href="submit.html" class="btn btn-request">Request Item</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Item 5 -->
+    <div class="col-md-6 col-lg-4" data-category="medicine">
+      <div class="inventory-card">
+        <div class="inventory-img-container">
+          <img src="https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60" class="inventory-img" alt="Basic Medicines">
+          <span class="inventory-badge badge-low">Low Stock</span>
+        </div>
+        <div class="inventory-body">
+          <h5 class="inventory-title">Basic Medicines</h5>
+          <p class="inventory-text">Over-the-counter medicines including pain relievers, cold medicines, and first aid supplies.</p>
+          <div class="inventory-meta">
+            <div class="inventory-quantity">
+              <i class="fas fa-cubes quantity-icon"></i>
+              <span>Quantity: 10</span>
+            </div>
+            <div class="inventory-date">
+              <i class="far fa-calendar-alt me-1"></i>
+              <span>Added:April 20, 2025</span>
+            </div>
+          </div>
+          <div class="inventory-footer">
+            <span class="inventory-category">Medicine</span>
+            <a href="submit.html" class="btn btn-request">Request Item</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Item 6 -->
+    <div class="col-md-6 col-lg-4" data-category="sports">
+      <div class="inventory-card">
+        <div class="inventory-img-container">
+          <img src="https://images.unsplash.com/photo-1517649763962-0c623066013b?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60" class="inventory-img" alt="Sports Equipment">
+          <span class="inventory-badge badge-new">New</span>
+        </div>
+        <div class="inventory-body">
+          <h5 class="inventory-title">Sports Equipment</h5>
+          <p class="inventory-text">Various sports equipment including cricket bats, footballs, basketballs, and other sporting goods.</p>
+          <div class="inventory-meta">
+            <div class="inventory-quantity">
+              <i class="fas fa-cubes quantity-icon"></i>
+              <span>Quantity: 30</span>
+            </div>
+            <div class="inventory-date">
+              <i class="far fa-calendar-alt me-1"></i>
+              <span>Added: Feb 12, 2025</span>
+            </div>
+          </div>
+          <div class="inventory-footer">
+            <span class="inventory-category">Sports</span>
+            <a href="submit.html" class="btn btn-request">Request Item</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Empty State (Hidden by default) -->
+  <div class="empty-state" id="emptyState" style="display: none;">
+    <i class="fas fa-box-open empty-icon"></i>
+    <h3>No Items Found</h3>
+    <p class="text-muted">We couldn't find any items matching your search criteria.</p>
+    <button class="btn btn-primary mt-3" id="resetFilters">
+      <i class="fas fa-sync-alt me-2"></i>Reset Filters
+    </button>
+  </div>
+
+  <!-- Pagination -->
+  <div class="pagination-container">
+    <nav aria-label="Inventory pagination">
+      <ul class="pagination">
+        <li class="page-item disabled">
+          <a class="page-link" href="#" aria-label="Previous">
+            <span aria-hidden="true"><i class="fas fa-chevron-left"></i></span>
+          </a>
+        </li>
+        <li class="page-item active"><a class="page-link" href="#">1</a></li>
+        <li class="page-item"><a class="page-link" href="#">2</a></li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item">
+          <a class="page-link" href="#" aria-label="Next">
+            <span aria-hidden="true"><i class="fas fa-chevron-right"></i></span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>
+
+<!-- Include Footer -->
+<div id="footer-placeholder"></div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Custom JS -->
+<script src="js/inventory.js"></script>
+<!-- Component Loader -->
+<script>
+  // Load header and footer components
+  fetch('components/header.html')
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById('header-placeholder').innerHTML = data;
+      // After loading header, update active link
+      setTimeout(() => {
+        document.querySelector('a[href="./inventory.html"]').classList.add('active');
+        document.querySelector('a[href="index.html"]').classList.remove('active');
+      }, 100);
+    });
+  
+  fetch('components/footer.html')
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById('footer-placeholder').innerHTML = data;
+    });
+</script>
+
+</body>
+</html>

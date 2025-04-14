@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Profile - HopeDose</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- AOS Animation Library -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/profile.css">
+</head>
+<body>
+
+<!-- Header Placeholder -->
+<div id="header-placeholder"></div>
+
+<!-- Profile Header -->
+<header class="profile-header">
+  <div class="container">
+    <h1 class="display-4 fw-bold" data-aos="fade-up">My Profile</h1>
+    <p class="lead" data-aos="fade-up" data-aos-delay="200">Manage your personal information and track your donation activities</p>
+  </div>
+</header>
+
+<!-- Profile Section -->
+<section class="py-5">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8 mb-4" data-aos="fade-up">
+        <div class="profile-card shadow-sm rounded p-4">
+          <div class="text-center mb-4">
+            <div class="profile-image-container mx-auto mb-3">
+              <img src="images/donation.jpg" alt="Profile Picture" class="profile-image  shadow" id="profileImagePreview">
+            </div>
+            <h2 class="mt-3 mb-0 fw-bold" id="profileName">Hope Dose</h2>
+            <p class="text-muted" id="profileEmail">HopeDose@Gmail.com</p>
+            <div class="mt-2 mb-3">
+              <span class="achievement-badge bg-success text-white rounded-circle p-2 mx-1" title="Verified Donor"><i class="fas fa-check"></i></span>
+              <span class="achievement-badge bg-primary text-white rounded-circle p-2 mx-1" title="Top Contributor"><i class="fas fa-award"></i></span>
+              <span class="achievement-badge bg-danger text-white rounded-circle p-2 mx-1" title="Regular Donor"><i class="fas fa-heart"></i></span>
+            </div>
+            <button class="edit-profile-btn btn btn-outline-primary mt-2 px-4 py-2 rounded-pill" onclick="window.location.href='settings.html'">
+              <i class="fas fa-edit me-2"></i>Edit Profile
+            </button>
+          </div>
+          
+          <!-- Profile Tabs -->
+          <div class="profile-tabs">
+            <ul class="nav nav-tabs justify-content-center" id="profileTabs" role="tablist">
+              <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="personal-tab" data-bs-toggle="tab" data-bs-target="#personal" type="button" role="tab" aria-controls="personal" aria-selected="true">
+                  <i class="fas fa-user me-2"></i>Personal Info
+                </button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button class="nav-link" id="preferences-tab" data-bs-toggle="tab" data-bs-target="#preferences" type="button" role="tab" aria-controls="preferences" aria-selected="false">
+                  <i class="fas fa-heart me-2"></i>Preferences
+                </button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button class="nav-link" id="security-tab" data-bs-toggle="tab" data-bs-target="#security" type="button" role="tab" aria-controls="security" aria-selected="false">
+                  <i class="fas fa-shield-alt me-2"></i>Security
+                </button>
+              </li>
+            </ul>
+            
+            <div class="tab-content" id="profileTabsContent">
+              <div class="tab-pane fade show active" id="personal" role="tabpanel" aria-labelledby="personal-tab">
+                <div class="row mt-4">
+                  <div class="col-md-6">
+                    <h5><i class="fas fa-user me-2 text-primary"></i>Personal Information</h5>
+                    <ul class="list-group list-group-flush">
+                      <li class="list-group-item d-flex justify-content-between">
+                        <span class="text-muted">Full Name:</span>
+                        <span class="fw-bold" id="fullName">your name</span>
+                      </li>
+                      <li class="list-group-item d-flex justify-content-between">
+                        <span class="text-muted">Phone:</span>
+                        <span class="fw-bold" id="phone">+91 9876543210</span>
+                      </li>
+                      <li class="list-group-item d-flex justify-content-between">
+                        <span class="text-muted">Location:</span>
+                        <span class="fw-bold" id="location">Panjab, India</span>
+                      </li>
+                      <li class="list-group-item d-flex justify-content-between">
+                        <span class="text-muted">Member Since:</span>
+                        <span class="fw-bold" id="memberSince">January 2025</span>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="col-md-6">
+                    <h5><i class="fas fa-id-card me-2 text-primary"></i>Contact Information</h5>
+                    <ul class="list-group list-group-flush">
+                      <li class="list-group-item d-flex justify-content-between">
+                        <span class="text-muted">Email:</span>
+                        <span class="fw-bold" id="contactEmail">emailAddress.com</span>
+                      </li>
+                      <li class="list-group-item d-flex justify-content-between">
+                        <span class="text-muted">Alternative Phone:</span>
+                        <span class="fw-bold" id="altPhone">Not provided</span>
+                      </li>
+                      <li class="list-group-item d-flex justify-content-between">
+                        <span class="text-muted">Address:</span>
+                        <span class="fw-bold" id="address">815 Chandigarh Panjab</span>
+                      </li>
+                      <li class="list-group-item d-flex justify-content-between">
+                        <span class="text-muted">Preferred Contact:</span>
+                        <span class="fw-bold" id="preferredContact">Email</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="tab-pane fade" id="preferences" role="tabpanel" aria-labelledby="preferences-tab">
+                <div class="row mt-4">
+                  <div class="col-md-6">
+                    <h5><i class="fas fa-heart me-2 text-danger"></i>Donation Preferences</h5>
+                    <ul class="list-group list-group-flush">
+                      <li class="list-group-item d-flex justify-content-between">
+                        <span class="text-muted">Preferred Categories:</span>
+                        <span class="fw-bold" id="categories">Books, Clothes, Food</span>
+                      </li>
+                      <li class="list-group-item d-flex justify-content-between">
+                        <span class="text-muted">Donation Frequency:</span>
+                        <span class="fw-bold" id="frequency">Monthly</span>
+                      </li>
+                      <li class="list-group-item d-flex justify-content-between">
+                        <span class="text-muted">Preferred Method:</span>
+                        <span class="fw-bold" id="method">In-person</span>
+                      </li>
+                      <li class="list-group-item d-flex justify-content-between">
+                        <span class="text-muted">Tax Receipts:</span>
+                        <span class="fw-bold" id="taxReceipts">Yes</span>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="col-md-6">
+                    <h5><i class="fas fa-bell me-2 text-warning"></i>Notification Settings</h5>
+                    <ul class="list-group list-group-flush">
+                      <li class="list-group-item d-flex justify-content-between">
+                        <span class="text-muted">Email Notifications:</span>
+                        <span class="fw-bold" id="emailNotif">Enabled</span>
+                      </li>
+                      <li class="list-group-item d-flex justify-content-between">
+                        <span class="text-muted">SMS Notifications:</span>
+                        <span class="fw-bold" id="smsNotif">Disabled</span>
+                      </li>
+                      <li class="list-group-item d-flex justify-content-between">
+                        <span class="text-muted">Campaign Updates:</span>
+                        <span class="fw-bold" id="campaignUpdates">Weekly</span>
+                      </li>
+                      <li class="list-group-item d-flex justify-content-between">
+                        <span class="text-muted">Donation Reminders:</span>
+                        <span class="fw-bold" id="donationReminders">Enabled</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="tab-pane fade" id="security" role="tabpanel" aria-labelledby="security-tab">
+                <div class="row mt-4">
+                  <div class="col-md-6">
+                    <h5><i class="fas fa-lock me-2 text-primary"></i>Account Security</h5>
+                    <ul class="list-group list-group-flush">
+                      <li class="list-group-item d-flex justify-content-between">
+                        <span class="text-muted">Password:</span>
+                        <span class="fw-bold">••••••••• <a href="#" class="ms-2 text-primary small">Change</a></span>
+                      </li>
+                      <li class="list-group-item d-flex justify-content-between">
+                        <span class="text-muted">Two-Factor Auth:</span>
+                        <span class="fw-bold text-danger">Disabled <a href="#" class="ms-2 text-primary small">Enable</a></span>
+                      </li>
+                      <li class="list-group-item d-flex justify-content-between">
+                        <span class="text-muted">Last Login:</span>
+                        <span class="fw-bold">Today, 10:45 AM</span>
+                      </li>
+                      <li class="list-group-item d-flex justify-content-between">
+                        <span class="text-muted">Account Status:</span>
+                        <span class="fw-bold text-success">Active</span>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="col-md-6">
+                    <h5><i class="fas fa-history me-2 text-primary"></i>Login History</h5>
+                    <ul class="list-group list-group-flush">
+                      <li class="list-group-item">
+                        <div class="d-flex justify-content-between">
+                          <span class="fw-bold">Today, 10:45 AM</span>
+                          <span class="text-success">Success</span>
+                        </div>
+                        <small class="text-muted">Chrome on Windows</small>
+                      </li>
+                      <li class="list-group-item">
+                        <div class="d-flex justify-content-between">
+                          <span class="fw-bold">Yesterday, 6:30 PM</span>
+                          <span class="text-success">Success</span>
+                        </div>
+                        <small class="text-muted">Safari on iPhone</small>
+                      </li>
+                      <li class="list-group-item">
+                        <div class="d-flex justify-content-between">
+                          <span class="fw-bold">May 15, 2025, 9:15 AM</span>
+                          <span class="text-success">Success</span>
+                        </div>
+                        <small class="text-muted">Chrome on Windows</small>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-lg-4" data-aos="fade-up" data-aos-delay="200">
+        <div class="profile-stats">
+          <h4 class="text-center mb-4">Your Impact</h4>
+          
+          <div class="row g-3">
+            <div class="col-6">
+              <div class="stat-item">
+                <div class="stat-icon">
+                  <i class="fas fa-gift"></i>
+                </div>
+                <h3 class="mb-0" id="donationCount">12</h3>
+                <p class="text-muted mb-0">Donations</p>
+              </div>
+            </div>
+            
+            <div class="col-6">
+              <div class="stat-item">
+                <div class="stat-icon">
+                  <i class="fas fa-hands-helping"></i>
+                </div>
+                <h3 class="mb-0" id="peopleHelped">36</h3>
+                <p class="text-muted mb-0">People Helped</p>
+              </div>
+            </div>
+            
+            <div class="col-6">
+              <div class="stat-item">
+                <div class="stat-icon">
+                  <i class="fas fa-rupee-sign"></i>
+                </div>
+                <h3 class="mb-0" id="totalAmount">₹8,500</h3>
+                <p class="text-muted mb-0">Total Amount</p>
+              </div>
+            </div>
+            
+            <div class="col-6">
+              <div class="stat-item">
+                <div class="stat-icon">
+                  <i class="fas fa-medal"></i>
+                </div>
+                <h3 class="mb-0" id="rank">Silver</h3>
+                <p class="text-muted mb-0">Donor Rank</p>
+              </div>
+            </div>
+          </div>
+          
+          <hr class="my-4">
+          
+          <h5 class="mb-3">Donation Categories</h5>
+          <div class="mb-3">
+            <div class="d-flex justify-content-between mb-1">
+              <span>Books</span>
+              <span>40%</span>
+            </div>
+            <div class="progress">
+              <div class="progress-bar bg-primary" role="progressbar" style="width: 40%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+          </div>
+          
+          <div class="mb-3">
+            <div class="d-flex justify-content-between mb-1">
+              <span>Clothes</span>
+              <span>30%</span>
+            </div>
+            <div class="progress">
+              <div class="progress-bar bg-success" role="progressbar" style="width: 30%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+          </div>
+          
+          <div class="mb-3">
+            <div class="d-flex justify-content-between mb-1">
+              <span>Food</span>
+              <span>20%</span>
+            </div>
+            <div class="progress">
+              <div class="progress-bar bg-warning" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+          </div>
+          
+          <div class="mb-3">
+            <div class="d-flex justify-content-between mb-1">
+              <span>Cash</span>
+              <span>10%</span>
+            </div>
+            <div class="progress">
+              <div class="progress-bar bg-danger" role="progressbar" style="width: 10%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+          </div>
+          
+          <div class="text-center mt-4">
+            <a href="Donate.html" class="btn btn-primary">Make a New Donation</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Recent Activity Section -->
+<section class="py-5 bg-light">
+  <div class="container">
+    <h2 class="section-title" data-aos="fade-up">Recent Activity</h2>
+    
+    <div class="row">
+      <div class="col-lg-8 mx-auto" data-aos="fade-up" data-aos-delay="200">
+        <div class="activity-item">
+          <div class="d-flex justify-content-between align-items-center">
+            <h5 class="mb-1">Donated Books <span class="donation-badge">15 items</span></h5>
+            <span class="badge bg-primary">2 days ago</span>
+          </div>
+          <p class="mb-1 text-muted">You donated 15 books to the local library program.</p>
+          <small><i class="fas fa-map-marker-alt me-1"></i>Punjab Public Library</small>
+        </div>
+        
+        <div class="activity-item">
+          <div class="d-flex justify-content-between align-items-center">
+            <h5 class="mb-1">Cash Donation <span class="donation-badge">₹2,000</span></h5>
+            <span class="badge bg-primary">1 week ago</span>
+          </div>
+          <p class="mb-1 text-muted">You donated ₹2,000 to the education fund.</p>
+          <small><i class="fas fa-hand-holding-heart me-1"></i>Education For All Campaign</small>
+        </div>
+        
+        <div class="activity-item">
+          <div class="d-flex justify-content-between align-items-center">
+            <h5 class="mb-1">Clothes Donation <span class="donation-badge">5 families</span></h5>
+            <span class="badge bg-primary">2 weeks ago</span>
+          </div>
+          <p class="mb-1 text-muted">You donated winter clothes for 5 families.</p>
+          <small><i class="fas fa-tshirt me-1"></i>Winter Relief Program</small>
+        </div>
+        
+        <div class="activity-item">
+          <div class="d-flex justify-content-between align-items-center">
+            <h5 class="mb-1">Food Donation <span class="donation-badge">₹1,500</span></h5>
+            <span class="badge bg-primary">1 month ago</span>
+          </div>
+          <p class="mb-1 text-muted">You donated food supplies worth ₹1,500.</p>
+          <small><i class="fas fa-utensils me-1"></i>Food Distribution Drive</small>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Upcoming Events Section -->
+<section class="py-5">
+  <div class="container">
+    <h2 class="section-title" data-aos="fade-up">Upcoming Events</h2>
+    
+    <div class="row g-4" data-aos="fade-up" data-aos-delay="200">
+      <div class="col-md-4">
+        <div class="card h-100 shadow-sm">
+      
+          <div class="card-body">
+            <div class="d-flex justify-content-between mb-2">
+              <span class="badge bg-primary">Jun 15, 2025</span>
+              <span class="badge bg-success">Open</span>
+            </div>
+            <h5 class="card-title">Book Collection Drive</h5>
+            <p class="card-text">Join us for our annual book collection drive to support local schools.</p>
+            <div class="d-flex justify-content-between align-items-center mt-3">
+              <small class="text-muted"><i class="fas fa-map-marker-alt me-1"></i>City Library</small>
+              <a href="#" class="btn btn-outline-primary btn-sm">Register</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-md-4">
+        <div class="card h-100 shadow-sm">
+         
+          <div class="card-body">
+            <div class="d-flex justify-content-between mb-2">
+              <span class="badge bg-primary">Jul 5, 2025</span>
+              <span class="badge bg-success">Open</span>
+            </div>
+            <h5 class="card-title">Clothes Distribution</h5>
+            <p class="card-text">Help us distribute clothes to those in need in our community.</p>
+            <div class="d-flex justify-content-between align-items-center mt-3">
+              <small class="text-muted"><i class="fas fa-map-marker-alt me-1"></i>Community Center</small>
+              <a href="#" class="btn btn-outline-primary btn-sm">Register</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-md-4">
+        <div class="card h-100 shadow-sm">
+         
+          <div class="card-body">
+            <div class="d-flex justify-content-between mb-2">
+              <span class="badge bg-primary">Aug 12, 2025</span>
+              <span class="badge bg-success">Open</span>
+            </div>
+            <h5 class="card-title">Food Donation Drive</h5>
+            <p class="card-text">Participate in our food donation drive to help feed hungry families.</p>
+            <div class="d-flex justify-content-between align-items-center mt-3">
+              <small class="text-muted"><i class="fas fa-map-marker-alt me-1"></i>Food Bank</small>
+              <a href="#" class="btn btn-outline-primary btn-sm">Register</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+  </div>
+</section>
+
+<!-- Achievements Section -->
+<section class="py-5 bg-light">
+  <div class="container">
+    <h2 class="section-title" data-aos="fade-up">Your Achievements</h2>
+    
+    <div class="row g-4" data-aos="fade-up" data-aos-delay="200">
+      <div class="col-md-3 col-6">
+        <div class="card text-center h-100 shadow-sm">
+          <div class="card-body">
+            <div class="achievement-icon mb-3">
+              <i class="fas fa-award fa-3x text-primary"></i>
+            </div>
+            <h5 class="card-title">Silver Donor</h5>
+            <p class="card-text small">Donated more than ₹5,000 in total</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-md-3 col-6">
+        <div class="card text-center h-100 shadow-sm">
+          <div class="card-body">
+            <div class="achievement-icon mb-3">
+              <i class="fas fa-book-reader fa-3x text-success"></i>
+            </div>
+            <h5 class="card-title">Book Champion</h5>
+            <p class="card-text small">Donated more than 50 books</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-md-3 col-6">
+        <div class="card text-center h-100 shadow-sm">
+          <div class="card-body">
+            <div class="achievement-icon mb-3">
+              <i class="fas fa-hands-helping fa-3x text-warning"></i>
+            </div>
+            <h5 class="card-title">Regular Helper</h5>
+            <p class="card-text small">Donated consistently for 6 months</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-md-3 col-6">
+        <div class="card text-center h-100 shadow-sm">
+          <div class="card-body">
+            <div class="achievement-icon mb-3">
+              <i class="fas fa-users fa-3x text-danger"></i>
+            </div>
+            <h5 class="card-title">Community Hero</h5>
+            <p class="card-text small">Helped more than 30 people</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer Placeholder -->
+<div id="footer-placeholder"></div>
+
+<!-- Bootstrap JS Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- AOS Animation Library -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<!-- Custom JS -->
+<script src="js/profile.js"></script>
+
+</body>
+</html>
