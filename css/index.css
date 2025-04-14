@@ -351,7 +351,7 @@
 
 /* ===== BANNER SECTION ===== */
 .banner {
-  background-image: url('../images/Home.jpg');
+  background-image: url('../images/home.jpg');
 
   background-size: cover; 
   height: 80vh;
