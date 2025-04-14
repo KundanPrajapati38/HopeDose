@@ -45,12 +45,13 @@
     .dashboard-header {
       background: linear-gradient(rgba(10, 46, 61, 0.8), rgba(10, 46, 61, 0.9)), url('https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80') no-repeat center center;
       background-size: cover;
+      height:60vh;
       color: white;
-      padding: 120px 0 80px;
+      padding-top:100px;
       text-align: center;
       position: relative;
       overflow: hidden;
-      margin-top: -60px;
+      
     }
     
     .dashboard-header::before {
@@ -206,7 +207,8 @@
     /* Enhanced Section Titles */
     .section-title {
       font-weight: 700;
-      position: relative;
+      padding-top:40px;
+      text-align:center;
       text-transform: uppercase;
       letter-spacing: 1px;
       color: var(--primary-color);
@@ -216,7 +218,7 @@
     
     .section-title:after {
       content: '';
-      display: block;
+     
       width: 50px;
       height: 3px;
       background: var(--primary-gradient);
