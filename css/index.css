@@ -53,51 +53,7 @@
   }
 }
 
-@keyframes giveHand {
-  0% {
-    left: -100px;
-    opacity: 0;
-    transform: translateY(0) rotate(0deg);
-  }
-  20% {
-    opacity: 1;
-  }
-  50% {
-    left: calc(50% - 50px);
-    transform: translateY(10px) rotate(10deg);
-  }
-  80% {
-    opacity: 1;
-  }
-  100% {
-    left: calc(50% - 30px);
-    opacity: 0;
-    transform: translateY(0) rotate(0deg);
-  }
-}
 
-@keyframes receiveHand {
-  0% {
-    right: -100px;
-    opacity: 0;
-    transform: scaleX(-1) translateY(0) rotate(0deg);
-  }
-  20% {
-    opacity: 1;
-  }
-  50% {
-    right: calc(50% - 50px);
-    transform: scaleX(-1) translateY(-10px) rotate(-10deg);
-  }
-  80% {
-    opacity: 1;
-  }
-  100% {
-    right: calc(50% - 30px);
-    opacity: 0;
-    transform: scaleX(-1) translateY(0) rotate(0deg);
-  }
-}
 
 @keyframes glowEffect {
   0%, 100% {
@@ -471,12 +427,13 @@ color: #ffffff;
 /* Banner floating elements */
 .banner .floating-element {
   position: absolute;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.15);
   border-radius: 50%;
   z-index: 0;
   box-shadow: 0 0 15px rgba(60, 42, 255, 0.4);
   border: 1px solid rgba(255, 255, 255, 0.3);
   backdrop-filter: blur(3px);
+  transition: all 0.5s ease;
 }
 
 .banner .floating-element:nth-child(1) {
@@ -513,6 +470,13 @@ color: #ffffff;
   right: 10%;
   animation: float 14s ease-in-out infinite;
   box-shadow: 0 0 22px rgba(255, 255, 255, 0.5);
+}
+
+/* Hide floating elements on mobile devices */
+@media (max-width: 768px) {
+  .banner .floating-element {
+    display: none;
+  }
 }
 
 /* Banner with side box layout */
@@ -611,6 +575,7 @@ color: #ffffff;
 .custom-card {
   border: none;
   border-radius: 15px;
+  text-align: center;
   overflow: hidden;
   box-shadow: 0 10px 20px rgba(0,0,0,0.1);
   transition: all 0.3s ease;
