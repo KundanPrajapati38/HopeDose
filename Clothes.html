@@ -4,332 +4,29 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Donate Clothes</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Donate Clothes | HopeDose</title>
+    <!-- Bootstrap & FontAwesome -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+   
     <style>
-        * {
-            margin: 0px;
-            padding: 0px;
-        }
-        
         body {
-            font-family: arial;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-image: url('https://img.freepik.com/free-photo/abstract-luxury-gradient-blue-background-smooth-dark-blue-with-black-vignette-studio-banner_1258-52379.jpg');
             background-size: cover;
             background-attachment: fixed;
             background-position: center;
             color: #333;
-        }
-        
-        /* Navbar styles from header.html */
-        .navbar {
-            
-            background: rgba(10, 46, 61, 0.9);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            padding: 8px 0;
-            transition: all 0.3s ease;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .navbar.scrolled {
-            padding: 6px 0;
-            background: rgba(10, 46, 61, 0.95);
-            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
-        }
-        
-        .navbar .nav-link {
-            color: rgba(255, 255, 255, 0.85) !important;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            position: relative;
-            padding: 6px 12px;
-            font-size: 0.95rem;
-            letter-spacing: 0.3px;
-        }
-        
-        .navbar .nav-link:hover {
-            color: #4db8ff !important;
-            transform: translateY(-2px);
-        }
-        
-        .navbar .nav-link.active {
-            color: #4db8ff !important;
-        }
-        
-        .navbar .nav-link.active::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 50%;
-            width: 20px;
-            height: 2px;
-            background-color: #4db8ff;
-            border-radius: 2px;
-            transform: translateX(-50%);
-            transition: width 0.3s ease;
-        }
-        
-        .navbar .nav-link.active:hover::after {
-            width: 30px;
-        }
-        
-        .logo {
-            width: 32px;
-            height: 32px;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-            transition: all 0.3s ease;
-            object-fit: cover;
-        }
-        
-        .navbar-brand:hover .logo {
-            transform: rotate(5deg);
-        }
-        
-        .brand-text {
-            font-weight: 700;
-            letter-spacing: 1px;
-            font-size: 1.3rem;
-            text-transform: uppercase;
-            background: linear-gradient(to right, #ffffff, #4db8ff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        
-        .dropdown-menu {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: none;
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-            overflow: hidden;
-            padding: 10px;
-            animation: dropdownFade 0.3s ease;
-            margin-top: 10px;
-            border: 1px solid rgba(0, 0, 0, 0.05);
-        }
-        
-        @keyframes dropdownFade {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .dropdown-item {
-            padding: 10px 15px;
-            transition: all 0.3s ease;
-            color: #222222 !important;
-            font-weight: 500;
-            border-radius: 8px;
-            margin-bottom: 4px;
-            display: flex;
-            align-items: center;
-            font-size: 0.9rem;
-        }
-        
-        .dropdown-item i {
-            color: #0a4d68;
-            margin-right: 10px;
-            font-size: 16px;
-            transition: all 0.3s ease;
-            width: 18px;
-            text-align: center;
-        }
-        
-        .dropdown-item:hover {
-            background: linear-gradient(to right, #f0f8ff, #e6f2ff);
-            transform: translateX(5px);
-            color: #0a4d68 !important;
-            box-shadow: 0 2px 8px rgba(0,123,255,0.1);
-        }
-        
-        .dropdown-item:hover i {
-            color: #0a4d68;
-            transform: scale(1.2);
-        }
-        
-        .dropdown-divider {
-            border-color: rgba(0, 0, 0, 0.05);
-            margin: 8px 0;
-            opacity: 0.5;
-        }
-        
-        #logoutBtn {
-            color: #dc3545 !important;
-            font-weight: 500;
-        }
-        
-        #logoutBtn i {
-            color: #dc3545;
-        }
-        
-        #logoutBtn:hover {
-            background: linear-gradient(to right, #fff5f5, #ffe0e0);
-            color: #dc3545 !important;
-            box-shadow: 0 2px 8px rgba(220,53,69,0.1);
-        }
-        
-        #logoutBtn:hover i {
-            transform: translateX(-3px) scale(1.2);
-        }
-        
-        /* Volunteer link special styling */
-        .nav-item .nav-link[href="volunteer.html"] {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 30px;
-            padding: 6px 14px;
-            margin-left: 5px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            transition: all 0.3s ease;
-            font-size: 0.9rem;
-        }
-        
-        .nav-item .nav-link[href="volunteer.html"]:hover {
-            background: rgba(255, 255, 255, 0.15);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            transform: translateY(-2px);
-        }
-        
-        .nav-item .nav-link[href="volunteer.html"] i {
-            color: #4db8ff;
-        }
-        
-        .nav-item .nav-link[href="volunteer.html"].active {
-            background: rgba(255, 255, 255, 0.15);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-        
-        /* Login button styling */
-        .btn-login-nav {
-            background: rgba(77, 184, 255, 0.2);
-            color: #4db8ff !important;
-            border-radius: 30px;
-            padding: 6px 16px !important;
-            font-weight: 500 !important;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-            transition: all 0.3s ease;
-            border: 1px solid rgba(77, 184, 255, 0.3);
-            font-size: 0.9rem;
-        }
-        
-        .btn-login-nav:hover {
-            background: rgba(77, 184, 255, 0.3);
-            color: white !important;
-            transform: translateY(-2px) !important;
-            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
-        }
-        
-        /* Special styling for Home and Donate links */
-        .nav-item .nav-link[href="index.html"],
-        .nav-item .nav-link[href="Donate.html"] {
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .nav-item .nav-link[href="index.html"]::before,
-        .nav-item .nav-link[href="Donate.html"]::before {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            width: 0;
-            height: 2px;
-            background-color: #4db8ff;
-            transition: all 0.3s ease;
-            transform: translateX(-50%);
-            opacity: 0;
-        }
-        
-        .nav-item .nav-link[href="index.html"]:hover::before,
-        .nav-item .nav-link[href="Donate.html"]:hover::before {
-            width: 70%;
-            opacity: 1;
-        }
-        
-        /* Enhanced styling for Home link */
-        .nav-item .nav-link[href="index.html"] {
-            color: #4db8ff !important;
-            font-weight: 600;
-        }
-        
-        /* Enhanced styling for Donate link */
-        .nav-item .nav-link[href="Donate.html"] {
-            background: rgba(77, 184, 255, 0.15);
-            color: #ffffff !important;
-            font-weight: 600;
-            border-radius: 30px;
-            padding: 6px 16px;
-            border: 1px solid rgba(77, 184, 255, 0.3);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-        }
-        
-        .nav-item .nav-link[href="Donate.html"]:hover {
-            background: rgba(77, 184, 255, 0.25);
-            color: #ffffff !important;
-            transform: translateY(-3px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-        }
-        
-        .nav-item .nav-link[href="Donate.html"] i {
-            color: #ffffff;
-            transition: all 0.3s ease;
-        }
-        
-        .nav-item .nav-link[href="Donate.html"]:hover i {
-            transform: scale(1.2);
-        }
-        
-        .nav-item .nav-link[href="Donate.html"].active {
-            background: rgba(77, 184, 255, 0.3);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-        }
-        
-        /* Responsive adjustments */
-        @media (max-width: 992px) {
-            .navbar-collapse {
-                background: rgba(10, 46, 61, 0.98);
-                border-radius: 10px;
-                padding: 20px;
-                margin-top: 10px;
-                box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            }
-            
-            .navbar .nav-link {
-                padding: 10px 15px;
-                margin: 5px 0;
-            }
-            
-            .nav-item .nav-link[href="volunteer.html"],
-            .nav-item .nav-link[href="Donate.html"] {
-                margin: 5px 0;
-                text-align: center;
-                display: inline-block;
-                width: 100%;
-            }
-            
-            .btn-login-nav {
-                margin: 5px 0;
-                text-align: center;
-                display: block;
-            }
+            padding-top: 80px; /* Add padding to account for fixed navbar */
         }
         
         /* Clothes form styles */
         .clothesbox {
-            padding-top: 120px;
+            padding-top: 20px; /* Reduced padding since we have body padding-top */
             display: flex;
             justify-content: center;
             box-sizing: border-box;
+            margin-bottom: 50px;
         }
         
         .clothesbox > form {
@@ -339,11 +36,10 @@
             border-radius: 15px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
             overflow: hidden;
-            margin-bottom: 50px;
             border: none;
         }
         
-        input[type=text], input[type=password], input[type=email], input[type=tel], textarea {
+        input[type=text], input[type=password], input[type=email], input[type=tel], textarea, select {
             width: 100%;
             padding: 12px 20px;
             margin: 8px 0;
@@ -353,6 +49,13 @@
             box-sizing: border-box;
             font-size: 16px;
             background-color: rgba(255, 255, 255, 0.8);
+            transition: all 0.3s ease;
+        }
+        
+        input:focus, textarea:focus, select:focus {
+            border-color: #4db8ff;
+            box-shadow: 0 0 8px rgba(77, 184, 255, 0.3);
+            outline: none;
         }
         
         textarea {
@@ -377,7 +80,6 @@
         button:hover {
             background-color: darkcyan;
             color: white;
-            transition: .5s;
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
@@ -419,9 +121,7 @@
             z-index: 1;
         }
         
-        .container {
-            padding: 30px;
-        }
+       
         
         .form-group {
             margin-bottom: 20px;
@@ -441,6 +141,11 @@
             font-size: 14px;
         }
         
+        .collapse{
+            
+            justify-content: right;
+            color: #ffffff;
+        }
         /* Responsive styles */
         @media screen and (max-width: 768px) {
             .clothesbox > form {
@@ -450,55 +155,12 @@
     </style>
 </head>
 <body>
-    <!-- Navbar from header.html -->
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
-        <div class="container">
-            <a class="navbar-brand d-flex align-items-center" href="index.html">
-                <img src="images/donation.jpg" alt="HopeDose Logo" class="logo me-2">
-                <span class="brand-text">HopeDose</span>
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto align-items-center">
-                    <li class="nav-item mx-1">
-                        <a class="nav-link" href="index.html"><i class="fas fa-home me-1"></i> Home</a>
-                    </li>
-                    <li class="nav-item mx-1">
-                        <a class="nav-link" href="Donate.html"><i class="fas fa-hand-holding-heart me-1"></i> Donate</a>
-                    </li>
-                    <li class="nav-item mx-1">
-                        <a class="nav-link" href="volunteer.html"><i class="fas fa-hands-helping me-1"></i> Volunteer</a>
-                    </li>
-                    <li class="nav-item mx-1">
-                        <a class="nav-link" href="about.html"><i class="fas fa-info-circle me-1"></i> About Us</a>
-                    </li>
-                    <li class="nav-item mx-1">
-                        <a class="nav-link" href="contact.html"><i class="fas fa-envelope me-1"></i> Contact</a>
-                    </li>
-                    <li class="nav-item dropdown mx-1">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fas fa-user-circle"></i> Account
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="profile.html"><i class="fas fa-user me-2"></i>Profile</a></li>
-                            <li><a class="dropdown-item" href="settings.html"><i class="fas fa-cog me-2"></i>Settings</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="#" id="logoutBtn"><i class="fas fa-sign-out-alt me-2"></i>Logout</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item auth-link mx-1">
-                        <a class="nav-link btn-login-nav" href="login.html"><i class="fas fa-sign-in-alt me-1"></i> Login</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-
+    <!-- Include the header component -->
+    <div id="header-placeholder"></div>
+    
     <!-- Clothes donation form -->
     <div class="clothesbox">
-        <form action="mailto:mysocialinterection.com" method="post" enctype="text/plain">
+        <form action="mailto:hopedose@example.com" method="post" enctype="text/plain">
             <div class="imgcontainer">
                 <img src="https://media.istockphoto.com/id/1257563298/photo/fashion-clothes-on-a-rack-in-a-light-background-indoors-place-for-text.jpg?s=612x612&w=0&k=20&c=UTL3KlMvLkteLe_9l3QbMklBcyaKQM5j6mcDxxtTr4Y=" alt="Clothes" class="avatar">
                 <div class="form-header-text">Clothes Donation</div>
@@ -522,7 +184,13 @@
                 
                 <div class="form-group">
                     <label for="Condition"><b>Clothes Condition</b></label>
-                    <input type="text" placeholder="Enter condition (e.g., New, Used - Good, Used - Fair)" name="Condition" id="Condition">
+                    <select name="Condition" id="Condition" required>
+                        <option value="" disabled selected>Select condition</option>
+                        <option value="New">New (with tags)</option>
+                        <option value="Like New">Like New (without tags)</option>
+                        <option value="Good">Good (gently used)</option>
+                        <option value="Fair">Fair (visible wear)</option>
+                    </select>
                 </div>
                 
                 <div class="form-group">
@@ -548,58 +216,34 @@
                 <button type="submit">Donate Clothes</button>
                 
                 <div class="form-note">
-                    Thank you for your donation! We'll contact you shortly to arrange pickup.
+                    <p>Thank you for your donation! We'll contact you shortly to arrange pickup.</p>
+                    <p><small>Note: We only accept clean clothes in good condition.</small></p>
                 </div>
             </div>
         </form>
     </div>
     
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- jQuery first, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    
     <script>
-        // Logout functionality
-        document.getElementById('logoutBtn')?.addEventListener('click', function(e) {
-            e.preventDefault();
-            if (confirm('Are you sure you want to logout?')) {
-                localStorage.removeItem('isLoggedIn');
-                localStorage.removeItem('userData');
-                window.location.href = 'login.html';
-            }
-        });
-        
-        // Add active class to current nav item
-        document.addEventListener('DOMContentLoaded', function() {
-            const currentLocation = location.href;
-            const navItems = document.querySelectorAll('.navbar .nav-link');
-            navItems.forEach(item => {
-                if (item.href === currentLocation) {
-                    item.classList.add('active');
+        // Load header component
+        $(function() {
+            $("#header-placeholder").load("components/header.html", function() {
+                // After loading header, check if current page should be active
+                const currentPage = window.location.pathname.split("/").pop();
+                if (currentPage === "Clothes.html") {
+                    // Find the Donate link and make it active since Clothes is under Donate category
+                    $('.nav-link[href="Donate.html"]').addClass('active');
+                }
+                
+                // Check if user is logged in (this will work with the header.html script)
+                const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+                if (typeof updateAuthUI === 'function') {
+                    updateAuthUI(isLoggedIn);
                 }
             });
-            
-            // Navbar scroll effect
-            window.addEventListener('scroll', function() {
-                const navbar = document.querySelector('.navbar');
-                if (window.scrollY > 30) {
-                    navbar.classList.add('scrolled');
-                } else {
-                    navbar.classList.remove('scrolled');
-                }
-            });
-            
-            // Check if user is logged in
-            const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
-            const authLinks = document.querySelectorAll('.auth-link');
-            const dropdownLink = document.querySelector('.nav-item.dropdown');
-            
-            if (isLoggedIn) {
-                // Hide login/signup links and show dropdown
-                authLinks.forEach(link => link.style.display = 'none');
-                if (dropdownLink) dropdownLink.style.display = 'block';
-            } else {
-                // Show login/signup links and hide dropdown
-                authLinks.forEach(link => link.style.display = 'block');
-                if (dropdownLink) dropdownLink.style.display = 'none';
-            }
         });
     </script>
 </body>
