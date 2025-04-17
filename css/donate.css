@@ -87,6 +87,7 @@ body {
 /* Section Titles */
 .section-title {
   text-align: center;
+  padding-top: 20px;
   margin-bottom: 3rem;
   font-size: 2.4rem;
   color: #0a4d68;
