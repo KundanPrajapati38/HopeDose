@@ -18,6 +18,7 @@ body {
 /* Card Styles */
 .custom-card {
   background: white;
+ 
   border-radius: 15px;
   box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15);
   transition: transform 0.3s ease;
@@ -222,6 +223,7 @@ body {
 
 /* Chart Containers */
 .chart-container {
+  
   position: relative;
   height: 300px;
 }
@@ -257,7 +259,7 @@ body {
 
 /* Custom Card */
 .custom-card {
-  background-color: #fff;
+  background-color: #dbd9ebf0;
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
