@@ -80,7 +80,6 @@ function initEventListeners() {
   // Edit product form submission
   document.getElementById('edit-product-form').addEventListener('submit', handleEditProductSubmit);
 }
-
 // Camera Functions
 function startCamera() {
   // Display camera status
@@ -99,13 +98,37 @@ function startCamera() {
       facingMode: 'environment',
       width: { ideal: 1280 },
       height: { ideal: 720 }
-    }
+    },
+    audio: false
   })
   .then(function(stream) {
     cameraStream = stream;
     cameraFeed.srcObject = stream;
+    
+    // Make sure video element is visible and properly styled
     cameraFeed.style.display = 'block';
     imageCanvas.style.display = 'none';
+    
+    // Ensure video has proper dimensions and is visible
+    cameraFeed.style.width = '100%';
+    cameraFeed.style.height = 'auto';
+    cameraFeed.style.maxHeight = '400px';
+    cameraFeed.style.backgroundColor = '#000';
+    cameraFeed.style.border = '1px solid #ccc';
+    cameraFeed.style.borderRadius = '5px';
+    cameraFeed.style.objectFit = 'cover'; // Ensure video fills the container
+    
+    // Add event listener to play video when metadata is loaded
+    cameraFeed.onloadedmetadata = function() {
+      // Force video to be visible
+      document.querySelector('.camera-container').style.display = 'block';
+      
+      cameraFeed.play().catch(e => {
+        console.error('Error playing video:', e);
+        cameraStatus.textContent = 'Error playing video: ' + e.message;
+        cameraStatus.className = 'alert alert-danger mt-2';
+      });
+    };
     
     // Update button states
     startCameraBtn.textContent = 'Restart Camera';
@@ -120,8 +143,15 @@ function startCamera() {
     console.error('Error accessing camera:', error);
     cameraStatus.textContent = 'Error accessing camera: ' + error.message;
     cameraStatus.className = 'alert alert-danger mt-2';
+    
+    // Reset button states
+    startCameraBtn.textContent = 'Start Camera';
+    captureImageBtn.disabled = true;
+    stopCameraBtn.disabled = true;
   });
 }
+
+// ... existing code ...
 
 function stopCamera() {
   if (cameraStream) {
