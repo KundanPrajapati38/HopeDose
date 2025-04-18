@@ -38,16 +38,14 @@
                 <i class="fas fa-plus-circle me-2"></i>Add Products
               </button>
             </li>
+           
             <li class="nav-item" role="presentation">
-              <button class="nav-link" id="dashboard-tab" data-bs-toggle="tab" data-bs-target="#dashboard-panel" type="button" role="tab" aria-controls="dashboard-panel" aria-selected="false">
-                <i class="fas fa-chart-line me-2"></i>Dashboard
-              </button>
+              <a class="nav-link" href="dash&inven.html">
+                <i class="fas fa-tachometer-alt me-2"></i>Inventory & <i class="fas fa-chart-line me-2"></i>Dashboard
+              </a>
             </li>
-            <li class="nav-item" role="presentation">
-              <button class="nav-link" id="inventory-tab" data-bs-toggle="tab" data-bs-target="#inventory-panel" type="button" role="tab" aria-controls="inventory-panel" aria-selected="false">
-                <i class="fas fa-boxes me-2"></i>Inventory
-              </button>
-            </li>
+            
+            
           </ul>
         </div>
       </div>
@@ -192,39 +190,37 @@
               </div>
            
              
-
-        <!-- Product List section fixed -->
-        <div class="row mt-4">
-          <div class="col-12">
-            <div class="custom-card p-4">
-              <div class="d-flex justify-content-between align-items-center mb-4">
-                <h3 class="mb-0">Product List</h3>
-                <div class="d-flex gap-2">
-                  <select id="categoryFilter" class="form-select form-select-sm" style="width: auto;">
-                    <option value="All">All Categories</option>
-                    <option value="Toys">Toys</option>
-                    <option value="Books">Books</option>
-                    <option value="Clothes">Clothes</option>
-                    <option value="Food">Food</option>
-                    <option value="Games Kit">Games Kit</option>
-                    <option value="Medicines">Medicines</option>
-                    <option value="Others">Others</option>
-                  </select>
-                  <button id="saveProducts" class="btn btn-sm btn-outline-success">
-                    <i class="fas fa-save me-1"></i>Save
-                  </button>
-                  <button id="clearProducts" class="btn btn-sm btn-outline-danger">
-                    <i class="fas fa-trash-alt me-1"></i>Clear All
-                  </button>
-                </div>
+        
+        <!-- Product List moved below camera section -->
+        <div class="row" data-aos="fade-up" data-aos-delay="200">
+          <div class="custom-card p-4">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+              <h3 class="mb-0">Product List</h3>
+              <div class="d-flex gap-2">
+                <select id="categoryFilter" class="form-select form-select-sm" style="width: auto;">
+                  <option value="All">All Categories</option>
+                  <option value="Toys">Toys</option>
+                  <option value="Books">Books</option>
+                  <option value="Clothes">Clothes</option>
+                  <option value="Food">Food</option>
+                  <option value="Games Kit">Games Kit</option>
+                  <option value="Medicines">Medicines</option>
+                  <option value="Others">Others</option>
+                </select>
+                <button id="saveProducts" class="btn btn-sm btn-outline-success">
+                  <i class="fas fa-save me-1"></i>Save
+                </button>
+                <button id="clearProducts" class="btn btn-sm btn-outline-danger">
+                  <i class="fas fa-trash-alt me-1"></i>Clear All
+                </button>
               </div>
-              
-              <div id="productList" class="product-list">
-                <div class="no-products text-center py-5" id="noProductsMessage">
-                  <i class="fas fa-box-open fa-3x mb-3 text-muted"></i>
-                  <h4>No products added yet</h4>
-                  <p>Add your first product using the form on the left</p>
-                </div>
+            </div>
+            
+            <div id="productList" class="product-list">
+              <div class="no-products text-center py-5" id="noProductsMessage">
+                <i class="fas fa-box-open fa-3x mb-3 text-muted"></i>
+                <h4>No products added yet</h4>
+                <p>Add your first product using the form on the left</p>
               </div>
             </div>
           </div>
@@ -337,6 +333,7 @@
                 <button class="btn btn-danger" id="manage-expired">
                   <i class="fas fa-trash-alt me-1"></i> Manage Expired
                 </button>
+              
               </div>
             </div>
           </div>
