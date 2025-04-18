@@ -24,22 +24,16 @@
 <!-- Include Header -->
 <div id="header-placeholder"></div>
 
-<!-- Main Content -->
-<div class="container-fluid py-5">
-  <div class="row">
-    <div class="col-12 text-center mb-4">
-      <h1 class="section-title" data-aos="fade-up">Product Management System</h1>
-      <p class="lead" data-aos="fade-up" data-aos-delay="100">Add, track, and manage your inventory efficiently</p>
-    </div>
-  </div>
+
 
   <!-- Quick Navigation Tabs -->
   <div class="row mb-4">
     <div class="col-12">
-      <div class="card shadow-sm" data-aos="fade-up" data-aos-delay="150">
-        <div class="card-body">
-          <ul class="nav nav-tabs" id="productTabs" role="tablist">
-            <li class="nav-item" role="presentation">
+      <div class="card shadow-sm " data-aos="fade-up" data-aos-delay="150">
+        <div class="card-body ">
+          <h1 class="section-title" data-aos="fade-up">Product Management System</h1>
+          <ul class="nav nav-tabs justify-content-center" id="productTabs" role="tablist">
+            <li class="nav-item " role="presentation">
               <button class="nav-link active" id="entry-tab" data-bs-toggle="tab" data-bs-target="#entry-panel" type="button" role="tab" aria-controls="entry-panel" aria-selected="true">
                 <i class="fas fa-plus-circle me-2"></i>Add Products
               </button>
@@ -147,9 +141,19 @@
                 </div>
               </div>
               
+              <div class="d-grid gap-2">
+                <button type="submit" class="btn btn-primary btn-lg">
+                  <i class="fas fa-plus-circle me-2"></i>Add Product
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+        
               <!-- Improved camera capture functionality -->
+              <div class="col">
               <div class="mb-4">
-                <label class="form-label">Product Image</label>
+                
                 <div class="camera-container border rounded p-3 mb-3">
                   <div class="text-center mb-3">
                     <div class="btn-group" role="group">
@@ -166,39 +170,28 @@
                         <i class="fas fa-stop-circle me-1"></i>Stop
                       </button>
                     </div>
-                  </div>
-                  <div class="text-center">
-                    <div class="camera-placeholder mb-2" id="cameraPlaceholder">
+                
+                    <div class="text-center">
+                    <!-- This should be in your product-management.html file -->
+                      <div class="camera-placeholder mb-2" id="cameraPlaceholder">
                       <i class="fas fa-camera fa-3x text-muted"></i>
-                      <p class="mt-2 text-muted">Click "Start Camera" to take a product photo</p>
-                    </div>
-                    <video id="cameraFeed" class="camera-feed d-none" autoplay playsinline></video>
-                    <canvas id="imageCanvas" class="image-canvas d-none"></canvas>
+                      <video id="cameraFeed" autoplay playsinline style="display: none;"></video>
+                      <canvas id="imageCanvas" style="display: none;"></canvas>
                     <div id="cameraStatus" class="alert alert-info mt-2">Camera is not active</div>
                   </div>
                 </div>
-                
-                <!-- Alternative image upload option -->
-                <div class="mb-3">
-                  <label for="productImage" class="form-label">Or upload image</label>
+              </div>
+           
+              </div>
+                <!-- Alternative image upload option -->                                
                   <div class="input-group">
                     <span class="input-group-text"><i class="fas fa-upload"></i></span>
                     <input type="file" class="form-control" id="productImage" accept="image/*">
                   </div>
-                </div>
-              </div>
-              
-              <div class="d-grid gap-2">
-                <button type="submit" class="btn btn-primary btn-lg">
-                  <i class="fas fa-plus-circle me-2"></i>Add Product
-                </button>
-              </div>
-            </form>
-          </div>
         </div>
-        
         <!-- Product List -->
-        <div class="col-lg-8" data-aos="fade-up" data-aos-delay="300">
+        
+        <div class="row" data-aos="fade-up" data-aos-delay="300">
           <div class="custom-card p-4">
             <div class="d-flex justify-content-between align-items-center mb-4">
               <h3 class="mb-0">Product List</h3>
@@ -233,7 +226,7 @@
         </div>
       </div>
     </div>
-
+   
     <!-- Dashboard Tab Panel -->
     <div class="tab-pane fade" id="dashboard-panel" role="tabpanel" aria-labelledby="dashboard-tab">
       <!-- Expiring Products Alert -->
