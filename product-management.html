@@ -154,72 +154,77 @@
               <div class="col">
               <div class="mb-4">
                 
-                <div class="camera-container border rounded p-3 mb-3">
-                  <div class="text-center mb-3">
-                    <div class="btn-group" role="group">
-                      <button type="button" id="startCamera" class="btn btn-outline-primary">
-                        <i class="fas fa-camera me-1"></i>Start Camera
-                      </button>
-                      <button type="button" id="captureImage" class="btn btn-outline-success" disabled>
-                        <i class="fas fa-image me-1"></i>Capture
-                      </button>
-                      <button type="button" id="retakeImage" class="btn btn-outline-warning" disabled>
-                        <i class="fas fa-redo me-1"></i>Retake
-                      </button>
-                      <button type="button" id="stopCamera" class="btn btn-outline-danger" disabled>
-                        <i class="fas fa-stop-circle me-1"></i>Stop
-                      </button>
-                    </div>
-                
-                    <div class="text-center">
-                    <!-- This should be in your product-management.html file -->
-                      <div class="camera-placeholder mb-2" id="cameraPlaceholder">
-                      <i class="fas fa-camera fa-3x text-muted"></i>
-                      <video id="cameraFeed" autoplay playsinline style="display: none;"></video>
-                      <canvas id="imageCanvas" style="display: none;"></canvas>
-                    <div id="cameraStatus" class="alert alert-info mt-2">Camera is not active</div>
+                <div class="text-center mb-3">
+                  <div class="btn-group" role="group">
+                    <button type="button" id="startCamera" class="btn btn-outline-primary">
+                      <i class="fas fa-camera me-1"></i>Start Camera
+                    </button>
+                    <button type="button" id="captureImage" class="btn btn-outline-success" disabled>
+                      <i class="fas fa-image me-1"></i>Capture
+                    </button>
+                    <button type="button" id="retakeImage" class="btn btn-outline-warning" disabled>
+                      <i class="fas fa-redo me-1"></i>Retake
+                    </button>
+                    <button type="button" id="stopCamera" class="btn btn-outline-danger" disabled>
+                      <i class="fas fa-stop-circle me-1"></i>Stop
+                    </button>
                   </div>
+                </div>
+
+
+                <div class="camera-container border rounded p-3 mb-3">                  
+                  <div class="text-center PT-5">                
+                      <div class="camera-placeholder mb-2" id="cameraPlaceholder">
+                         <div style="padding-bottom: 20px;"><i class="fas fa-camera fa-3x text-muted"></i></div>                        <div>
+                         <video id="cameraFeed" autoplay playsinline style="display: none; width: 100%;  object-fit: cover; margin: 10PX auto; border: 2px solid #007bff; border-radius: 8px; background-color: #000;"></video>
+                         <canvas id="imageCanvas" style="display: none; width: 100%;  object-fit: contain; margin: 0 auto; border: 2px solid #ffffff; border-radius: 8px;"></canvas>
+                      </div>
+                  </div>
+                </div>   
+              </div>                       
+                 <div id="cameraStatus" class="alert alert-info mt-2 text-center">Camera is not active</div>
+              
+                <!-- Alternative image upload option -->                                
+                <div class="input-group mb-3">
+                  <span class="input-group-text"><i class="fas fa-upload"></i></span>
+                  <input type="file" class="form-control" id="productImage" accept="image/*">
                 </div>
               </div>
            
+             
+
+        <!-- Product List section fixed -->
+        <div class="row mt-4">
+          <div class="col-12">
+            <div class="custom-card p-4">
+              <div class="d-flex justify-content-between align-items-center mb-4">
+                <h3 class="mb-0">Product List</h3>
+                <div class="d-flex gap-2">
+                  <select id="categoryFilter" class="form-select form-select-sm" style="width: auto;">
+                    <option value="All">All Categories</option>
+                    <option value="Toys">Toys</option>
+                    <option value="Books">Books</option>
+                    <option value="Clothes">Clothes</option>
+                    <option value="Food">Food</option>
+                    <option value="Games Kit">Games Kit</option>
+                    <option value="Medicines">Medicines</option>
+                    <option value="Others">Others</option>
+                  </select>
+                  <button id="saveProducts" class="btn btn-sm btn-outline-success">
+                    <i class="fas fa-save me-1"></i>Save
+                  </button>
+                  <button id="clearProducts" class="btn btn-sm btn-outline-danger">
+                    <i class="fas fa-trash-alt me-1"></i>Clear All
+                  </button>
+                </div>
               </div>
-                <!-- Alternative image upload option -->                                
-                  <div class="input-group">
-                    <span class="input-group-text"><i class="fas fa-upload"></i></span>
-                    <input type="file" class="form-control" id="productImage" accept="image/*">
-                  </div>
-        </div>
-        <!-- Product List -->
-        
-        <div class="row" data-aos="fade-up" data-aos-delay="300">
-          <div class="custom-card p-4">
-            <div class="d-flex justify-content-between align-items-center mb-4">
-              <h3 class="mb-0">Product List</h3>
-              <div class="d-flex gap-2">
-                <select id="categoryFilter" class="form-select form-select-sm" style="width: auto;">
-                  <option value="All">All Categories</option>
-                  <option value="Toys">Toys</option>
-                  <option value="Books">Books</option>
-                  <option value="Clothes">Clothes</option>
-                  <option value="Food">Food</option>
-                  <option value="Games Kit">Games Kit</option>
-                  <option value="Medicines">Medicines</option>
-                  <option value="Others">Others</option>
-                </select>
-                <button id="saveProducts" class="btn btn-sm btn-outline-success">
-                  <i class="fas fa-save me-1"></i>Save
-                </button>
-                <button id="clearProducts" class="btn btn-sm btn-outline-danger">
-                  <i class="fas fa-trash-alt me-1"></i>Clear All
-                </button>
-              </div>
-            </div>
-            
-            <div id="productList" class="product-list">
-              <div class="no-products text-center py-5" id="noProductsMessage">
-                <i class="fas fa-box-open fa-3x mb-3 text-muted"></i>
-                <h4>No products added yet</h4>
-                <p>Add your first product using the form on the left</p>
+              
+              <div id="productList" class="product-list">
+                <div class="no-products text-center py-5" id="noProductsMessage">
+                  <i class="fas fa-box-open fa-3x mb-3 text-muted"></i>
+                  <h4>No products added yet</h4>
+                  <p>Add your first product using the form on the left</p>
+                </div>
               </div>
             </div>
           </div>
