@@ -80,17 +80,28 @@ function initEventListeners() {
   // Edit product form submission
   document.getElementById('edit-product-form').addEventListener('submit', handleEditProductSubmit);
 }
+
 // Camera Functions
 function startCamera() {
   // Display camera status
   cameraStatus.style.display = 'block';
   cameraStatus.textContent = 'Starting camera...';
+  cameraStatus.className = 'alert alert-info mt-2';
   
   // Check if camera is already running
   if (cameraStream) {
     stopCamera();
     return;
   }
+  
+  // Hide the camera icon and show the video element
+  const cameraIcon = document.querySelector('#cameraPlaceholder .fas.fa-camera');
+  if (cameraIcon) {
+    cameraIcon.style.display = 'none';
+  }
+  
+  cameraFeed.style.display = 'inline-block';
+  imageCanvas.style.display = 'none';
   
   // Request camera access with rear camera preference
   navigator.mediaDevices.getUserMedia({
@@ -105,24 +116,8 @@ function startCamera() {
     cameraStream = stream;
     cameraFeed.srcObject = stream;
     
-    // Make sure video element is visible and properly styled
-    cameraFeed.style.display = 'block';
-    imageCanvas.style.display = 'none';
-    
-    // Ensure video has proper dimensions and is visible
-    cameraFeed.style.width = '100%';
-    cameraFeed.style.height = 'auto';
-    cameraFeed.style.maxHeight = '400px';
-    cameraFeed.style.backgroundColor = '#000';
-    cameraFeed.style.border = '1px solid #ccc';
-    cameraFeed.style.borderRadius = '5px';
-    cameraFeed.style.objectFit = 'cover'; // Ensure video fills the container
-    
     // Add event listener to play video when metadata is loaded
     cameraFeed.onloadedmetadata = function() {
-      // Force video to be visible
-      document.querySelector('.camera-container').style.display = 'block';
-      
       cameraFeed.play().catch(e => {
         console.error('Error playing video:', e);
         cameraStatus.textContent = 'Error playing video: ' + e.message;
@@ -134,6 +129,9 @@ function startCamera() {
     startCameraBtn.textContent = 'Restart Camera';
     captureImageBtn.disabled = false;
     stopCameraBtn.disabled = false;
+    if (document.getElementById('retakeImage')) {
+      document.getElementById('retakeImage').disabled = true;
+    }
     
     // Update status
     cameraStatus.textContent = 'Camera is active. Position the product and click Capture.';
@@ -148,10 +146,11 @@ function startCamera() {
     startCameraBtn.textContent = 'Start Camera';
     captureImageBtn.disabled = true;
     stopCameraBtn.disabled = true;
+    if (document.getElementById('retakeImage')) {
+      document.getElementById('retakeImage').disabled = true;
+    }
   });
 }
-
-// ... existing code ...
 
 function stopCamera() {
   if (cameraStream) {
@@ -163,10 +162,19 @@ function stopCamera() {
     cameraFeed.srcObject = null;
     cameraFeed.style.display = 'none';
     
+    // Show the camera icon again
+    const cameraIcon = document.querySelector('#cameraPlaceholder .fas.fa-camera');
+    if (cameraIcon) {
+      cameraIcon.style.display = 'block';
+    }
+    
     // Reset button states
     startCameraBtn.textContent = 'Start Camera';
     captureImageBtn.disabled = true;
     stopCameraBtn.disabled = true;
+    if (document.getElementById('retakeImage')) {
+      document.getElementById('retakeImage').disabled = true;
+    }
     
     // Update status
     cameraStatus.textContent = 'Camera stopped';
@@ -187,13 +195,59 @@ function captureImage() {
   
   // Show canvas, hide video
   cameraFeed.style.display = 'none';
-  imageCanvas.style.display = 'block';
+  imageCanvas.style.display = 'inline-block';
+  
+  // Update button states
+  captureImageBtn.disabled = true;
+  if (document.getElementById('retakeImage')) {
+    document.getElementById('retakeImage').disabled = false;
+  }
   
   // Update status
-  cameraStatus.textContent = 'Image captured! You can add the product or restart the camera.';
+  cameraStatus.textContent = 'Image captured! You can add the product or retake the image.';
   cameraStatus.className = 'alert alert-success mt-2';
 }
 
+// Add this new function for the retake button
+function retakeImage() {
+  if (cameraStream) {
+    // Hide canvas, show video
+    imageCanvas.style.display = 'none';
+    cameraFeed.style.display = 'inline-block';
+    
+    // Update button states
+    captureImageBtn.disabled = false;
+    if (document.getElementById('retakeImage')) {
+      document.getElementById('retakeImage').disabled = true;
+    }
+    
+    // Update status
+    cameraStatus.textContent = 'Camera is active. Position the product and click Capture.';
+    cameraStatus.className = 'alert alert-success mt-2';
+  } else {
+    // If camera was stopped, restart it
+    startCamera();
+  }
+}
+
+// Initialize all event listeners
+function initEventListeners() {
+  // Product form submission
+  productForm.addEventListener('submit', handleProductSubmit);
+  
+  // Camera functionality
+  startCameraBtn.addEventListener('click', startCamera);
+  captureImageBtn.addEventListener('click', captureImage);
+  stopCameraBtn.addEventListener('click', stopCamera);
+  
+  // Add event listener for retake button
+  const retakeImageBtn = document.getElementById('retakeImage');
+  if (retakeImageBtn) {
+    retakeImageBtn.addEventListener('click', retakeImage);
+  }
+  
+  // Rest of your event listeners...
+}
 // Product Form Submission
 function handleProductSubmit(e) {
   e.preventDefault();
