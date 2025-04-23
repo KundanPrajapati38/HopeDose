@@ -316,8 +316,15 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <!-- AOS Animation Library -->
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<!-- EmailJS Library -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 
 <script>
+  // Initialize EmailJS
+  (function() {
+    emailjs.init("inbHyXZ_fLmD0iRxa"); // Replace with your EmailJS public key
+  })();
+  
   // Load header component
   fetch('components/header.html')
     .then(response => response.text())
@@ -502,22 +509,53 @@
     submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i> Processing...';
     submitBtn.disabled = true;
     
-    // Simulate form processing
-    setTimeout(() => {
-      // Show success message
-      document.getElementById('requestForm').style.display = 'none';
-      document.getElementById('successMessage').style.display = 'block';
-      
-      // Create confetti effect
-      createConfetti();
-      
-      // Scroll to success message
-      document.getElementById('successMessage').scrollIntoView({ behavior: 'smooth' });
-      
-      // Reset button state
-      submitBtn.innerHTML = originalBtnText;
-      submitBtn.disabled = false;
-    }, 1500);
+    // Prepare email template parameters
+    const templateParams = {
+      to_email: 'HopeDose38@gmail.com',
+      from_name: name,
+      from_email: email,
+      request_id: requestData.id,
+      request_type: requestType,
+      request_title: requestTitle,
+      request_details: request,
+      urgency_level: urgency,
+      phone_number: phone,
+      location: location,
+      submission_date: new Date().toLocaleString()
+    };
+    
+    // Send email using EmailJS
+    emailjs.send('service_9z0usqi', 'template_bld4xrt', templateParams)
+      .then(function(response) {
+        console.log('Email sent successfully!', response.status, response.text);
+        
+        // Show success message
+        document.getElementById('requestForm').style.display = 'none';
+        document.getElementById('successMessage').style.display = 'block';
+        
+        // Create confetti effect
+        createConfetti();
+        
+        // Scroll to success message
+        document.getElementById('successMessage').scrollIntoView({ behavior: 'smooth' });
+        
+        // Reset button state
+        submitBtn.innerHTML = originalBtnText;
+        submitBtn.disabled = false;
+      }, function(error) {
+        console.log('Failed to send email...', error);
+        
+        // Show detailed error message
+        alert('Email sending failed: ' + (error.text || 'Unknown error') + '. Your request has been saved locally and our team will review it.');
+        
+        // Show success message anyway since data is saved locally
+        document.getElementById('requestForm').style.display = 'none';
+        document.getElementById('successMessage').style.display = 'block';
+        
+        // Reset button state
+        submitBtn.innerHTML = originalBtnText;
+        submitBtn.disabled = false;
+      });
   }
 </script>
 </body>
